@@ -1,0 +1,1582 @@
+[
+  {
+    "id": 1000,
+    "parent_id": null,
+    "slug": "fashion-apparel",
+    "name": "Fashion & Apparel",
+    "level": 1,
+    "seo_title": "Best Fashion & Apparel in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fashion & Apparel at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fashion & Apparel, department, online shopping, kenya, fashion,apparel"
+  },
+  {
+    "id": 1100,
+    "parent_id": 1000,
+    "slug": "clothing",
+    "name": "Clothing",
+    "level": 2,
+    "seo_title": "Best Clothing in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Clothing at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Clothing, category, online shopping, kenya, clothing"
+  },
+  {
+    "id": 1110,
+    "parent_id": 1100,
+    "slug": "clothing-general",
+    "name": "Clothing General",
+    "level": 3,
+    "seo_title": "Best Clothing General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Clothing General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Clothing General, subcategory, online shopping, kenya, clothing,general"
+  },
+  {
+    "id": 1111,
+    "parent_id": 1000,
+    "slug": "shoes",
+    "name": "Shoes",
+    "level": 2,
+    "seo_title": "Best Shoes in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Shoes at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Shoes, category, online shopping, kenya, shoes"
+  },
+  {
+    "id": 1121,
+    "parent_id": 1111,
+    "slug": "shoes-general",
+    "name": "Shoes General",
+    "level": 3,
+    "seo_title": "Best Shoes General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Shoes General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Shoes General, subcategory, online shopping, kenya, shoes,general"
+  },
+  {
+    "id": 1122,
+    "parent_id": 1000,
+    "slug": "accessories",
+    "name": "Accessories",
+    "level": 2,
+    "seo_title": "Best Accessories in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Accessories at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Accessories, category, online shopping, kenya, accessories"
+  },
+  {
+    "id": 1132,
+    "parent_id": 1122,
+    "slug": "accessories-general",
+    "name": "Accessories General",
+    "level": 3,
+    "seo_title": "Best Accessories General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Accessories General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Accessories General, subcategory, online shopping, kenya, accessories,general"
+  },
+  {
+    "id": 1133,
+    "parent_id": 1000,
+    "slug": "jewelry",
+    "name": "Jewelry",
+    "level": 2,
+    "seo_title": "Best Jewelry in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Jewelry at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Jewelry, category, online shopping, kenya, jewelry"
+  },
+  {
+    "id": 1143,
+    "parent_id": 1133,
+    "slug": "jewelry-general",
+    "name": "Jewelry General",
+    "level": 3,
+    "seo_title": "Best Jewelry General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Jewelry General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Jewelry General, subcategory, online shopping, kenya, jewelry,general"
+  },
+  {
+    "id": 1144,
+    "parent_id": null,
+    "slug": "electronics",
+    "name": "Electronics",
+    "level": 1,
+    "seo_title": "Best Electronics in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Electronics at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Electronics, department, online shopping, kenya, electronics"
+  },
+  {
+    "id": 1244,
+    "parent_id": 1144,
+    "slug": "computers-laptops",
+    "name": "Computers & Laptops",
+    "level": 2,
+    "seo_title": "Best Computers & Laptops in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Computers & Laptops at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Computers & Laptops, category, online shopping, kenya, computers,laptops"
+  },
+  {
+    "id": 1254,
+    "parent_id": 1244,
+    "slug": "computers-laptops-general",
+    "name": "Computers & Laptops General",
+    "level": 3,
+    "seo_title": "Best Computers & Laptops General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Computers & Laptops General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Computers & Laptops General, subcategory, online shopping, kenya, computers,laptops,general"
+  },
+  {
+    "id": 1255,
+    "parent_id": 1144,
+    "slug": "mobile-phones-accessories",
+    "name": "Mobile Phones & Accessories",
+    "level": 2,
+    "seo_title": "Best Mobile Phones & Accessories in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Mobile Phones & Accessories at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Mobile Phones & Accessories, category, online shopping, kenya, mobile,phones,accessories"
+  },
+  {
+    "id": 1265,
+    "parent_id": 1255,
+    "slug": "mobile-phones-accessories-general",
+    "name": "Mobile Phones & Accessories General",
+    "level": 3,
+    "seo_title": "Best Mobile Phones & Accessories General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Mobile Phones & Accessories General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Mobile Phones & Accessories General, subcategory, online shopping, kenya, mobile,phones,accessories,general"
+  },
+  {
+    "id": 1266,
+    "parent_id": 1144,
+    "slug": "cameras-photography",
+    "name": "Cameras & Photography",
+    "level": 2,
+    "seo_title": "Best Cameras & Photography in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Cameras & Photography at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Cameras & Photography, category, online shopping, kenya, cameras,photography"
+  },
+  {
+    "id": 1276,
+    "parent_id": 1266,
+    "slug": "cameras-photography-general",
+    "name": "Cameras & Photography General",
+    "level": 3,
+    "seo_title": "Best Cameras & Photography General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Cameras & Photography General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Cameras & Photography General, subcategory, online shopping, kenya, cameras,photography,general"
+  },
+  {
+    "id": 1277,
+    "parent_id": 1144,
+    "slug": "audio-video",
+    "name": "Audio & Video",
+    "level": 2,
+    "seo_title": "Best Audio & Video in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Audio & Video at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Audio & Video, category, online shopping, kenya, audio,video"
+  },
+  {
+    "id": 1287,
+    "parent_id": 1277,
+    "slug": "audio-video-general",
+    "name": "Audio & Video General",
+    "level": 3,
+    "seo_title": "Best Audio & Video General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Audio & Video General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Audio & Video General, subcategory, online shopping, kenya, audio,video,general"
+  },
+  {
+    "id": 1288,
+    "parent_id": null,
+    "slug": "home-kitchen",
+    "name": "Home & Kitchen",
+    "level": 1,
+    "seo_title": "Best Home & Kitchen in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Home & Kitchen at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Home & Kitchen, department, online shopping, kenya, home,kitchen"
+  },
+  {
+    "id": 1388,
+    "parent_id": 1288,
+    "slug": "home-decor",
+    "name": "Home D\u00e9cor",
+    "level": 2,
+    "seo_title": "Best Home D\u00e9cor in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Home D\u00e9cor at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Home D\u00e9cor, category, online shopping, kenya, home,decor"
+  },
+  {
+    "id": 1398,
+    "parent_id": 1388,
+    "slug": "home-decor-general",
+    "name": "Home D\u00e9cor General",
+    "level": 3,
+    "seo_title": "Best Home D\u00e9cor General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Home D\u00e9cor General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Home D\u00e9cor General, subcategory, online shopping, kenya, home,decor,general"
+  },
+  {
+    "id": 1399,
+    "parent_id": 1288,
+    "slug": "kitchen-dining",
+    "name": "Kitchen & Dining",
+    "level": 2,
+    "seo_title": "Best Kitchen & Dining in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Kitchen & Dining at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Kitchen & Dining, category, online shopping, kenya, kitchen,dining"
+  },
+  {
+    "id": 1409,
+    "parent_id": 1399,
+    "slug": "kitchen-dining-general",
+    "name": "Kitchen & Dining General",
+    "level": 3,
+    "seo_title": "Best Kitchen & Dining General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Kitchen & Dining General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Kitchen & Dining General, subcategory, online shopping, kenya, kitchen,dining,general"
+  },
+  {
+    "id": 1410,
+    "parent_id": 1288,
+    "slug": "furniture",
+    "name": "Furniture",
+    "level": 2,
+    "seo_title": "Best Furniture in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Furniture at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Furniture, category, online shopping, kenya, furniture"
+  },
+  {
+    "id": 1420,
+    "parent_id": 1410,
+    "slug": "furniture-general",
+    "name": "Furniture General",
+    "level": 3,
+    "seo_title": "Best Furniture General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Furniture General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Furniture General, subcategory, online shopping, kenya, furniture,general"
+  },
+  {
+    "id": 1421,
+    "parent_id": 1288,
+    "slug": "bedding-bath",
+    "name": "Bedding & Bath",
+    "level": 2,
+    "seo_title": "Best Bedding & Bath in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Bedding & Bath at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Bedding & Bath, category, online shopping, kenya, bedding,bath"
+  },
+  {
+    "id": 1431,
+    "parent_id": 1421,
+    "slug": "bedding-bath-general",
+    "name": "Bedding & Bath General",
+    "level": 3,
+    "seo_title": "Best Bedding & Bath General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Bedding & Bath General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Bedding & Bath General, subcategory, online shopping, kenya, bedding,bath,general"
+  },
+  {
+    "id": 1432,
+    "parent_id": null,
+    "slug": "beauty-cosmetics",
+    "name": "Beauty & Cosmetics",
+    "level": 1,
+    "seo_title": "Best Beauty & Cosmetics in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Beauty & Cosmetics at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Beauty & Cosmetics, department, online shopping, kenya, beauty,cosmetics"
+  },
+  {
+    "id": 1532,
+    "parent_id": 1432,
+    "slug": "skincare",
+    "name": "Skincare",
+    "level": 2,
+    "seo_title": "Best Skincare in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Skincare at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Skincare, category, online shopping, kenya, skincare"
+  },
+  {
+    "id": 1542,
+    "parent_id": 1532,
+    "slug": "skincare-general",
+    "name": "Skincare General",
+    "level": 3,
+    "seo_title": "Best Skincare General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Skincare General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Skincare General, subcategory, online shopping, kenya, skincare,general"
+  },
+  {
+    "id": 1543,
+    "parent_id": 1432,
+    "slug": "makeup",
+    "name": "Makeup",
+    "level": 2,
+    "seo_title": "Best Makeup in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Makeup at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Makeup, category, online shopping, kenya, makeup"
+  },
+  {
+    "id": 1553,
+    "parent_id": 1543,
+    "slug": "makeup-general",
+    "name": "Makeup General",
+    "level": 3,
+    "seo_title": "Best Makeup General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Makeup General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Makeup General, subcategory, online shopping, kenya, makeup,general"
+  },
+  {
+    "id": 1554,
+    "parent_id": 1432,
+    "slug": "haircare",
+    "name": "Haircare",
+    "level": 2,
+    "seo_title": "Best Haircare in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Haircare at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Haircare, category, online shopping, kenya, haircare"
+  },
+  {
+    "id": 1564,
+    "parent_id": 1554,
+    "slug": "haircare-general",
+    "name": "Haircare General",
+    "level": 3,
+    "seo_title": "Best Haircare General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Haircare General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Haircare General, subcategory, online shopping, kenya, haircare,general"
+  },
+  {
+    "id": 1565,
+    "parent_id": 1432,
+    "slug": "fragrances",
+    "name": "Fragrances",
+    "level": 2,
+    "seo_title": "Best Fragrances in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fragrances at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fragrances, category, online shopping, kenya, fragrances"
+  },
+  {
+    "id": 1575,
+    "parent_id": 1565,
+    "slug": "fragrances-general",
+    "name": "Fragrances General",
+    "level": 3,
+    "seo_title": "Best Fragrances General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fragrances General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fragrances General, subcategory, online shopping, kenya, fragrances,general"
+  },
+  {
+    "id": 1576,
+    "parent_id": null,
+    "slug": "books-education",
+    "name": "Books & Education",
+    "level": 1,
+    "seo_title": "Best Books & Education in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Books & Education at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Books & Education, department, online shopping, kenya, books,education"
+  },
+  {
+    "id": 1676,
+    "parent_id": 1576,
+    "slug": "fiction",
+    "name": "Fiction",
+    "level": 2,
+    "seo_title": "Best Fiction in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fiction at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fiction, category, online shopping, kenya, fiction"
+  },
+  {
+    "id": 1686,
+    "parent_id": 1676,
+    "slug": "fiction-general",
+    "name": "Fiction General",
+    "level": 3,
+    "seo_title": "Best Fiction General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fiction General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fiction General, subcategory, online shopping, kenya, fiction,general"
+  },
+  {
+    "id": 1687,
+    "parent_id": 1576,
+    "slug": "non-fiction",
+    "name": "Non-Fiction",
+    "level": 2,
+    "seo_title": "Best Non-Fiction in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Non-Fiction at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Non-Fiction, category, online shopping, kenya, non,fiction"
+  },
+  {
+    "id": 1697,
+    "parent_id": 1687,
+    "slug": "non-fiction-general",
+    "name": "Non-Fiction General",
+    "level": 3,
+    "seo_title": "Best Non-Fiction General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Non-Fiction General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Non-Fiction General, subcategory, online shopping, kenya, non,fiction,general"
+  },
+  {
+    "id": 1698,
+    "parent_id": 1576,
+    "slug": "textbooks",
+    "name": "Textbooks",
+    "level": 2,
+    "seo_title": "Best Textbooks in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Textbooks at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Textbooks, category, online shopping, kenya, textbooks"
+  },
+  {
+    "id": 1708,
+    "parent_id": 1698,
+    "slug": "textbooks-general",
+    "name": "Textbooks General",
+    "level": 3,
+    "seo_title": "Best Textbooks General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Textbooks General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Textbooks General, subcategory, online shopping, kenya, textbooks,general"
+  },
+  {
+    "id": 1709,
+    "parent_id": 1576,
+    "slug": "children-s-books",
+    "name": "Children's Books",
+    "level": 2,
+    "seo_title": "Best Children's Books in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Children's Books at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Children's Books, category, online shopping, kenya, children,s,books"
+  },
+  {
+    "id": 1719,
+    "parent_id": 1709,
+    "slug": "children-s-books-general",
+    "name": "Children's Books General",
+    "level": 3,
+    "seo_title": "Best Children's Books General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Children's Books General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Children's Books General, subcategory, online shopping, kenya, children,s,books,general"
+  },
+  {
+    "id": 1720,
+    "parent_id": null,
+    "slug": "toys-games",
+    "name": "Toys & Games",
+    "level": 1,
+    "seo_title": "Best Toys & Games in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Toys & Games at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Toys & Games, department, online shopping, kenya, toys,games"
+  },
+  {
+    "id": 1820,
+    "parent_id": 1720,
+    "slug": "action-figures",
+    "name": "Action Figures",
+    "level": 2,
+    "seo_title": "Best Action Figures in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Action Figures at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Action Figures, category, online shopping, kenya, action,figures"
+  },
+  {
+    "id": 1830,
+    "parent_id": 1820,
+    "slug": "action-figures-general",
+    "name": "Action Figures General",
+    "level": 3,
+    "seo_title": "Best Action Figures General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Action Figures General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Action Figures General, subcategory, online shopping, kenya, action,figures,general"
+  },
+  {
+    "id": 1831,
+    "parent_id": 1720,
+    "slug": "board-games",
+    "name": "Board Games",
+    "level": 2,
+    "seo_title": "Best Board Games in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Board Games at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Board Games, category, online shopping, kenya, board,games"
+  },
+  {
+    "id": 1841,
+    "parent_id": 1831,
+    "slug": "board-games-general",
+    "name": "Board Games General",
+    "level": 3,
+    "seo_title": "Best Board Games General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Board Games General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Board Games General, subcategory, online shopping, kenya, board,games,general"
+  },
+  {
+    "id": 1842,
+    "parent_id": 1720,
+    "slug": "educational-toys",
+    "name": "Educational Toys",
+    "level": 2,
+    "seo_title": "Best Educational Toys in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Educational Toys at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Educational Toys, category, online shopping, kenya, educational,toys"
+  },
+  {
+    "id": 1852,
+    "parent_id": 1842,
+    "slug": "educational-toys-general",
+    "name": "Educational Toys General",
+    "level": 3,
+    "seo_title": "Best Educational Toys General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Educational Toys General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Educational Toys General, subcategory, online shopping, kenya, educational,toys,general"
+  },
+  {
+    "id": 1853,
+    "parent_id": 1720,
+    "slug": "dolls",
+    "name": "Dolls",
+    "level": 2,
+    "seo_title": "Best Dolls in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Dolls at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Dolls, category, online shopping, kenya, dolls"
+  },
+  {
+    "id": 1863,
+    "parent_id": 1853,
+    "slug": "dolls-general",
+    "name": "Dolls General",
+    "level": 3,
+    "seo_title": "Best Dolls General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Dolls General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Dolls General, subcategory, online shopping, kenya, dolls,general"
+  },
+  {
+    "id": 1864,
+    "parent_id": null,
+    "slug": "sports-outdoors",
+    "name": "Sports & Outdoors",
+    "level": 1,
+    "seo_title": "Best Sports & Outdoors in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Sports & Outdoors at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Sports & Outdoors, department, online shopping, kenya, sports,outdoors"
+  },
+  {
+    "id": 1964,
+    "parent_id": 1864,
+    "slug": "fitness-exercise",
+    "name": "Fitness & Exercise",
+    "level": 2,
+    "seo_title": "Best Fitness & Exercise in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fitness & Exercise at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fitness & Exercise, category, online shopping, kenya, fitness,exercise"
+  },
+  {
+    "id": 1974,
+    "parent_id": 1964,
+    "slug": "fitness-exercise-general",
+    "name": "Fitness & Exercise General",
+    "level": 3,
+    "seo_title": "Best Fitness & Exercise General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fitness & Exercise General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fitness & Exercise General, subcategory, online shopping, kenya, fitness,exercise,general"
+  },
+  {
+    "id": 1975,
+    "parent_id": 1864,
+    "slug": "camping-hiking",
+    "name": "Camping & Hiking",
+    "level": 2,
+    "seo_title": "Best Camping & Hiking in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Camping & Hiking at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Camping & Hiking, category, online shopping, kenya, camping,hiking"
+  },
+  {
+    "id": 1985,
+    "parent_id": 1975,
+    "slug": "camping-hiking-general",
+    "name": "Camping & Hiking General",
+    "level": 3,
+    "seo_title": "Best Camping & Hiking General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Camping & Hiking General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Camping & Hiking General, subcategory, online shopping, kenya, camping,hiking,general"
+  },
+  {
+    "id": 1986,
+    "parent_id": 1864,
+    "slug": "cycling",
+    "name": "Cycling",
+    "level": 2,
+    "seo_title": "Best Cycling in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Cycling at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Cycling, category, online shopping, kenya, cycling"
+  },
+  {
+    "id": 1996,
+    "parent_id": 1986,
+    "slug": "cycling-general",
+    "name": "Cycling General",
+    "level": 3,
+    "seo_title": "Best Cycling General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Cycling General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Cycling General, subcategory, online shopping, kenya, cycling,general"
+  },
+  {
+    "id": 1997,
+    "parent_id": 1864,
+    "slug": "team-sports",
+    "name": "Team Sports",
+    "level": 2,
+    "seo_title": "Best Team Sports in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Team Sports at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Team Sports, category, online shopping, kenya, team,sports"
+  },
+  {
+    "id": 2007,
+    "parent_id": 1997,
+    "slug": "team-sports-general",
+    "name": "Team Sports General",
+    "level": 3,
+    "seo_title": "Best Team Sports General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Team Sports General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Team Sports General, subcategory, online shopping, kenya, team,sports,general"
+  },
+  {
+    "id": 2008,
+    "parent_id": null,
+    "slug": "automotive-tools",
+    "name": "Automotive & Tools",
+    "level": 1,
+    "seo_title": "Best Automotive & Tools in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Automotive & Tools at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Automotive & Tools, department, online shopping, kenya, automotive,tools"
+  },
+  {
+    "id": 2108,
+    "parent_id": 2008,
+    "slug": "car-care",
+    "name": "Car Care",
+    "level": 2,
+    "seo_title": "Best Car Care in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Car Care at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Car Care, category, online shopping, kenya, car,care"
+  },
+  {
+    "id": 2118,
+    "parent_id": 2108,
+    "slug": "car-care-general",
+    "name": "Car Care General",
+    "level": 3,
+    "seo_title": "Best Car Care General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Car Care General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Car Care General, subcategory, online shopping, kenya, car,care,general"
+  },
+  {
+    "id": 2119,
+    "parent_id": 2008,
+    "slug": "power-tools",
+    "name": "Power Tools",
+    "level": 2,
+    "seo_title": "Best Power Tools in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Power Tools at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Power Tools, category, online shopping, kenya, power,tools"
+  },
+  {
+    "id": 2129,
+    "parent_id": 2119,
+    "slug": "power-tools-general",
+    "name": "Power Tools General",
+    "level": 3,
+    "seo_title": "Best Power Tools General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Power Tools General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Power Tools General, subcategory, online shopping, kenya, power,tools,general"
+  },
+  {
+    "id": 2130,
+    "parent_id": 2008,
+    "slug": "hand-tools",
+    "name": "Hand Tools",
+    "level": 2,
+    "seo_title": "Best Hand Tools in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Hand Tools at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Hand Tools, category, online shopping, kenya, hand,tools"
+  },
+  {
+    "id": 2140,
+    "parent_id": 2130,
+    "slug": "hand-tools-general",
+    "name": "Hand Tools General",
+    "level": 3,
+    "seo_title": "Best Hand Tools General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Hand Tools General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Hand Tools General, subcategory, online shopping, kenya, hand,tools,general"
+  },
+  {
+    "id": 2141,
+    "parent_id": 2008,
+    "slug": "motorcycle-parts",
+    "name": "Motorcycle Parts",
+    "level": 2,
+    "seo_title": "Best Motorcycle Parts in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Motorcycle Parts at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Motorcycle Parts, category, online shopping, kenya, motorcycle,parts"
+  },
+  {
+    "id": 2151,
+    "parent_id": 2141,
+    "slug": "motorcycle-parts-general",
+    "name": "Motorcycle Parts General",
+    "level": 3,
+    "seo_title": "Best Motorcycle Parts General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Motorcycle Parts General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Motorcycle Parts General, subcategory, online shopping, kenya, motorcycle,parts,general"
+  },
+  {
+    "id": 2152,
+    "parent_id": null,
+    "slug": "health-personal-care",
+    "name": "Health & Personal Care",
+    "level": 1,
+    "seo_title": "Best Health & Personal Care in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Health & Personal Care at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Health & Personal Care, department, online shopping, kenya, health,personal,care"
+  },
+  {
+    "id": 2252,
+    "parent_id": 2152,
+    "slug": "vitamins-supplements",
+    "name": "Vitamins & Supplements",
+    "level": 2,
+    "seo_title": "Best Vitamins & Supplements in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Vitamins & Supplements at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Vitamins & Supplements, category, online shopping, kenya, vitamins,supplements"
+  },
+  {
+    "id": 2262,
+    "parent_id": 2252,
+    "slug": "vitamins-supplements-general",
+    "name": "Vitamins & Supplements General",
+    "level": 3,
+    "seo_title": "Best Vitamins & Supplements General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Vitamins & Supplements General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Vitamins & Supplements General, subcategory, online shopping, kenya, vitamins,supplements,general"
+  },
+  {
+    "id": 2263,
+    "parent_id": 2152,
+    "slug": "personal-care-appliances",
+    "name": "Personal Care Appliances",
+    "level": 2,
+    "seo_title": "Best Personal Care Appliances in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Personal Care Appliances at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Personal Care Appliances, category, online shopping, kenya, personal,care,appliances"
+  },
+  {
+    "id": 2273,
+    "parent_id": 2263,
+    "slug": "personal-care-appliances-general",
+    "name": "Personal Care Appliances General",
+    "level": 3,
+    "seo_title": "Best Personal Care Appliances General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Personal Care Appliances General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Personal Care Appliances General, subcategory, online shopping, kenya, personal,care,appliances,general"
+  },
+  {
+    "id": 2274,
+    "parent_id": 2152,
+    "slug": "medical-supplies",
+    "name": "Medical Supplies",
+    "level": 2,
+    "seo_title": "Best Medical Supplies in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Medical Supplies at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Medical Supplies, category, online shopping, kenya, medical,supplies"
+  },
+  {
+    "id": 2284,
+    "parent_id": 2274,
+    "slug": "medical-supplies-general",
+    "name": "Medical Supplies General",
+    "level": 3,
+    "seo_title": "Best Medical Supplies General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Medical Supplies General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Medical Supplies General, subcategory, online shopping, kenya, medical,supplies,general"
+  },
+  {
+    "id": 2285,
+    "parent_id": null,
+    "slug": "groceries-gourmet-food",
+    "name": "Groceries & Gourmet Food",
+    "level": 1,
+    "seo_title": "Best Groceries & Gourmet Food in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Groceries & Gourmet Food at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Groceries & Gourmet Food, department, online shopping, kenya, groceries,gourmet,food"
+  },
+  {
+    "id": 2385,
+    "parent_id": 2285,
+    "slug": "pantry-staples",
+    "name": "Pantry Staples",
+    "level": 2,
+    "seo_title": "Best Pantry Staples in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Pantry Staples at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Pantry Staples, category, online shopping, kenya, pantry,staples"
+  },
+  {
+    "id": 2395,
+    "parent_id": 2385,
+    "slug": "pantry-staples-general",
+    "name": "Pantry Staples General",
+    "level": 3,
+    "seo_title": "Best Pantry Staples General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Pantry Staples General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Pantry Staples General, subcategory, online shopping, kenya, pantry,staples,general"
+  },
+  {
+    "id": 2396,
+    "parent_id": 2285,
+    "slug": "snacks",
+    "name": "Snacks",
+    "level": 2,
+    "seo_title": "Best Snacks in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Snacks at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Snacks, category, online shopping, kenya, snacks"
+  },
+  {
+    "id": 2406,
+    "parent_id": 2396,
+    "slug": "snacks-general",
+    "name": "Snacks General",
+    "level": 3,
+    "seo_title": "Best Snacks General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Snacks General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Snacks General, subcategory, online shopping, kenya, snacks,general"
+  },
+  {
+    "id": 2407,
+    "parent_id": 2285,
+    "slug": "beverages",
+    "name": "Beverages",
+    "level": 2,
+    "seo_title": "Best Beverages in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Beverages at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Beverages, category, online shopping, kenya, beverages"
+  },
+  {
+    "id": 2417,
+    "parent_id": 2407,
+    "slug": "beverages-general",
+    "name": "Beverages General",
+    "level": 3,
+    "seo_title": "Best Beverages General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Beverages General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Beverages General, subcategory, online shopping, kenya, beverages,general"
+  },
+  {
+    "id": 2418,
+    "parent_id": 2285,
+    "slug": "organic-foods",
+    "name": "Organic Foods",
+    "level": 2,
+    "seo_title": "Best Organic Foods in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Organic Foods at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Organic Foods, category, online shopping, kenya, organic,foods"
+  },
+  {
+    "id": 2428,
+    "parent_id": 2418,
+    "slug": "organic-foods-general",
+    "name": "Organic Foods General",
+    "level": 3,
+    "seo_title": "Best Organic Foods General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Organic Foods General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Organic Foods General, subcategory, online shopping, kenya, organic,foods,general"
+  },
+  {
+    "id": 2429,
+    "parent_id": null,
+    "slug": "office-products",
+    "name": "Office Products",
+    "level": 1,
+    "seo_title": "Best Office Products in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Office Products at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Office Products, department, online shopping, kenya, office,products"
+  },
+  {
+    "id": 2529,
+    "parent_id": 2429,
+    "slug": "stationery",
+    "name": "Stationery",
+    "level": 2,
+    "seo_title": "Best Stationery in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Stationery at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Stationery, category, online shopping, kenya, stationery"
+  },
+  {
+    "id": 2539,
+    "parent_id": 2529,
+    "slug": "stationery-general",
+    "name": "Stationery General",
+    "level": 3,
+    "seo_title": "Best Stationery General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Stationery General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Stationery General, subcategory, online shopping, kenya, stationery,general"
+  },
+  {
+    "id": 2540,
+    "parent_id": 2429,
+    "slug": "office-furniture",
+    "name": "Office Furniture",
+    "level": 2,
+    "seo_title": "Best Office Furniture in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Office Furniture at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Office Furniture, category, online shopping, kenya, office,furniture"
+  },
+  {
+    "id": 2550,
+    "parent_id": 2540,
+    "slug": "office-furniture-general",
+    "name": "Office Furniture General",
+    "level": 3,
+    "seo_title": "Best Office Furniture General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Office Furniture General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Office Furniture General, subcategory, online shopping, kenya, office,furniture,general"
+  },
+  {
+    "id": 2551,
+    "parent_id": 2429,
+    "slug": "printers-ink",
+    "name": "Printers & Ink",
+    "level": 2,
+    "seo_title": "Best Printers & Ink in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Printers & Ink at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Printers & Ink, category, online shopping, kenya, printers,ink"
+  },
+  {
+    "id": 2561,
+    "parent_id": 2551,
+    "slug": "printers-ink-general",
+    "name": "Printers & Ink General",
+    "level": 3,
+    "seo_title": "Best Printers & Ink General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Printers & Ink General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Printers & Ink General, subcategory, online shopping, kenya, printers,ink,general"
+  },
+  {
+    "id": 2562,
+    "parent_id": null,
+    "slug": "pet-supplies",
+    "name": "Pet Supplies",
+    "level": 1,
+    "seo_title": "Best Pet Supplies in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Pet Supplies at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Pet Supplies, department, online shopping, kenya, pet,supplies"
+  },
+  {
+    "id": 2662,
+    "parent_id": 2562,
+    "slug": "dog-supplies",
+    "name": "Dog Supplies",
+    "level": 2,
+    "seo_title": "Best Dog Supplies in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Dog Supplies at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Dog Supplies, category, online shopping, kenya, dog,supplies"
+  },
+  {
+    "id": 2672,
+    "parent_id": 2662,
+    "slug": "dog-supplies-general",
+    "name": "Dog Supplies General",
+    "level": 3,
+    "seo_title": "Best Dog Supplies General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Dog Supplies General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Dog Supplies General, subcategory, online shopping, kenya, dog,supplies,general"
+  },
+  {
+    "id": 2673,
+    "parent_id": 2562,
+    "slug": "cat-supplies",
+    "name": "Cat Supplies",
+    "level": 2,
+    "seo_title": "Best Cat Supplies in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Cat Supplies at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Cat Supplies, category, online shopping, kenya, cat,supplies"
+  },
+  {
+    "id": 2683,
+    "parent_id": 2673,
+    "slug": "cat-supplies-general",
+    "name": "Cat Supplies General",
+    "level": 3,
+    "seo_title": "Best Cat Supplies General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Cat Supplies General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Cat Supplies General, subcategory, online shopping, kenya, cat,supplies,general"
+  },
+  {
+    "id": 2684,
+    "parent_id": 2562,
+    "slug": "fish-aquatic-pets",
+    "name": "Fish & Aquatic Pets",
+    "level": 2,
+    "seo_title": "Best Fish & Aquatic Pets in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fish & Aquatic Pets at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fish & Aquatic Pets, category, online shopping, kenya, fish,aquatic,pets"
+  },
+  {
+    "id": 2694,
+    "parent_id": 2684,
+    "slug": "fish-aquatic-pets-general",
+    "name": "Fish & Aquatic Pets General",
+    "level": 3,
+    "seo_title": "Best Fish & Aquatic Pets General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Fish & Aquatic Pets General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Fish & Aquatic Pets General, subcategory, online shopping, kenya, fish,aquatic,pets,general"
+  },
+  {
+    "id": 2695,
+    "parent_id": null,
+    "slug": "music-instruments",
+    "name": "Music & Instruments",
+    "level": 1,
+    "seo_title": "Best Music & Instruments in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Music & Instruments at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Music & Instruments, department, online shopping, kenya, music,instruments"
+  },
+  {
+    "id": 2795,
+    "parent_id": 2695,
+    "slug": "guitars",
+    "name": "Guitars",
+    "level": 2,
+    "seo_title": "Best Guitars in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Guitars at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Guitars, category, online shopping, kenya, guitars"
+  },
+  {
+    "id": 2805,
+    "parent_id": 2795,
+    "slug": "guitars-general",
+    "name": "Guitars General",
+    "level": 3,
+    "seo_title": "Best Guitars General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Guitars General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Guitars General, subcategory, online shopping, kenya, guitars,general"
+  },
+  {
+    "id": 2806,
+    "parent_id": 2695,
+    "slug": "keyboards",
+    "name": "Keyboards",
+    "level": 2,
+    "seo_title": "Best Keyboards in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Keyboards at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Keyboards, category, online shopping, kenya, keyboards"
+  },
+  {
+    "id": 2816,
+    "parent_id": 2806,
+    "slug": "keyboards-general",
+    "name": "Keyboards General",
+    "level": 3,
+    "seo_title": "Best Keyboards General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Keyboards General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Keyboards General, subcategory, online shopping, kenya, keyboards,general"
+  },
+  {
+    "id": 2817,
+    "parent_id": 2695,
+    "slug": "dj-equipment",
+    "name": "DJ Equipment",
+    "level": 2,
+    "seo_title": "Best DJ Equipment in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality DJ Equipment at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "DJ Equipment, category, online shopping, kenya, dj,equipment"
+  },
+  {
+    "id": 2827,
+    "parent_id": 2817,
+    "slug": "dj-equipment-general",
+    "name": "DJ Equipment General",
+    "level": 3,
+    "seo_title": "Best DJ Equipment General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality DJ Equipment General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "DJ Equipment General, subcategory, online shopping, kenya, dj,equipment,general"
+  },
+  {
+    "id": 2828,
+    "parent_id": null,
+    "slug": "movies-tv",
+    "name": "Movies & TV",
+    "level": 1,
+    "seo_title": "Best Movies & TV in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Movies & TV at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Movies & TV, department, online shopping, kenya, movies,tv"
+  },
+  {
+    "id": 2928,
+    "parent_id": 2828,
+    "slug": "blu-ray",
+    "name": "Blu-ray",
+    "level": 2,
+    "seo_title": "Best Blu-ray in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Blu-ray at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Blu-ray, category, online shopping, kenya, blu,ray"
+  },
+  {
+    "id": 2938,
+    "parent_id": 2928,
+    "slug": "blu-ray-general",
+    "name": "Blu-ray General",
+    "level": 3,
+    "seo_title": "Best Blu-ray General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Blu-ray General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Blu-ray General, subcategory, online shopping, kenya, blu,ray,general"
+  },
+  {
+    "id": 2939,
+    "parent_id": 2828,
+    "slug": "dvd",
+    "name": "DVD",
+    "level": 2,
+    "seo_title": "Best DVD in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality DVD at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "DVD, category, online shopping, kenya, dvd"
+  },
+  {
+    "id": 2949,
+    "parent_id": 2939,
+    "slug": "dvd-general",
+    "name": "DVD General",
+    "level": 3,
+    "seo_title": "Best DVD General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality DVD General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "DVD General, subcategory, online shopping, kenya, dvd,general"
+  },
+  {
+    "id": 2950,
+    "parent_id": 2828,
+    "slug": "streaming",
+    "name": "Streaming",
+    "level": 2,
+    "seo_title": "Best Streaming in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Streaming at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Streaming, category, online shopping, kenya, streaming"
+  },
+  {
+    "id": 2960,
+    "parent_id": 2950,
+    "slug": "streaming-general",
+    "name": "Streaming General",
+    "level": 3,
+    "seo_title": "Best Streaming General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Streaming General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Streaming General, subcategory, online shopping, kenya, streaming,general"
+  },
+  {
+    "id": 2961,
+    "parent_id": null,
+    "slug": "garden-outdoor",
+    "name": "Garden & Outdoor",
+    "level": 1,
+    "seo_title": "Best Garden & Outdoor in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Garden & Outdoor at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Garden & Outdoor, department, online shopping, kenya, garden,outdoor"
+  },
+  {
+    "id": 3061,
+    "parent_id": 2961,
+    "slug": "gardening-tools",
+    "name": "Gardening Tools",
+    "level": 2,
+    "seo_title": "Best Gardening Tools in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Gardening Tools at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Gardening Tools, category, online shopping, kenya, gardening,tools"
+  },
+  {
+    "id": 3071,
+    "parent_id": 3061,
+    "slug": "gardening-tools-general",
+    "name": "Gardening Tools General",
+    "level": 3,
+    "seo_title": "Best Gardening Tools General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Gardening Tools General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Gardening Tools General, subcategory, online shopping, kenya, gardening,tools,general"
+  },
+  {
+    "id": 3072,
+    "parent_id": 2961,
+    "slug": "patio-furniture",
+    "name": "Patio Furniture",
+    "level": 2,
+    "seo_title": "Best Patio Furniture in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Patio Furniture at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Patio Furniture, category, online shopping, kenya, patio,furniture"
+  },
+  {
+    "id": 3082,
+    "parent_id": 3072,
+    "slug": "patio-furniture-general",
+    "name": "Patio Furniture General",
+    "level": 3,
+    "seo_title": "Best Patio Furniture General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Patio Furniture General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Patio Furniture General, subcategory, online shopping, kenya, patio,furniture,general"
+  },
+  {
+    "id": 3083,
+    "parent_id": 2961,
+    "slug": "grills-outdoor-cooking",
+    "name": "Grills & Outdoor Cooking",
+    "level": 2,
+    "seo_title": "Best Grills & Outdoor Cooking in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Grills & Outdoor Cooking at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Grills & Outdoor Cooking, category, online shopping, kenya, grills,outdoor,cooking"
+  },
+  {
+    "id": 3093,
+    "parent_id": 3083,
+    "slug": "grills-outdoor-cooking-general",
+    "name": "Grills & Outdoor Cooking General",
+    "level": 3,
+    "seo_title": "Best Grills & Outdoor Cooking General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Grills & Outdoor Cooking General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Grills & Outdoor Cooking General, subcategory, online shopping, kenya, grills,outdoor,cooking,general"
+  },
+  {
+    "id": 3094,
+    "parent_id": null,
+    "slug": "handmade-products",
+    "name": "Handmade Products",
+    "level": 1,
+    "seo_title": "Best Handmade Products in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Handmade Products at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Handmade Products, department, online shopping, kenya, handmade,products"
+  },
+  {
+    "id": 3194,
+    "parent_id": 3094,
+    "slug": "crafts",
+    "name": "Crafts",
+    "level": 2,
+    "seo_title": "Best Crafts in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Crafts at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Crafts, category, online shopping, kenya, crafts"
+  },
+  {
+    "id": 3204,
+    "parent_id": 3194,
+    "slug": "crafts-general",
+    "name": "Crafts General",
+    "level": 3,
+    "seo_title": "Best Crafts General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Crafts General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Crafts General, subcategory, online shopping, kenya, crafts,general"
+  },
+  {
+    "id": 3205,
+    "parent_id": 3094,
+    "slug": "artisan-jewelry",
+    "name": "Artisan Jewelry",
+    "level": 2,
+    "seo_title": "Best Artisan Jewelry in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Artisan Jewelry at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Artisan Jewelry, category, online shopping, kenya, artisan,jewelry"
+  },
+  {
+    "id": 3215,
+    "parent_id": 3205,
+    "slug": "artisan-jewelry-general",
+    "name": "Artisan Jewelry General",
+    "level": 3,
+    "seo_title": "Best Artisan Jewelry General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Artisan Jewelry General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Artisan Jewelry General, subcategory, online shopping, kenya, artisan,jewelry,general"
+  },
+  {
+    "id": 3216,
+    "parent_id": 3094,
+    "slug": "handmade-decor",
+    "name": "Handmade Decor",
+    "level": 2,
+    "seo_title": "Best Handmade Decor in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Handmade Decor at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Handmade Decor, category, online shopping, kenya, handmade,decor"
+  },
+  {
+    "id": 3226,
+    "parent_id": 3216,
+    "slug": "handmade-decor-general",
+    "name": "Handmade Decor General",
+    "level": 3,
+    "seo_title": "Best Handmade Decor General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Handmade Decor General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Handmade Decor General, subcategory, online shopping, kenya, handmade,decor,general"
+  },
+  {
+    "id": 3227,
+    "parent_id": null,
+    "slug": "industrial-scientific",
+    "name": "Industrial & Scientific",
+    "level": 1,
+    "seo_title": "Best Industrial & Scientific in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Industrial & Scientific at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Industrial & Scientific, department, online shopping, kenya, industrial,scientific"
+  },
+  {
+    "id": 3327,
+    "parent_id": 3227,
+    "slug": "lab-equipment",
+    "name": "Lab Equipment",
+    "level": 2,
+    "seo_title": "Best Lab Equipment in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Lab Equipment at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Lab Equipment, category, online shopping, kenya, lab,equipment"
+  },
+  {
+    "id": 3337,
+    "parent_id": 3327,
+    "slug": "lab-equipment-general",
+    "name": "Lab Equipment General",
+    "level": 3,
+    "seo_title": "Best Lab Equipment General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Lab Equipment General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Lab Equipment General, subcategory, online shopping, kenya, lab,equipment,general"
+  },
+  {
+    "id": 3338,
+    "parent_id": 3227,
+    "slug": "janitorial-supplies",
+    "name": "Janitorial Supplies",
+    "level": 2,
+    "seo_title": "Best Janitorial Supplies in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Janitorial Supplies at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Janitorial Supplies, category, online shopping, kenya, janitorial,supplies"
+  },
+  {
+    "id": 3348,
+    "parent_id": 3338,
+    "slug": "janitorial-supplies-general",
+    "name": "Janitorial Supplies General",
+    "level": 3,
+    "seo_title": "Best Janitorial Supplies General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Janitorial Supplies General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Janitorial Supplies General, subcategory, online shopping, kenya, janitorial,supplies,general"
+  },
+  {
+    "id": 3349,
+    "parent_id": 3227,
+    "slug": "test-measurement",
+    "name": "Test & Measurement",
+    "level": 2,
+    "seo_title": "Best Test & Measurement in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Test & Measurement at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Test & Measurement, category, online shopping, kenya, test,measurement"
+  },
+  {
+    "id": 3359,
+    "parent_id": 3349,
+    "slug": "test-measurement-general",
+    "name": "Test & Measurement General",
+    "level": 3,
+    "seo_title": "Best Test & Measurement General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Test & Measurement General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Test & Measurement General, subcategory, online shopping, kenya, test,measurement,general"
+  },
+  {
+    "id": 3360,
+    "parent_id": null,
+    "slug": "baby-products",
+    "name": "Baby Products",
+    "level": 1,
+    "seo_title": "Best Baby Products in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Baby Products at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Baby Products, department, online shopping, kenya, baby,products"
+  },
+  {
+    "id": 3460,
+    "parent_id": 3360,
+    "slug": "diapering",
+    "name": "Diapering",
+    "level": 2,
+    "seo_title": "Best Diapering in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Diapering at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Diapering, category, online shopping, kenya, diapering"
+  },
+  {
+    "id": 3470,
+    "parent_id": 3460,
+    "slug": "diapering-general",
+    "name": "Diapering General",
+    "level": 3,
+    "seo_title": "Best Diapering General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Diapering General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Diapering General, subcategory, online shopping, kenya, diapering,general"
+  },
+  {
+    "id": 3471,
+    "parent_id": 3360,
+    "slug": "baby-gear",
+    "name": "Baby Gear",
+    "level": 2,
+    "seo_title": "Best Baby Gear in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Baby Gear at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Baby Gear, category, online shopping, kenya, baby,gear"
+  },
+  {
+    "id": 3481,
+    "parent_id": 3471,
+    "slug": "baby-gear-general",
+    "name": "Baby Gear General",
+    "level": 3,
+    "seo_title": "Best Baby Gear General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Baby Gear General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Baby Gear General, subcategory, online shopping, kenya, baby,gear,general"
+  },
+  {
+    "id": 3482,
+    "parent_id": 3360,
+    "slug": "nursery",
+    "name": "Nursery",
+    "level": 2,
+    "seo_title": "Best Nursery in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Nursery at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Nursery, category, online shopping, kenya, nursery"
+  },
+  {
+    "id": 3492,
+    "parent_id": 3482,
+    "slug": "nursery-general",
+    "name": "Nursery General",
+    "level": 3,
+    "seo_title": "Best Nursery General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Nursery General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Nursery General, subcategory, online shopping, kenya, nursery,general"
+  },
+  {
+    "id": 3493,
+    "parent_id": null,
+    "slug": "software",
+    "name": "Software",
+    "level": 1,
+    "seo_title": "Best Software in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Software at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Software, department, online shopping, kenya, software"
+  },
+  {
+    "id": 3593,
+    "parent_id": 3493,
+    "slug": "business-software",
+    "name": "Business Software",
+    "level": 2,
+    "seo_title": "Best Business Software in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Business Software at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Business Software, category, online shopping, kenya, business,software"
+  },
+  {
+    "id": 3603,
+    "parent_id": 3593,
+    "slug": "business-software-general",
+    "name": "Business Software General",
+    "level": 3,
+    "seo_title": "Best Business Software General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Business Software General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Business Software General, subcategory, online shopping, kenya, business,software,general"
+  },
+  {
+    "id": 3604,
+    "parent_id": 3493,
+    "slug": "antivirus",
+    "name": "Antivirus",
+    "level": 2,
+    "seo_title": "Best Antivirus in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Antivirus at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Antivirus, category, online shopping, kenya, antivirus"
+  },
+  {
+    "id": 3614,
+    "parent_id": 3604,
+    "slug": "antivirus-general",
+    "name": "Antivirus General",
+    "level": 3,
+    "seo_title": "Best Antivirus General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Antivirus General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Antivirus General, subcategory, online shopping, kenya, antivirus,general"
+  },
+  {
+    "id": 3615,
+    "parent_id": 3493,
+    "slug": "operating-systems",
+    "name": "Operating Systems",
+    "level": 2,
+    "seo_title": "Best Operating Systems in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Operating Systems at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Operating Systems, category, online shopping, kenya, operating,systems"
+  },
+  {
+    "id": 3625,
+    "parent_id": 3615,
+    "slug": "operating-systems-general",
+    "name": "Operating Systems General",
+    "level": 3,
+    "seo_title": "Best Operating Systems General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Operating Systems General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Operating Systems General, subcategory, online shopping, kenya, operating,systems,general"
+  },
+  {
+    "id": 3626,
+    "parent_id": null,
+    "slug": "video-games",
+    "name": "Video Games",
+    "level": 1,
+    "seo_title": "Best Video Games in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Video Games at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Video Games, department, online shopping, kenya, video,games"
+  },
+  {
+    "id": 3726,
+    "parent_id": 3626,
+    "slug": "playstation",
+    "name": "PlayStation",
+    "level": 2,
+    "seo_title": "Best PlayStation in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality PlayStation at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "PlayStation, category, online shopping, kenya, playstation"
+  },
+  {
+    "id": 3736,
+    "parent_id": 3726,
+    "slug": "playstation-general",
+    "name": "PlayStation General",
+    "level": 3,
+    "seo_title": "Best PlayStation General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality PlayStation General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "PlayStation General, subcategory, online shopping, kenya, playstation,general"
+  },
+  {
+    "id": 3737,
+    "parent_id": 3626,
+    "slug": "xbox",
+    "name": "Xbox",
+    "level": 2,
+    "seo_title": "Best Xbox in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Xbox at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Xbox, category, online shopping, kenya, xbox"
+  },
+  {
+    "id": 3747,
+    "parent_id": 3737,
+    "slug": "xbox-general",
+    "name": "Xbox General",
+    "level": 3,
+    "seo_title": "Best Xbox General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Xbox General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Xbox General, subcategory, online shopping, kenya, xbox,general"
+  },
+  {
+    "id": 3748,
+    "parent_id": 3626,
+    "slug": "nintendo-switch",
+    "name": "Nintendo Switch",
+    "level": 2,
+    "seo_title": "Best Nintendo Switch in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Nintendo Switch at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Nintendo Switch, category, online shopping, kenya, nintendo,switch"
+  },
+  {
+    "id": 3758,
+    "parent_id": 3748,
+    "slug": "nintendo-switch-general",
+    "name": "Nintendo Switch General",
+    "level": 3,
+    "seo_title": "Best Nintendo Switch General in Kenya | The Bazaar",
+    "seo_description": "Shop for high-quality Nintendo Switch General at The Bazaar. Fast delivery, great prices, and top-rated sellers.",
+    "meta_keywords": "Nintendo Switch General, subcategory, online shopping, kenya, nintendo,switch,general"
+  }
+]

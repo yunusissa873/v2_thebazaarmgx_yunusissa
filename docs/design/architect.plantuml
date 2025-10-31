@@ -1,0 +1,39 @@
+@startuml
+!theme plain
+
+package "Vendor Dashboard (New Frontend)" {
+  [Vendor UI Components] as VendorUI
+  [Vendor State Management] as VendorState
+}
+
+package "The Bazaar (Existing Frontend)" {
+  [Customer UI Components]
+}
+
+package "Backend (Supabase)" {
+  database "Database" as DB
+  [Authentication] as Auth
+  [Edge Functions] as Functions
+  [File Storage] as Storage
+}
+
+VendorUI --> VendorState
+VendorState --> Auth : Authenticate Vendor/Admin
+VendorState --> Functions : API Calls (e.g., getOrders, updateProduct)
+Functions --> DB : Query/Mutate Data (with RLS)
+VendorUI --> Storage : Upload Product Images
+
+Auth -> DB : Verifies user roles (vendor, admin)
+
+note right of VendorUI
+  A separate React/Vite application
+  using shadcn-ui and TypeScript.
+end note
+
+note right of Functions
+  Deno functions will handle business logic,
+  ensuring data access is validated against
+  the user's role and ownership.
+end note
+
+@enduml

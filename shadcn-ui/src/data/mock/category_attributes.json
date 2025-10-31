@@ -1,0 +1,1057 @@
+[
+  {
+    "category_id": 1110,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "size",
+        "material",
+        "gender"
+      ],
+      "optional": [
+        "pattern",
+        "occasion",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1121,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "size",
+        "material",
+        "gender"
+      ],
+      "optional": [
+        "pattern",
+        "occasion",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1132,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "size",
+        "material",
+        "gender"
+      ],
+      "optional": [
+        "pattern",
+        "occasion",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1143,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "size",
+        "material",
+        "gender"
+      ],
+      "optional": [
+        "pattern",
+        "occasion",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1254,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "model",
+        "color",
+        "storage_capacity"
+      ],
+      "optional": [
+        "screen_size",
+        "features",
+        "year"
+      ]
+    }
+  },
+  {
+    "category_id": 1265,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "model",
+        "color",
+        "storage_capacity"
+      ],
+      "optional": [
+        "screen_size",
+        "features",
+        "year"
+      ]
+    }
+  },
+  {
+    "category_id": 1276,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "model",
+        "color",
+        "storage_capacity"
+      ],
+      "optional": [
+        "screen_size",
+        "features",
+        "year"
+      ]
+    }
+  },
+  {
+    "category_id": 1287,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "model",
+        "color",
+        "storage_capacity"
+      ],
+      "optional": [
+        "screen_size",
+        "features",
+        "year"
+      ]
+    }
+  },
+  {
+    "category_id": 1398,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "material",
+        "color",
+        "dimensions"
+      ],
+      "optional": [
+        "style",
+        "weight",
+        "capacity"
+      ]
+    }
+  },
+  {
+    "category_id": 1409,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "material",
+        "color",
+        "dimensions"
+      ],
+      "optional": [
+        "style",
+        "weight",
+        "capacity"
+      ]
+    }
+  },
+  {
+    "category_id": 1420,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "material",
+        "color",
+        "dimensions"
+      ],
+      "optional": [
+        "style",
+        "weight",
+        "capacity"
+      ]
+    }
+  },
+  {
+    "category_id": 1431,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "material",
+        "color",
+        "dimensions"
+      ],
+      "optional": [
+        "style",
+        "weight",
+        "capacity"
+      ]
+    }
+  },
+  {
+    "category_id": 1542,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "skin_type",
+        "item_form",
+        "finish_type"
+      ],
+      "optional": [
+        "scent",
+        "volume",
+        "spf"
+      ]
+    }
+  },
+  {
+    "category_id": 1553,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "skin_type",
+        "item_form",
+        "finish_type"
+      ],
+      "optional": [
+        "scent",
+        "volume",
+        "spf"
+      ]
+    }
+  },
+  {
+    "category_id": 1564,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "skin_type",
+        "item_form",
+        "finish_type"
+      ],
+      "optional": [
+        "scent",
+        "volume",
+        "spf"
+      ]
+    }
+  },
+  {
+    "category_id": 1575,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "skin_type",
+        "item_form",
+        "finish_type"
+      ],
+      "optional": [
+        "scent",
+        "volume",
+        "spf"
+      ]
+    }
+  },
+  {
+    "category_id": 1686,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1697,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1708,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1719,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1830,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1841,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1852,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1863,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1974,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1985,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 1996,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2007,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2118,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2129,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2140,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2151,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2262,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2273,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2284,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2395,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2406,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2417,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2428,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2539,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2550,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2561,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2672,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2683,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2694,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2805,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2816,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2827,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2938,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2949,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 2960,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3071,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3082,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3093,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3204,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3215,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3226,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3337,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3348,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3359,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3470,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3481,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3492,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3603,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3614,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3625,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3736,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3747,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  },
+  {
+    "category_id": 3758,
+    "attributes": {
+      "canonical": [
+        "brand",
+        "color",
+        "material"
+      ],
+      "optional": [
+        "weight",
+        "dimensions",
+        "origin"
+      ]
+    }
+  }
+]

@@ -8,6 +8,34 @@ export type Currency = 'KES' | 'USD';
 export type StaffRole = 'manager' | 'staff' | 'viewer';
 export type MessageType = 'text' | 'image' | 'file' | 'voice';
 
+// Custom Interfaces for structured data
+export interface KycDocument {
+  type: string;
+  url: string;
+  status: 'pending' | 'approved' | 'rejected';
+}
+
+export interface Image {
+  url: string;
+  alt?: string;
+}
+
+export interface Dimensions {
+  width: number;
+  height: number;
+  depth: number;
+  unit: 'cm' | 'in';
+}
+
+export interface Address {
+  street: string;
+  city: string;
+  state: string;
+  postal_code: string;
+  country: string;
+}
+
+
 // Subscription Tier Definitions
 export interface SubscriptionTierConfig {
   tier: SubscriptionTier;
@@ -98,7 +126,7 @@ export interface Vendor {
   is_verified: boolean;
   is_mega_brand: boolean;
   kyc_status: string;
-  kyc_documents?: any;
+  kyc_documents?: KycDocument[];
   created_at: string;
   updated_at: string;
 }
@@ -112,7 +140,7 @@ export interface VendorSubscription {
   current_sku_count: number;
   monthly_fee: number;
   currency: Currency;
-  features?: any;
+  features?: string[];
   branch_count: number;
   branch_discount_percentage: number;
   start_date: string;
@@ -130,7 +158,7 @@ export interface VendorStaff {
   vendor_id: string;
   profile_id: string;
   role: StaffRole;
-  permissions?: any;
+  permissions?: string[];
   is_active: boolean;
   invited_by?: string;
   invited_at: string;
@@ -161,7 +189,7 @@ export interface Product {
   slug: string;
   description?: string;
   short_description?: string;
-  images?: any;
+  images?: Image[];
   price: number;
   compare_at_price?: number;
   currency: Currency;
@@ -172,7 +200,7 @@ export interface Product {
   is_active: boolean;
   is_featured: boolean;
   weight?: number;
-  dimensions?: any;
+  dimensions?: Dimensions;
   tags?: string[];
   meta_title?: string;
   meta_description?: string;
@@ -191,7 +219,7 @@ export interface ProductVariant {
   price?: number;
   compare_at_price?: number;
   stock_quantity: number;
-  attributes?: any;
+  attributes?: Record<string, string>;
   image_url?: string;
   is_active: boolean;
   created_at: string;
@@ -210,8 +238,8 @@ export interface Order {
   discount: number;
   total: number;
   currency: Currency;
-  shipping_address?: any;
-  billing_address?: any;
+  shipping_address?: Address;
+  billing_address?: Address;
   notes?: string;
   tracking_number?: string;
   shipped_at?: string;
@@ -247,8 +275,8 @@ export interface Payment {
   status: PaymentStatus;
   payment_method: PaymentMethod;
   provider_transaction_id?: string;
-  provider_response?: any;
-  metadata?: any;
+  provider_response?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
   paid_at?: string;
   refunded_at?: string;
   refund_amount?: number;
@@ -265,7 +293,7 @@ export interface Review {
   rating: number;
   title?: string;
   comment?: string;
-  images?: any;
+  images?: Image[];
   is_verified_purchase: boolean;
   helpful_count: number;
   is_approved: boolean;
@@ -343,7 +371,7 @@ export interface Message {
   chat_id: string;
   sender_id: string;
   content: string;
-  translated_content?: any;
+  translated_content?: string | Record<string, unknown>;
   message_type: MessageType;
   media_url?: string;
   is_read: boolean;
@@ -413,7 +441,7 @@ export interface FilterParams {
 }
 
 // API Response types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;

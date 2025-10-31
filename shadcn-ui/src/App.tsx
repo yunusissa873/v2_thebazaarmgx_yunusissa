@@ -1,14 +1,18 @@
+import { Suspense, lazy } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Index from './pages/Index';
-import NotFound from './pages/NotFound';
 import BuildBadge from '@/components/shared/BuildBadge';
 import { Navbar } from '@/components/shared/Navbar';
 import { Footer } from '@/components/shared/Footer';
 
 const queryClient = new QueryClient();
+
+// Lazy load pages
+const Index = lazy(() => import('./pages/Index'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const VendorDashboard = lazy(() => import('./pages/VendorDashboard'));
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -18,10 +22,13 @@ const App = () => (
         <div className="min-h-screen flex flex-col">
           <Navbar />
           <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
           </main>
           <Footer />
         </div>

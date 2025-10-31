@@ -1,5 +1,5 @@
 import { supabase } from '../../../lib/supabase/client';
-import type { MockVendor } from '@/data/mockVendors';
+import type { Vendor, Product } from '@/types';
 
 export interface VendorFilters {
   category?: string;
@@ -16,7 +16,7 @@ export async function getVendors(
   limit: number = 20,
   offset: number = 0,
   filters: VendorFilters = {}
-): Promise<{ data: MockVendor[] | null; error: any }> {
+): Promise<{ data: Vendor[] | null; error: unknown }> {
   try {
     let query = supabase
       .from('vendors')
@@ -55,7 +55,7 @@ export async function getVendors(
  */
 export async function getVendorBySlug(
   slug: string
-): Promise<{ data: MockVendor | null; error: any }> {
+): Promise<{ data: Vendor | null; error: unknown }> {
   try {
     const { data, error } = await supabase
       .from('vendors')
@@ -75,7 +75,7 @@ export async function getVendorBySlug(
 export async function getVendorProducts(
   vendorId: string,
   limit: number = 20
-): Promise<{ data: any[] | null; error: any }> {
+): Promise<{ data: Product[] | null; error: unknown }> {
   try {
     const { data, error } = await supabase
       .from('products')
@@ -95,7 +95,7 @@ export async function getVendorProducts(
  */
 export async function getFeaturedVendors(
   limit: number = 5
-): Promise<{ data: MockVendor[] | null; error: any }> {
+): Promise<{ data: Vendor[] | null; error: unknown }> {
   try {
     const { data, error } = await supabase
       .from('vendors')
@@ -116,7 +116,7 @@ export async function getFeaturedVendors(
 export async function searchVendors(
   query: string,
   limit: number = 20
-): Promise<{ data: MockVendor[] | null; error: any }> {
+): Promise<{ data: Vendor[] | null; error: unknown }> {
   try {
     const { data, error } = await supabase
       .from('vendors')

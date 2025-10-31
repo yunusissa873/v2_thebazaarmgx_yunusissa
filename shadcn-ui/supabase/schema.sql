@@ -417,6 +417,23 @@ CREATE INDEX idx_mega_brands_vendor_id ON mega_brands(vendor_id);
 CREATE INDEX idx_mega_brands_display_order ON mega_brands(display_order);
 CREATE INDEX idx_mega_brands_is_active ON mega_brands(is_active);
 
+-- 19. Audit Log Table
+CREATE TABLE audit_log (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    action TEXT NOT NULL,
+    target_resource TEXT,
+    target_resource_id UUID,
+    details JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_audit_log_profile_id ON audit_log(profile_id);
+CREATE INDEX idx_audit_log_action ON audit_log(action);
+CREATE INDEX idx_audit_log_target_resource ON audit_log(target_resource, target_resource_id);
+CREATE INDEX idx_audit_log_created_at ON audit_log(created_at DESC);
+
+
 -- Row Level Security (RLS) Policies
 
 -- Enable RLS on all tables
@@ -438,6 +455,7 @@ ALTER TABLE loyalty_programs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE chats ENABLE ROW LEVEL SECURITY;
 ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mega_brands ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_log ENABLE ROW LEVEL SECURITY;
 
 -- Profiles Policies
 CREATE POLICY "Public profiles are viewable by everyone" ON profiles FOR SELECT USING (true);
@@ -578,6 +596,14 @@ CREATE POLICY "Vendor staff can view own vendor staff" ON vendor_staff FOR SELEC
 CREATE POLICY "Vendor owners can manage staff" ON vendor_staff FOR ALL USING (
     vendor_id IN (SELECT id FROM vendors WHERE profile_id = auth.uid())
 );
+
+-- Audit Log Policies
+CREATE POLICY "Admins can view audit logs" ON audit_log FOR SELECT USING (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
+);
+CREATE POLICY "Audit logs are immutable" ON audit_log FOR UPDATE USING (false);
+CREATE POLICY "Audit logs are permanent" ON audit_log FOR DELETE USING (false);
+-- NOTE: Inserts into this table should be handled by SECURITY DEFINER functions or triggers.
 
 -- Functions for automatic timestamp updates
 CREATE OR REPLACE FUNCTION update_updated_at_column()

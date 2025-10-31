@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Star, MapPin, BadgeCheck, Users, Package, Share2, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Star, MapPin, BadgeCheck, Users, Package, Share2, Heart, LayoutDashboard } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -7,14 +8,38 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { ProductCard } from '@/components/marketplace/ProductCard';
 import { cn } from '@/lib/utils';
-import type { MockVendor } from '@/data/mockVendors';
+import type { Product } from '@/types';
 
-interface VendorProfileProps {
-  vendor: MockVendor;
-  products?: any[];
+interface VendorProfileData {
+  id: string;
+  banner: string;
+  name: string;
+  logo: string;
+  isVerified: boolean;
+  businessType: string;
+  rating: number;
+  reviewCount: number;
+  city: string;
+  country: string;
+  subscriptionTier: 'Basic' | 'Bronze' | 'Silver' | 'Gold' | 'Platinum';
+  productCount: number;
+  followers: number;
+  description: string;
+  hours: string;
+  contact: {
+    email: string;
+    phone: string;
+    website?: string;
+  };
 }
 
-const tierColors = {
+interface VendorProfileProps {
+  vendor: VendorProfileData;
+  products?: Product[];
+  isOwner?: boolean;
+}
+
+const tierColors: Record<VendorProfileData['subscriptionTier'], string> = {
   Basic: 'bg-gray-500',
   Bronze: 'bg-orange-700',
   Silver: 'bg-gray-400',
@@ -22,7 +47,7 @@ const tierColors = {
   Platinum: 'bg-purple-500',
 };
 
-export function VendorProfile({ vendor, products = [] }: VendorProfileProps) {
+export function VendorProfile({ vendor, products = [], isOwner = false }: VendorProfileProps) {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const handleFollow = () => {
@@ -119,6 +144,14 @@ export function VendorProfile({ vendor, products = [] }: VendorProfileProps) {
 
           {/* Action Buttons */}
           <div className="flex gap-2">
+            {isOwner && (
+                <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Link to="/vendor/dashboard">
+                        <LayoutDashboard className="h-4 w-4 mr-2" />
+                        Go to Dashboard
+                    </Link>
+                </Button>
+            )}
             <Button
               variant={isFollowing ? 'outline' : 'default'}
               className={cn(
@@ -201,7 +234,7 @@ export function VendorProfile({ vendor, products = [] }: VendorProfileProps) {
             {products.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {products.map((product) => (
-                  <ProductCard key={product.id} {...product} />
+                  <ProductCard key={product.id} {...product} vendorName={vendor.name} vendorSlug={vendor.id} />
                 ))}
               </div>
             ) : (

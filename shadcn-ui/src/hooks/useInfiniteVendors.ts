@@ -110,8 +110,14 @@ export function useInfiniteVendors({
     setVendors([]);
     setPage(0);
     setHasMore(true);
-    loadMore();
   }, [filters.search, filters.category, filters.location, filters.rating, filters.tier]);
+
+  // Load initial data or data after filter change
+  useEffect(() => {
+    if (page === 0 && hasMore) {
+      loadMore();
+    }
+  }, [page, hasMore, loadMore]);
 
   // Intersection Observer for infinite scroll
   useEffect(() => {
