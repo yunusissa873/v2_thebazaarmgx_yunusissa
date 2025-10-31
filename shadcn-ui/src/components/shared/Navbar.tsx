@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -34,8 +34,8 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-6">
+          {/* Desktop Navigation - Added ml-24 for ~1 inch spacing */}
+          <div className="hidden md:flex md:items-center md:space-x-6 ml-24">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -69,6 +69,17 @@ export function Navbar() {
             >
               <Search className="h-5 w-5" />
             </Button>
+
+            {/* Wishlist */}
+            <Link to="/wishlist">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-gray-300 hover:text-white"
+              >
+                <Heart className="h-5 w-5" />
+              </Button>
+            </Link>
 
             {/* Cart */}
             <Link to="/cart">
