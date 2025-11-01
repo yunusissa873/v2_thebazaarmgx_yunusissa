@@ -13,6 +13,7 @@ const queryClient = new QueryClient();
 const Index = lazy(() => import('./pages/Index'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const VendorDashboard = lazy(() => import('./pages/VendorDashboard'));
+const Vendors = lazy(() => import('./pages/Vendors'));
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -26,6 +27,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+                <Route path="/vendors" element={<Vendors />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
