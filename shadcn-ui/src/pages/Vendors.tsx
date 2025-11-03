@@ -10,7 +10,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Carousel } from '@/components/marketplace/Carousel';
+import { VendorCarousel } from '@/components/vendor/VendorCarousel';
+import { VendorGridCarousel } from '@/components/vendor/VendorGridCarousel';
 import { VendorCard } from '@/components/vendor/VendorCard';
 import { useInfiniteVendors } from '@/hooks/useInfiniteVendors';
 import { mockVendors } from '@/data/mockVendors';
@@ -22,23 +23,17 @@ export default function Vendors() {
   const [ratingFilter, setRatingFilter] = useState<string>('');
   const [tierFilter, setTierFilter] = useState<string>('');
 
-  // Get featured vendors for carousel
-  const featuredVendors = useMemo(
-    () => mockVendors.filter((v) => v.isFeatured),
+  // Get 10 vendors for hero carousel
+  const heroVendors = useMemo(
+    () => mockVendors.slice(0, 10),
     []
   );
 
-  // Create carousel items from featured vendors
-  const carouselItems = featuredVendors.map((vendor) => ({
-    id: vendor.id,
-    image: vendor.banner,
-    title: vendor.name,
-    subtitle: vendor.businessType,
-    cta: {
-      text: 'View Profile',
-      link: `/vendors/${vendor.slug}`,
-    },
-  }));
+  // Get featured vendors for 2-row carousel (30 total)
+  const featuredVendors = useMemo(
+    () => mockVendors.filter((v) => v.isFeatured).slice(0, 30),
+    []
+  );
 
   // Infinite scroll hook with filters
   const { vendors, loading, hasMore, observerTarget } = useInfiniteVendors({
@@ -81,13 +76,6 @@ export default function Vendors() {
 
   return (
     <div className="min-h-screen bg-netflix-black">
-      {/* Hero Carousel - Featured Vendors */}
-      {carouselItems.length > 0 && (
-        <section className="mb-8">
-          <Carousel items={carouselItems} autoPlayInterval={6000} />
-        </section>
-      )}
-
       <div className="container-custom py-8">
         {/* Page Header */}
         <div className="mb-8">
@@ -230,16 +218,46 @@ export default function Vendors() {
           </div>
         </div>
 
-        {/* Results Count */}
-        <div className="mb-6">
-          <p className="text-gray-400">
-            {vendors.length > 0
-              ? `Showing ${vendors.length} vendor${vendors.length !== 1 ? 's' : ''}`
-              : 'No vendors found'}
-          </p>
+        {/* Hero Carousel - 10 Vendors */}
+        {heroVendors.length > 0 && (
+          <section className="mb-12">
+            <VendorCarousel
+              vendors={heroVendors}
+              autoPlayInterval={5000}
+              showNavigation={true}
+            />
+          </section>
+        )}
+
+        {/* Featured Vendors - 2-row Grid Carousel (15 per row = 30 total) */}
+        {featuredVendors.length > 0 && (
+          <section className="mb-12">
+            <VendorGridCarousel
+              vendors={featuredVendors}
+              title="Featured Vendors"
+              rows={2}
+              itemsPerRow={15}
+              autoPlayInterval={6000}
+              showNavigation={true}
+            />
+          </section>
+        )}
+
+        {/* All Vendors Section */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-white mb-6">All Vendors</h2>
+          
+          {/* Results Count */}
+          <div className="mb-6">
+            <p className="text-gray-400">
+              {vendors.length > 0
+                ? `Showing ${vendors.length} vendor${vendors.length !== 1 ? 's' : ''}`
+                : 'No vendors found'}
+            </p>
+          </div>
         </div>
 
-        {/* Vendors Grid */}
+        {/* Vendors Grid - Infinite Scroll */}
         {vendors.length > 0 ? (
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-8">

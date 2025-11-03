@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Search, ShoppingCart, User, Menu, X, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,22 +9,56 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useAuth } from '@/contexts/AuthContext';
+import { useCart } from '@/contexts/CartContext';
+import { SearchBar } from '@/components/marketplace/SearchBar';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartCount] = useState(3); // TODO: Connect to cart state
-  const [isLoggedIn] = useState(false); // TODO: Connect to auth state
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const { getItemCount } = useCart();
+  const cartCount = getItemCount();
+  const { isAuthenticated, user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Pages where navbar should be static (not sticky)
+  const staticNavbarPages = ['/', '/vendors', '/categories'];
+  const isStaticNavbar = staticNavbarPages.includes(location.pathname);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+    setShowLogoutConfirm(false);
+  };
+
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true);
+  };
 
   const navLinks = [
     { name: 'Vendors', href: '/vendors' },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-netflix-dark-gray bg-netflix-black/95 backdrop-blur supports-[backdrop-filter]:bg-netflix-black/80">
+    <>
+    <nav className={`${isStaticNavbar ? 'static' : 'sticky top-0'} z-50 w-full border-b border-netflix-dark-gray bg-netflix-black/95 backdrop-blur supports-[backdrop-filter]:bg-netflix-black/80`}>
       <div className="container-custom">
         <div className="flex h-16 items-center justify-between">
           {/* Left Section: Logo and Navigation */}
@@ -50,24 +84,21 @@ export function Navbar() {
           {/* Right Section: Search, Actions, and Mobile Menu */}
           <div className="flex items-center gap-4">
             <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:px-8">
-              <div className="relative w-full max-w-lg">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                <Input
-                  type="search"
-                  placeholder="Search products, vendors..."
-                  className="w-full bg-netflix-dark-gray border-netflix-medium-gray pl-10 text-white placeholder:text-gray-400 focus-visible:ring-netflix-red"
-                />
-              </div>
+              <SearchBar placeholder="Search products, vendors..." />
             </div>
 
             <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="lg:hidden text-gray-300 hover:text-white"
-              >
-                <Search className="h-5 w-5" />
-              </Button>
+              <div className="lg:hidden">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="text-gray-300 hover:text-white"
+                  onClick={() => navigate('/products')}
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+              </div>
 
               <Link to="/wishlist">
                 <Button
@@ -108,30 +139,80 @@ export function Navbar() {
                   align="end"
                   className="w-56 bg-netflix-dark-gray border-netflix-medium-gray"
                 >
-                  {isLoggedIn ? (
+                  {isAuthenticated ? (
                     <>
                       <DropdownMenuLabel className="text-white">
-                        My Account
+                        {user?.email || 'My Account'}
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator className="bg-netflix-medium-gray" />
+                      
+                      {/* My Profile */}
                       <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
                         <Link to="/profile" className="w-full">
-                          Profile
+                          My Profile
                         </Link>
                       </DropdownMenuItem>
+
+                      {/* Purchase History */}
                       <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
                         <Link to="/orders" className="w-full">
-                          Orders
+                          Purchase History
                         </Link>
                       </DropdownMenuItem>
+
+                      {/* Notifications & Alerts */}
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
+                          Notifications & Alerts
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuSubContent className="bg-netflix-dark-gray border-netflix-medium-gray">
+                          <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
+                            <Link to="/profile?tab=notifications" className="w-full">
+                              Notification Settings
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
+                            <Link to="/orders" className="w-full">
+                              Order Updates
+                            </Link>
+                          </DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                      </DropdownMenuSub>
+
+                      {/* Settings */}
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
+                          Settings
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuSubContent className="bg-netflix-dark-gray border-netflix-medium-gray">
+                          <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
+                            <Link to="/profile?tab=settings" className="w-full">
+                              Language & Currency
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
+                            <Link to="/profile?tab=payments" className="w-full">
+                              Payment Methods
+                            </Link>
+                          </DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                      </DropdownMenuSub>
+
+                      {/* Support & Help Center */}
                       <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
-                        <Link to="/wishlist" className="w-full">
-                          Wishlist
+                        <Link to="/help" className="w-full">
+                          Support & Help Center
                         </Link>
                       </DropdownMenuItem>
+
                       <DropdownMenuSeparator className="bg-netflix-medium-gray" />
-                      <DropdownMenuItem className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray">
-                        Logout
+                      
+                      {/* Logout */}
+                      <DropdownMenuItem 
+                        className="text-gray-300 focus:text-white focus:bg-netflix-medium-gray cursor-pointer text-red-400 hover:text-red-300"
+                        onClick={handleLogoutClick}
+                      >
+                        Log Out
                       </DropdownMenuItem>
                     </>
                   ) : (
@@ -188,5 +269,29 @@ export function Navbar() {
         </div>
       </div>
     </nav>
+
+    {/* Logout Confirmation Dialog */}
+    <AlertDialog open={showLogoutConfirm} onOpenChange={setShowLogoutConfirm}>
+      <AlertDialogContent className="bg-netflix-dark-gray border-netflix-medium-gray">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-white">Confirm Logout</AlertDialogTitle>
+          <AlertDialogDescription className="text-gray-300">
+            Are you sure you want to log out? You'll need to sign in again to access your account.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel className="bg-netflix-medium-gray text-white border-netflix-medium-gray hover:bg-netflix-medium-gray/80">
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={handleSignOut}
+            className="bg-netflix-red hover:bg-netflix-red/90 text-white"
+          >
+            Log Out
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    </>
   );
 }

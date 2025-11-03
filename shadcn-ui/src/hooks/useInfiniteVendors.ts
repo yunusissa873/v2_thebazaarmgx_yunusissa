@@ -98,7 +98,10 @@ export function useInfiniteVendors({
         setVendors((prev) => [...prev, ...newVendors]);
         setPage((prev) => prev + 1);
       } catch (err) {
-        setError(err as Error);
+        const error = err as Error;
+        setError(error);
+        console.error('Error loading vendors:', error);
+        // TODO: Add toast notification or send to error monitoring
       } finally {
         setLoading(false);
       }

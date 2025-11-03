@@ -2,9 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ProductBannerCard } from './ProductBannerCard';
+import type { Product } from '@/data/transformed/products';
+import type { Vendor } from '@/data/transformed/vendors';
 
 interface CarouselItem {
   id: string;
+  type: 'banner' | 'product';
   image: string;
   title?: string;
   subtitle?: string;
@@ -12,6 +16,9 @@ interface CarouselItem {
     text: string;
     link: string;
   };
+  // Product-specific fields
+  product?: Product;
+  vendor?: Vendor | null;
 }
 
 interface CarouselProps {
@@ -72,39 +79,51 @@ export function Carousel({
               index === currentIndex ? 'opacity-100' : 'opacity-0'
             )}
           >
-            <img
-              src={item.image}
-              alt={item.title || `Slide ${index + 1}`}
-              className="h-full w-full object-cover"
-            />
+            {item.type === 'product' && item.product ? (
+              // Render Product Banner Card
+              <ProductBannerCard
+                product={item.product}
+                vendor={item.vendor || null}
+                className="h-full"
+              />
+            ) : (
+              // Render Regular Banner
+              <>
+                <img
+                  src={item.image}
+                  alt={item.title || `Slide ${index + 1}`}
+                  className="h-full w-full object-cover"
+                />
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-            {/* Content Overlay */}
-            {(item.title || item.subtitle || item.cta) && (
-              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-                <div className="max-w-2xl">
-                  {item.title && (
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 animate-slide-in">
-                      {item.title}
-                    </h2>
-                  )}
-                  {item.subtitle && (
-                    <p className="text-lg md:text-xl text-gray-200 mb-4 animate-slide-in delay-100">
-                      {item.subtitle}
-                    </p>
-                  )}
-                  {item.cta && (
-                    <Button
-                      className="bg-netflix-red hover:bg-netflix-red/90 text-white animate-slide-in delay-200"
-                      onClick={() => (window.location.href = item.cta!.link)}
-                    >
-                      {item.cta.text}
-                    </Button>
-                  )}
-                </div>
-              </div>
+                {/* Content Overlay */}
+                {(item.title || item.subtitle || item.cta) && (
+                  <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                    <div className="max-w-2xl">
+                      {item.title && (
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 animate-slide-in">
+                          {item.title}
+                        </h2>
+                      )}
+                      {item.subtitle && (
+                        <p className="text-lg md:text-xl text-gray-200 mb-4 animate-slide-in delay-100">
+                          {item.subtitle}
+                        </p>
+                      )}
+                      {item.cta && (
+                        <Button
+                          className="bg-netflix-red hover:bg-netflix-red/90 text-white animate-slide-in delay-200"
+                          onClick={() => (window.location.href = item.cta!.link)}
+                        >
+                          {item.cta.text}
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         ))}

@@ -1,166 +1,184 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Carousel } from '@/components/marketplace/Carousel';
 import { CategoryCarousel } from '@/components/marketplace/CategoryCarousel';
-import { ProductCard } from '@/components/marketplace/ProductCard';
-import { Skeleton } from '@/components/ui/skeleton';
+import { ProductCarousel } from '@/components/marketplace/ProductCarousel';
+import { ProductGridCarousel } from '@/components/marketplace/ProductGridCarousel';
+import { InfiniteScrollGrid } from '@/components/marketplace/InfiniteScrollGrid';
+import { Button } from '@/components/ui/button';
+import { useFeaturedCategories, useProducts, useVendors, useVendor } from '@/hooks/useMockData';
+import { mapProductToCard } from '@/utils/productMapper';
+import bannersData from '@/data/mock/banners.json';
+import { productsData } from '@/data/transformed/products';
+import type { Product } from '@/data/transformed/products';
 
 export default function Index() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
-
-  // Mock data for hero carousel
-  const heroSlides = [
-    {
-      id: '1',
-      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=600&fit=crop',
-      title: 'Welcome to The Bazaar',
-      subtitle: 'Discover amazing products from verified vendors across Kenya',
+  
+  // Load data from transformed mock data
+  const featuredCategories = useFeaturedCategories(8);
+  const allVendors = useVendors();
+  const allProducts = useProducts();
+  const featuredProductsData = useProducts({ featured: true, limit: 30 });
+  
+  // Get active banners and products for hero carousel (Hot Deals)
+  // Total: 10 items (1 banner + 9 products)
+  const heroSlides = useMemo(() => {
+    // Get first active banner (Welcome to The Bazaar)
+    const firstBanner = bannersData.data
+      .filter(banner => banner.is_active)
+      .filter(banner => {
+        const now = new Date();
+        const startDate = new Date(banner.start_date);
+        const endDate = new Date(banner.end_date);
+        return now >= startDate && now <= endDate;
+      })
+      .sort((a, b) => a.priority - b.priority)
+      .slice(0, 1)[0]; // Get only first banner
+    
+    const bannerItem = firstBanner ? {
+      id: firstBanner.banner_id,
+      type: 'banner' as const,
+      image: firstBanner.image_url,
+      title: firstBanner.title,
+      subtitle: firstBanner.subtitle,
       cta: {
-        text: 'Start Shopping',
-        link: '#products',
+        text: firstBanner.link_text,
+        link: firstBanner.link,
       },
-    },
-    {
-      id: '2',
-      image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1920&h=600&fit=crop',
-      title: 'Become a Vendor',
-      subtitle: 'Join thousands of successful vendors on our platform',
-      cta: {
-        text: 'Learn More',
-        link: '/vendors/register',
-      },
-    },
-  ];
+    } : null;
 
-  // Mock data for categories
-  const categories = [
-    { id: '1', name: 'All Products', slug: 'all', icon: '🛍️' },
-    { id: '2', name: 'Electronics', slug: 'electronics', icon: '📱' },
-    { id: '3', name: 'Fashion', slug: 'fashion', icon: '👕' },
-    { id: '4', name: 'Home & Garden', slug: 'home-garden', icon: '🏡' },
-    { id: '5', name: 'Beauty', slug: 'beauty', icon: '💄' },
-    { id: '6', name: 'Sports', slug: 'sports', icon: '⚽' },
-    { id: '7', name: 'Books', slug: 'books', icon: '📚' },
-    { id: '8', name: 'Toys', slug: 'toys', icon: '🧸' },
-  ];
+    // Select 9 diverse products from different categories for paid placements
+    // Priority: featured products with variants, from different vendors and categories
+    const selectedProductIds = [
+      'prd_thk_001', // iPhone 17 Pro Max - TechHub Kenya (Electronics)
+      'prd_001',     // Samsung Galaxy S25 Ultra - Nairobi Gadget Hub (Electronics)
+      'prd_002',     // MacBook Pro - Nairobi Gadget Hub (Electronics/Laptops)
+      'prd_sb_001',  // Le Falconé Hayba Royalty - Sawae Brands (Fragrances)
+      'prd_sb_006',  // Sapil Royal Oud - Sawae Brands (Fragrances)
+      'prd_003',     // Modern Linen Abaya - Ruuhi Collection (Fashion)
+      'prd_sb_013',  // Swiss Arabian Mukhallat Malaki - Sawae Brands (Fragrances)
+      'prd_sb_016',  // Cosmo Vitamin C Brightening Serum - Sawae Brands (Skincare)
+      'prd_sb_018',  // Cosmo Retinol Anti-Aging Cream - Sawae Brands (Skincare)
+    ];
 
-  // Mock data for products
-  const mockProducts = [
-    {
-      id: '1',
-      name: 'Premium Wireless Headphones',
-      price: 8500,
-      compareAtPrice: 12000,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=500&fit=crop'],
-      vendorName: 'TechHub Kenya',
-      vendorSlug: 'techhub-kenya',
-      rating: 4.5,
-      reviewCount: 128,
-      isInStock: true,
-      discount: 29,
-    },
-    {
-      id: '2',
-      name: 'Designer Leather Handbag',
-      price: 15000,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=500&fit=crop'],
-      vendorName: 'Fashion Forward',
-      vendorSlug: 'fashion-forward',
-      rating: 4.8,
-      reviewCount: 89,
-      isInStock: true,
-    },
-    {
-      id: '3',
-      name: 'Smart Watch Pro',
-      price: 25000,
-      compareAtPrice: 32000,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop'],
-      vendorName: 'TechHub Kenya',
-      vendorSlug: 'techhub-kenya',
-      rating: 4.6,
-      reviewCount: 256,
-      isInStock: true,
-      discount: 22,
-    },
-    {
-      id: '4',
-      name: 'Organic Skincare Set',
-      price: 4500,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=500&fit=crop'],
-      vendorName: 'Beauty Essentials',
-      vendorSlug: 'beauty-essentials',
-      rating: 4.9,
-      reviewCount: 342,
-      isInStock: true,
-    },
-    {
-      id: '5',
-      name: 'Running Shoes',
-      price: 7800,
-      compareAtPrice: 9500,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop'],
-      vendorName: 'Sports Arena',
-      vendorSlug: 'sports-arena',
-      rating: 4.4,
-      reviewCount: 167,
-      isInStock: true,
-      discount: 18,
-    },
-    {
-      id: '6',
-      name: 'Coffee Maker Deluxe',
-      price: 12000,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400&h=500&fit=crop'],
-      vendorName: 'Home Essentials',
-      vendorSlug: 'home-essentials',
-      rating: 4.7,
-      reviewCount: 93,
-      isInStock: false,
-    },
-    {
-      id: '7',
-      name: 'Bluetooth Speaker',
-      price: 5500,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=500&fit=crop'],
-      vendorName: 'TechHub Kenya',
-      vendorSlug: 'techhub-kenya',
-      rating: 4.3,
-      reviewCount: 201,
-      isInStock: true,
-    },
-    {
-      id: '8',
-      name: 'Vintage Sunglasses',
-      price: 3200,
-      currency: 'KES' as const,
-      images: ['https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=500&fit=crop'],
-      vendorName: 'Fashion Forward',
-      vendorSlug: 'fashion-forward',
-      rating: 4.6,
-      reviewCount: 78,
-      isInStock: true,
-    },
-  ];
+    const selectedProducts: Product[] = selectedProductIds
+      .map(id => productsData.find(p => p.product_id === id))
+      .filter((p): p is Product => p !== undefined);
+
+    // Create product carousel items
+    const productItems = selectedProducts.map(product => {
+      const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+      return {
+        id: `product_${product.product_id}`,
+        type: 'product' as const,
+        image: product.images?.[0] || '',
+        product: product,
+        vendor: vendor || null,
+      };
+    });
+
+    // Combine: 1 banner + 9 products = 10 items total
+    const allItems = bannerItem ? [bannerItem, ...productItems] : productItems;
+    
+    return allItems;
+  }, [allVendors]);
+
+  // Hot Deals - Top 10 products (can be filtered by paid placement later)
+  const hotDealsProducts = useMemo(() => {
+    return [...allProducts]
+      .sort((a, b) => {
+        // Sort by discount first, then by rating
+        const aDiscount = a.compare_at_price ? ((a.compare_at_price - a.price) / a.compare_at_price) * 100 : 0;
+        const bDiscount = b.compare_at_price ? ((b.compare_at_price - b.price) / b.compare_at_price) * 100 : 0;
+        if (bDiscount !== aDiscount) {
+          return bDiscount - aDiscount;
+        }
+        return (b.rating || 0) - (a.rating || 0);
+      })
+      .slice(0, 10)
+      .map(product => {
+        const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+        return mapProductToCard(product, vendor);
+      });
+  }, [allProducts, allVendors]);
+
+  // Map categories to CategoryCarousel format
+  const categories = useMemo(() => {
+    const allCat = [
+      { id: 'all', name: 'All Products', slug: 'all', icon: '🛍️' },
+      ...featuredCategories.map(cat => ({
+        id: cat.category_id,
+        category_id: cat.category_id,
+        name: cat.name,
+        slug: cat.slug,
+        image_url: cat.image_url,
+      })),
+    ];
+    return allCat;
+  }, [featuredCategories]);
+
+  // Featured Products - 30 products for 2 rows of 15
+  const featuredProducts = useMemo(() => {
+    return featuredProductsData.map(product => {
+      const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+      return mapProductToCard(product, vendor);
+    });
+  }, [featuredProductsData, allVendors]);
+
+  // Trending Now - Top 30 products for 2 rows of 15
+  const trendingProducts = useMemo(() => {
+    return [...allProducts]
+      .sort((a, b) => {
+        // Sort by rating first (higher is better)
+        if (b.rating !== a.rating) {
+          return b.rating - a.rating;
+        }
+        // Then by review count
+        return (b.review_count || 0) - (a.review_count || 0);
+      })
+      .slice(0, 30)
+      .map(product => {
+        const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+        return mapProductToCard(product, vendor);
+      });
+  }, [allProducts, allVendors]);
+
+  // Shop Now - All products for infinite scroll
+  const shopNowProducts = useMemo(() => {
+    return allProducts.map(product => {
+      const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+      return mapProductToCard(product, vendor);
+    });
+  }, [allProducts, allVendors]);
 
   return (
     <div className="min-h-screen bg-netflix-black">
-      {/* Hero Carousel */}
+      {/* Hero Carousel - Hot Deals */}
       <section className="mb-8">
+        <div className="container-custom mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-white">Hot Deals</h1>
+          <p className="text-gray-400 mt-2">Discover our best deals and featured products</p>
+        </div>
         <Carousel items={heroSlides} autoPlayInterval={5000} />
       </section>
 
       {/* Categories Section */}
       <section className="container-custom mb-12">
-        <h2 className="text-2xl font-bold text-white mb-6">
-          Browse by Category
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-white">
+            Browse by Category
+          </h2>
+          <Button
+            asChild
+            variant="outline"
+            className="border-netflix-red text-netflix-red hover:bg-netflix-red hover:text-white"
+          >
+            <Link to="/categories">
+              Browse Categories
+            </Link>
+          </Button>
+        </div>
         <CategoryCarousel
           categories={categories}
           activeCategory={activeCategory}
@@ -168,33 +186,43 @@ export default function Index() {
         />
       </section>
 
-      {/* Products Grid */}
-      <section className="container-custom mb-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-white">Featured Products</h2>
-          <button className="text-netflix-red hover:underline">View All</button>
-        </div>
+      {/* Featured Products - 2-row Grid Carousel (15 per row = 30 total) */}
+      {featuredProducts.length > 0 && (
+        <section className="container-custom mb-12">
+          <ProductGridCarousel
+            products={featuredProducts}
+            title="Featured Products"
+            rows={2}
+            itemsPerRow={15}
+            autoPlayInterval={5000}
+            showNavigation={true}
+          />
+        </section>
+      )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {mockProducts.map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
-        </div>
-      </section>
+      {/* Trending Now - 2-row Grid Carousel (15 per row = 30 total) */}
+      {trendingProducts.length > 0 && (
+        <section className="container-custom mb-12">
+          <ProductGridCarousel
+            products={trendingProducts}
+            title="Trending Now"
+            rows={2}
+            itemsPerRow={15}
+            autoPlayInterval={5000}
+            showNavigation={true}
+          />
+        </section>
+      )}
 
-      {/* Trending Section Placeholder */}
-      <section className="container-custom mb-12">
-        <h2 className="text-2xl font-bold text-white mb-6">Trending Now</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="space-y-3">
-              <Skeleton className="aspect-[3/4] w-full rounded-lg bg-netflix-dark-gray" />
-              <Skeleton className="h-4 w-3/4 bg-netflix-dark-gray" />
-              <Skeleton className="h-4 w-1/2 bg-netflix-dark-gray" />
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Shop Now - Infinite Scroll Grid */}
+      {shopNowProducts.length > 0 && (
+        <section className="container-custom mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white">Shop Now</h2>
+          </div>
+          <InfiniteScrollGrid products={shopNowProducts} pageSize={20} />
+        </section>
+      )}
 
       {/* Call to Action */}
       <section className="container-custom mb-12">
@@ -206,9 +234,11 @@ export default function Index() {
             <p className="text-white/90 text-lg mb-6">
               Join thousands of successful vendors on The Bazaar
             </p>
-            <button className="bg-white text-netflix-red hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors">
-              Become a Vendor
-            </button>
+            <Button asChild className="bg-white text-netflix-red hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors">
+              <Link to="/vendors/register">
+                Become a Vendor
+              </Link>
+            </Button>
           </div>
           <div className="absolute inset-0 bg-black/10" />
         </div>

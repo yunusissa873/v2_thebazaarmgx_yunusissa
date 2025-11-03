@@ -1,0 +1,113 @@
+{
+  "document_type": "payments",
+  "project": "The Bazaar — AI-Powered Marketplace (PWA)",
+  "version": "1.0.0",
+  "schema": "bazaar.payment.v1",
+  "data": [
+    {
+      "payment_id": "pay_001",
+      "order_id": "ord_001",
+      "user_id": "usr_001",
+      "amount": 213250,
+      "currency": "KES",
+      "payment_method": "mpesa",
+      "payment_gateway": "mpesa",
+      "transaction_id": "MPESA123456789012345",
+      "gateway_transaction_id": "MPESA123456789012345",
+      "reference": "BAZ-2024-001234",
+      "status": "completed",
+      "payment_date": "2024-10-15T10:32:00Z",
+      "metadata": {
+        "phone_number": "+254712345678",
+        "mpesa_receipt": "RGP123456789",
+        "account_balance": 450000
+      },
+      "created_at": "2024-10-15T10:30:00Z",
+      "updated_at": "2024-10-15T10:32:00Z"
+    },
+    {
+      "payment_id": "pay_002",
+      "order_id": "ord_002",
+      "user_id": "usr_002",
+      "amount": 5475,
+      "currency": "KES",
+      "payment_method": "paystack",
+      "payment_gateway": "paystack",
+      "transaction_id": "PAYSTACK_abc123xyz789",
+      "gateway_transaction_id": "PAYSTACK_abc123xyz789",
+      "reference": "BAZ-2024-001567",
+      "status": "completed",
+      "payment_date": "2024-10-20T14:22:00Z",
+      "metadata": {
+        "card_type": "visa",
+        "last_4": "4242",
+        "authorization_code": "AUTH_xyz123"
+      },
+      "created_at": "2024-10-20T14:20:00Z",
+      "updated_at": "2024-10-20T14:22:00Z"
+    },
+    {
+      "payment_id": "pay_003",
+      "order_id": "ord_003",
+      "user_id": "usr_001",
+      "amount": 340798,
+      "currency": "KES",
+      "payment_method": "mpesa",
+      "payment_gateway": "mpesa",
+      "transaction_id": "MPESA987654321098765",
+      "gateway_transaction_id": "MPESA987654321098765",
+      "reference": "BAZ-2024-001890",
+      "status": "completed",
+      "payment_date": "2024-10-25T11:47:00Z",
+      "metadata": {
+        "phone_number": "+254712345678",
+        "mpesa_receipt": "RGP987654321",
+        "account_balance": 150000
+      },
+      "created_at": "2024-10-25T11:45:00Z",
+      "updated_at": "2024-10-25T11:47:00Z"
+    },
+    {
+      "payment_id": "pay_004",
+      "order_id": "ord_004",
+      "user_id": "usr_004",
+      "amount": 10750,
+      "currency": "KES",
+      "payment_method": "stripe",
+      "payment_gateway": "stripe",
+      "transaction_id": null,
+      "gateway_transaction_id": null,
+      "reference": "BAZ-2024-002123",
+      "status": "pending",
+      "payment_date": null,
+      "metadata": {
+        "payment_intent_id": "pi_abc123xyz789",
+        "client_secret": "pi_abc123xyz789_secret_xxx"
+      },
+      "created_at": "2024-10-28T16:20:00Z",
+      "updated_at": "2024-10-28T16:20:00Z"
+    },
+    {
+      "payment_id": "pay_005",
+      "order_id": "ord_005",
+      "user_id": "usr_005",
+      "amount": 12500,
+      "currency": "KES",
+      "payment_method": "mpesa",
+      "payment_gateway": "mpesa",
+      "transaction_id": "MPESA555666777888999",
+      "gateway_transaction_id": "MPESA555666777888999",
+      "reference": "BAZ-2024-002456",
+      "status": "failed",
+      "payment_date": null,
+      "metadata": {
+        "phone_number": "+254756789012",
+        "failure_reason": "Insufficient funds",
+        "error_code": "LIMIT_EXCEEDED"
+      },
+      "created_at": "2024-10-22T09:15:00Z",
+      "updated_at": "2024-10-22T09:16:00Z"
+    }
+  ]
+}
+

@@ -46,6 +46,9 @@ export function VendorCard({
             src={banner || '/placeholder-banner.jpg'}
             alt={`${name} banner`}
             className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
+            onError={(e) => {
+              e.currentTarget.src = '/placeholder-banner.jpg';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80" />
 
@@ -71,7 +74,13 @@ export function VendorCard({
         {/* Vendor Logo - Overlapping banner */}
         <div className="relative -mt-12 px-4">
           <Avatar className="h-20 w-20 border-4 border-netflix-dark-gray">
-            <AvatarImage src={logo} alt={name} />
+            <AvatarImage 
+              src={logo} 
+              alt={name}
+              onError={(e) => {
+                e.currentTarget.src = '';
+              }}
+            />
             <AvatarFallback className="bg-netflix-medium-gray text-white text-xl">
               {name.charAt(0)}
             </AvatarFallback>

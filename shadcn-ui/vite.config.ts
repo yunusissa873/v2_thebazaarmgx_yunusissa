@@ -20,10 +20,14 @@ export default defineConfig(({ command, mode }) => {
                 name: 'The Bazaar - Marketplace',
                 short_name: 'The Bazaar',
                 description:
-                  'A Netflix-inspired marketplace connecting buyers with verified vendors',
-                theme_color: '#141414',
+                  'A Netflix-inspired marketplace connecting buyers with verified vendors across Kenya',
+                start_url: '/',
+                scope: '/',
+                theme_color: '#E50914',
                 background_color: '#141414',
                 display: 'standalone',
+                orientation: 'portrait-primary',
+                categories: ['shopping', 'business', 'marketplace'],
                 icons: [
                   {
                     src: '/icon-192x192.png',
@@ -37,23 +41,117 @@ export default defineConfig(({ command, mode }) => {
                     type: 'image/png',
                     purpose: 'any maskable',
                   },
+                  {
+                    src: '/icon-192x192.png',
+                    sizes: '192x192',
+                    type: 'image/png',
+                    purpose: 'maskable',
+                  },
+                  {
+                    src: '/icon-512x512.png',
+                    sizes: '512x512',
+                    type: 'image/png',
+                    purpose: 'maskable',
+                  },
                 ],
               },
               workbox: {
-                globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+                // Cache static assets with CacheFirst strategy
+                globPatterns: [
+                  '**/*.{js,css,html,ico,png,svg,woff2,webp,jpg,jpeg}',
+                  '**/fonts/**/*.{woff,woff2,ttf,otf}',
+                  '**/images/**/*.{png,jpg,jpeg,webp,svg}',
+                ],
+                
+                // Cache static assets - CacheFirst (fast, offline-first for assets)
+                navigationPreload: true,
+                
+                // Runtime caching strategies
                 runtimeCaching: [
+                  // Static assets (images, fonts) - CacheFirst
+                  {
+                    urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico|woff|woff2|ttf|otf)$/i,
+                    handler: 'CacheFirst',
+                    options: {
+                      cacheName: 'static-assets-cache',
+                      expiration: {
+                        maxEntries: 200,
+                        maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+                      },
+                      cacheableResponse: {
+                        statuses: [0, 200],
+                      },
+                    },
+                  },
+                  
+                  // API calls - NetworkFirst with fallback
                   {
                     urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
                     handler: 'NetworkFirst',
                     options: {
-                      cacheName: 'supabase-cache',
+                      cacheName: 'supabase-api-cache',
+                      networkTimeoutSeconds: 3,
+                      expiration: {
+                        maxEntries: 100,
+                        maxAgeSeconds: 60 * 60 * 24, // 24 hours
+                      },
+                      cacheableResponse: {
+                        statuses: [0, 200],
+                      },
+                      // Fallback to cache if network fails
+                      plugins: [
+                        {
+                          cacheKeyWillBeUsed: async ({ request }) => {
+                            return request.url;
+                          },
+                        },
+                      ],
+                    },
+                  },
+                  
+                  // External images (Unsplash, CDN) - StaleWhileRevalidate
+                  {
+                    urlPattern: /^https:\/\/(images\.unsplash\.com|.*\.cloudinary\.com|.*\.amazonaws\.com).*/i,
+                    handler: 'StaleWhileRevalidate',
+                    options: {
+                      cacheName: 'external-images-cache',
+                      expiration: {
+                        maxEntries: 150,
+                        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+                      },
+                      cacheableResponse: {
+                        statuses: [0, 200],
+                      },
+                    },
+                  },
+                  
+                  // HTML pages - NetworkFirst for fresh content
+                  {
+                    urlPattern: /^https?:\/\/.*\/.*$/i,
+                    handler: 'NetworkFirst',
+                    options: {
+                      cacheName: 'pages-cache',
+                      networkTimeoutSeconds: 3,
                       expiration: {
                         maxEntries: 50,
                         maxAgeSeconds: 60 * 60 * 24, // 24 hours
                       },
+                      cacheableResponse: {
+                        statuses: [0, 200],
+                      },
                     },
                   },
                 ],
+                
+                // Skip waiting - update immediately
+                skipWaiting: true,
+                clientsClaim: true,
+                
+                // Source map handling
+                sourcemap: false,
+                
+                // Cleanup old caches
+                cleanupOutdatedCaches: true,
               },
               devOptions: {
                 enabled: false, // ensure no SW in dev server
@@ -74,6 +172,7 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       port: 3000,
+      host: true, // Listen on all network interfaces
     },
   };
 });

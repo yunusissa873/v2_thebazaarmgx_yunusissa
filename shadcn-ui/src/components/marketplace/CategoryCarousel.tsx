@@ -5,11 +5,13 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 
 interface Category {
-  id: string;
+  id?: string;
+  category_id?: string;
   name: string;
   slug: string;
   icon?: string;
   image?: string;
+  image_url?: string;
 }
 
 interface CategoryCarouselProps {
@@ -75,7 +77,7 @@ export function CategoryCarousel({
         >
           {categories.map((category) => (
             <button
-              key={category.id}
+              key={category.id || category.category_id || category.slug}
               onClick={() => onCategoryClick?.(category.slug)}
               className={cn(
                 'flex-shrink-0 group/item relative overflow-hidden rounded-lg transition-all duration-300',
@@ -87,11 +89,14 @@ export function CategoryCarousel({
             >
               {/* Category Image/Icon */}
               <div className="relative h-full w-full">
-                {category.image ? (
+                {(category.image || category.image_url) ? (
                   <img
-                    src={category.image}
+                    src={category.image || category.image_url}
                     alt={category.name}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover/item:scale-110"
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop&q=80';
+                    }}
                   />
                 ) : (
                   <div className="h-full w-full bg-gradient-to-br from-netflix-red/20 to-netflix-red/5 flex items-center justify-center">

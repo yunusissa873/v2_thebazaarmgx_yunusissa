@@ -143,13 +143,29 @@ export function VendorProfile({ vendor, products = [], isOwner = false }: Vendor
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {isOwner && (
                 <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
                     <Link to="/vendor/dashboard">
                         <LayoutDashboard className="h-4 w-4 mr-2" />
                         Go to Dashboard
                     </Link>
+                </Button>
+            )}
+            {(vendor as any).mapUrl && (
+              <Button
+                asChild
+                variant="outline"
+                className="border-netflix-medium-gray text-white hover:bg-netflix-medium-gray"
+              >
+                <a
+                  href={(vendor as any).mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="h-4 w-4 mr-2" />
+                  Find Us
+                </a>
                 </Button>
             )}
             <Button
@@ -314,22 +330,75 @@ export function VendorProfile({ vendor, products = [], isOwner = false }: Vendor
 
               <Separator className="bg-netflix-medium-gray" />
 
-              {/* Location Map Placeholder */}
+              {/* Location Map */}
               <div>
-                <h3 className="text-xl font-semibold text-white mb-3">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xl font-semibold text-white">
                   Location
                 </h3>
+                  {(vendor as any).mapUrl && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="border-netflix-medium-gray text-white hover:bg-netflix-medium-gray"
+                    >
+                      <a
+                        href={(vendor as any).mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <MapPin className="h-4 w-4 mr-2" />
+                        Find Us
+                      </a>
+                    </Button>
+                  )}
+                </div>
+                {(vendor as any).mapEmbedUrl ? (
+                  <div className="aspect-video bg-netflix-dark-gray rounded-lg overflow-hidden border border-netflix-medium-gray">
+                    <iframe
+                      src={(vendor as any).mapEmbedUrl}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title={`${vendor.name} Location`}
+                      className="w-full h-full"
+                    />
+                  </div>
+                ) : (vendor as any).mapUrl ? (
+                  <div className="aspect-video bg-netflix-dark-gray rounded-lg flex items-center justify-center border border-netflix-medium-gray">
+                    <div className="text-center p-4">
+                      <MapPin className="h-12 w-12 text-gray-600 mx-auto mb-2" />
+                      <p className="text-gray-400 mb-3">
+                        {vendor.city}, {vendor.country}
+                      </p>
+                      <Button
+                        asChild
+                        className="bg-netflix-red hover:bg-netflix-red/90 text-white"
+                      >
+                        <a
+                          href={(vendor as any).mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View on Google Maps
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
                 <div className="aspect-video bg-netflix-dark-gray rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-gray-600 mx-auto mb-2" />
                     <p className="text-gray-400">
                       {vendor.city}, {vendor.country}
                     </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      Map integration coming soon
-                    </p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </TabsContent>

@@ -4,6 +4,8 @@ import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/contexts/CartContext';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 interface ProductCardProps {
   id: string;
@@ -37,7 +39,10 @@ export function ProductCard({
   className,
 }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isInWishlist, setIsInWishlist] = useState(false);
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  
+  const isProductInWishlist = isInWishlist(id);
 
   const formatPrice = (amount: number) => {
     return currency === 'KES'
@@ -45,17 +50,16 @@ export function ProductCard({
       : `$${amount.toFixed(2)}`;
   };
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
-    // TODO: Implement add to cart
-    console.log('Add to cart:', id);
+    e.stopPropagation();
+    await addToCart(id, null, 1);
   };
 
-  const handleToggleWishlist = (e: React.MouseEvent) => {
+  const handleToggleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsInWishlist(!isInWishlist);
-    // TODO: Implement wishlist toggle
-    console.log('Toggle wishlist:', id);
+    e.stopPropagation();
+    await toggleWishlist(id);
   };
 
   return (
@@ -71,12 +75,15 @@ export function ProductCard({
         {/* Image Container - 85% of card height */}
         <div className="relative aspect-[3/4] overflow-hidden">
           <img
-            src={images[0] || '/placeholder-product.jpg'}
+            src={images?.[0] || '/placeholder-product.jpg'}
             alt={name}
             className={cn(
               'h-full w-full object-cover transition-all duration-500',
               isHovered && 'scale-110 brightness-110'
             )}
+            onError={(e) => {
+              e.currentTarget.src = '/placeholder-product.jpg';
+            }}
           />
 
           {/* Gradient Overlay */}
@@ -98,32 +105,32 @@ export function ProductCard({
             </div>
           )}
 
-          {/* Quick Actions (appear on hover) */}
+          {/* Quick Actions (always visible, enhanced on hover) */}
           <div
             className={cn(
-              'absolute top-2 right-2 flex flex-col gap-2 transition-all duration-300',
-              isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+              'absolute top-2 right-2 flex flex-col gap-2 transition-all duration-300 z-10',
+              isHovered ? 'opacity-100 scale-100' : 'opacity-80 scale-95'
             )}
           >
             <Button
               size="icon"
               variant="secondary"
               className={cn(
-                'h-9 w-9 rounded-full bg-white/90 hover:bg-white',
-                isInWishlist && 'bg-netflix-red hover:bg-netflix-red text-white'
+                'h-10 w-10 rounded-full bg-black/70 backdrop-blur-sm hover:bg-netflix-red border-2 border-white/30 hover:border-netflix-red shadow-lg',
+                isProductInWishlist && 'bg-netflix-red border-netflix-red'
               )}
               onClick={handleToggleWishlist}
             >
-              <Heart className={cn('h-4 w-4', isInWishlist && 'fill-current')} />
+              <Heart className={cn('h-5 w-5 text-white', isProductInWishlist && 'fill-current')} />
             </Button>
             {isInStock && (
               <Button
                 size="icon"
                 variant="secondary"
-                className="h-9 w-9 rounded-full bg-white/90 hover:bg-white"
+                className="h-10 w-10 rounded-full bg-black/70 backdrop-blur-sm hover:bg-netflix-red border-2 border-white/30 hover:border-netflix-red shadow-lg"
                 onClick={handleAddToCart}
               >
-                <ShoppingCart className="h-4 w-4" />
+                <ShoppingCart className="h-5 w-5 text-white" />
               </Button>
             )}
           </div>
