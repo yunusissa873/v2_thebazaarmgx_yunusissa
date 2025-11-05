@@ -1,10 +1,10 @@
-import Sidebar from "./Sidebar";
+import Header from "./Header";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen bg-netflix-black">
-      <Sidebar />
-      <main className="flex-1 p-6 text-white">{children}</main>
+    <div className="min-h-screen bg-netflix-black">
+      <Header />
+      <main className="max-w-full mx-auto">{children}</main>
     </div>
   );
 };
