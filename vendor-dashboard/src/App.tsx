@@ -3,12 +3,10 @@ import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
-import Analytics from "./pages/Analytics";
-import ProductsPage from "./pages/Products";
-import AddProductPage from "./pages/AddProduct";
-import Orders from "./pages/Orders";
-import Profile from "./pages/Profile";
+import ProfilePage from "./pages/vendor/Profile";
+import CommercePage from "./pages/vendor/Commerce";
+import AnalyticsPage from "./pages/vendor/Analytics";
+import FinancePage from "./pages/vendor/Finance";
 
 function App() {
   return (
@@ -18,70 +16,68 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         
-        {/* Protected Routes */}
+        {/* Protected Routes - Vendor Portal v3.0 */}
         <Route
-          path="/dashboard"
+          path="/vendor/profile"
           element={
             <ProtectedRoute>
               <Layout>
-                <Dashboard />
+                <ProfilePage />
               </Layout>
             </ProtectedRoute>
           }
         />
         <Route
-          path="/analytics"
+          path="/vendor/commerce"
           element={
             <ProtectedRoute>
               <Layout>
-                <Analytics />
+                <CommercePage />
               </Layout>
             </ProtectedRoute>
           }
         />
         <Route
-          path="/products"
+          path="/vendor/commerce/products/add"
           element={
             <ProtectedRoute>
               <Layout>
-                <ProductsPage />
+                {/* AddProductPage will be integrated */}
               </Layout>
             </ProtectedRoute>
           }
         />
         <Route
-          path="/products/add"
+          path="/vendor/analytics"
           element={
             <ProtectedRoute>
               <Layout>
-                <AddProductPage />
+                <AnalyticsPage />
               </Layout>
             </ProtectedRoute>
           }
         />
         <Route
-          path="/orders"
+          path="/vendor/finance"
           element={
             <ProtectedRoute>
               <Layout>
-                <Orders />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Layout>
-                <Profile />
+                <FinancePage />
               </Layout>
             </ProtectedRoute>
           }
         />
         
+        {/* Legacy Routes - Redirect to new structure */}
+        <Route path="/dashboard" element={<Navigate to="/vendor/profile" replace />} />
+        <Route path="/profile" element={<Navigate to="/vendor/profile" replace />} />
+        <Route path="/products" element={<Navigate to="/vendor/commerce" replace />} />
+        <Route path="/orders" element={<Navigate to="/vendor/commerce" replace />} />
+        <Route path="/analytics" element={<Navigate to="/vendor/analytics" replace />} />
+        
         {/* Default redirect */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/vendor/profile" replace />} />
+        <Route path="/vendor" element={<Navigate to="/vendor/profile" replace />} />
       </Routes>
     </Router>
   );
