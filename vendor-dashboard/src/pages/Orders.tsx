@@ -126,8 +126,8 @@ const Orders = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Orders</h1>
-        <div className="text-sm text-gray-600">
+        <h1 className="text-3xl font-bold text-white">Orders</h1>
+        <div className="text-sm text-netflix-light-gray">
           Manage and track your orders
         </div>
       </div>
@@ -135,18 +135,18 @@ const Orders = () => {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-netflix-light-gray" />
           <Input
             placeholder="Search by order ID, customer name, or email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-10 bg-netflix-dark-gray border-netflix-medium-gray text-white placeholder:text-netflix-light-gray"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-netflix-medium-gray rounded-md focus:outline-none focus:ring-2 focus:ring-netflix-red bg-netflix-dark-gray text-white"
         >
           <option value="all">All Status ({statusCounts.all})</option>
           <option value="pending">Pending ({statusCounts.pending})</option>
@@ -157,44 +157,44 @@ const Orders = () => {
       </div>
 
       {/* Orders Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead>Order ID</TableHead>
-              <TableHead>Customer</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Items</TableHead>
-              <TableHead>Amount</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Actions</TableHead>
+            <TableRow className="border-netflix-medium-gray">
+              <TableHead className="text-white">Order ID</TableHead>
+              <TableHead className="text-white">Customer</TableHead>
+              <TableHead className="text-white">Date</TableHead>
+              <TableHead className="text-white">Items</TableHead>
+              <TableHead className="text-white">Amount</TableHead>
+              <TableHead className="text-white">Status</TableHead>
+              <TableHead className="text-white">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredOrders.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center py-8 text-gray-500">
+                <TableCell colSpan={7} className="text-center py-8 text-netflix-light-gray">
                   No orders found
                 </TableCell>
               </TableRow>
             ) : (
               filteredOrders.map((order) => (
-                <TableRow key={order.order_id}>
-                  <TableCell className="font-medium">{order.order_id}</TableCell>
+                <TableRow key={order.order_id} className="border-netflix-medium-gray">
+                  <TableCell className="font-medium text-white">{order.order_id}</TableCell>
                   <TableCell>
                     <div>
-                      <div className="font-medium">{order.customer_name}</div>
-                      <div className="text-sm text-gray-500">{order.customer_email}</div>
+                      <div className="font-medium text-white">{order.customer_name}</div>
+                      <div className="text-sm text-netflix-light-gray">{order.customer_email}</div>
                     </div>
                   </TableCell>
-                  <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
+                  <TableCell className="text-white">{new Date(order.date).toLocaleDateString()}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Package className="h-4 w-4 text-gray-400" />
-                      <span>{order.items.length} item(s)</span>
+                      <Package className="h-4 w-4 text-netflix-light-gray" />
+                      <span className="text-white">{order.items.length} item(s)</span>
                     </div>
                   </TableCell>
-                  <TableCell className="font-semibold">
+                  <TableCell className="font-semibold text-white">
                     KES {order.total_amount.toLocaleString()}
                   </TableCell>
                   <TableCell>{getStatusBadge(order.status)}</TableCell>
@@ -207,6 +207,7 @@ const Orders = () => {
                           setSelectedOrder(order);
                           setIsDialogOpen(true);
                         }}
+                        className="border-netflix-medium-gray text-white hover:bg-netflix-medium-gray"
                       >
                         <Eye className="h-4 w-4 mr-1" />
                         View
@@ -216,6 +217,7 @@ const Orders = () => {
                           variant="default"
                           size="sm"
                           onClick={() => handleMarkShipped(order)}
+                          className="bg-netflix-red hover:bg-[#c11119] text-white"
                         >
                           <Truck className="h-4 w-4 mr-1" />
                           Ship
@@ -226,6 +228,7 @@ const Orders = () => {
                           variant="default"
                           size="sm"
                           onClick={() => handleStatusChange(order.order_id, "shipped")}
+                          className="bg-netflix-red hover:bg-[#c11119] text-white"
                         >
                           Mark Shipped
                         </Button>

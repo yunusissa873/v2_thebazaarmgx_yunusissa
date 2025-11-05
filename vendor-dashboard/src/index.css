@@ -59,7 +59,7 @@
   }
 }
 
-/* Netflix-inspired custom styles */
+/* The Bazaar Brand Kit - Netflix-inspired dark theme */
 @layer base {
   body {
     @apply dark;
@@ -112,7 +112,7 @@
     );
   }
 
-  /* Netflix red accent */
+  /* The Bazaar red accent */
   .accent-red {
     color: #e50914;
   }
@@ -138,13 +138,13 @@
     @apply max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Button primary Netflix style */
-  .btn-netflix {
+  /* Button primary The Bazaar style */
+  .btn-bazaar {
     @apply bg-accent-red hover:bg-[#c11119] text-white font-semibold py-2 px-6 rounded transition-colors duration-200;
   }
 
-  /* Button secondary Netflix style */
-  .btn-netflix-secondary {
+  /* Button secondary The Bazaar style */
+  .btn-bazaar-secondary {
     @apply bg-[#2f2f2f] hover:bg-[#404040] text-white font-semibold py-2 px-6 rounded transition-colors duration-200;
   }
 }

@@ -50,31 +50,31 @@ const Dashboard = () => {
       title: "Total Products",
       value: stats.totalProducts,
       icon: Package,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-blue-400",
+      bgColor: "bg-netflix-dark-gray",
       link: "/products",
     },
     {
       title: "Total Orders",
       value: stats.totalOrders,
       icon: ShoppingCart,
-      color: "text-green-600",
-      bgColor: "bg-green-50",
+      color: "text-green-400",
+      bgColor: "bg-netflix-dark-gray",
       link: "/orders",
     },
     {
       title: "Total Revenue",
       value: `KES ${stats.totalRevenue.toLocaleString()}`,
       icon: DollarSign,
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-50",
+      color: "text-yellow-400",
+      bgColor: "bg-netflix-dark-gray",
     },
     {
       title: "Pending Orders",
       value: stats.pendingOrders,
       icon: AlertCircle,
-      color: "text-red-600",
-      bgColor: "bg-red-50",
+      color: "text-netflix-red",
+      bgColor: "bg-netflix-dark-gray",
       link: "/orders?status=pending",
     },
   ];
@@ -82,8 +82,8 @@ const Dashboard = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <div className="text-sm text-gray-600">
+        <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+        <div className="text-sm text-netflix-light-gray">
           Welcome back! Here's what's happening with your store.
         </div>
       </div>
@@ -93,11 +93,11 @@ const Dashboard = () => {
         {statCards.map((stat, index) => (
           <div
             key={index}
-            className={`${stat.bgColor} rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow`}
+            className={`${stat.bgColor} rounded-lg p-6 border border-netflix-medium-gray hover:border-netflix-red transition-all netflix-card`}
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">{stat.title}</p>
+                <p className="text-sm font-medium text-netflix-light-gray">{stat.title}</p>
                 <p className={`text-2xl font-bold ${stat.color} mt-2`}>
                   {stat.value}
                 </p>
@@ -106,7 +106,7 @@ const Dashboard = () => {
             </div>
             {stat.link && (
               <Link to={stat.link}>
-                <Button variant="link" className="mt-4 p-0 h-auto text-sm">
+                <Button variant="link" className="mt-4 p-0 h-auto text-sm text-netflix-red hover:text-[#c11119]">
                   View details →
                 </Button>
               </Link>
@@ -117,23 +117,23 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+        <div className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">Quick Actions</h2>
           <div className="space-y-3">
             <Link to="/products">
-              <Button className="w-full justify-start" variant="outline">
+              <Button className="w-full justify-start bg-netflix-medium-gray hover:bg-netflix-red border-netflix-medium-gray text-white" variant="outline">
                 <Package className="mr-2 h-4 w-4" />
                 Add New Product
               </Button>
             </Link>
             <Link to="/orders">
-              <Button className="w-full justify-start" variant="outline">
+              <Button className="w-full justify-start bg-netflix-medium-gray hover:bg-netflix-red border-netflix-medium-gray text-white" variant="outline">
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 View Orders
               </Button>
             </Link>
             <Link to="/profile">
-              <Button className="w-full justify-start" variant="outline">
+              <Button className="w-full justify-start bg-netflix-medium-gray hover:bg-netflix-red border-netflix-medium-gray text-white" variant="outline">
                 <CheckCircle2 className="mr-2 h-4 w-4" />
                 Update Profile
               </Button>
@@ -141,40 +141,40 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+        <div className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">Recent Activity</h2>
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+            <div className="flex items-center justify-between p-3 bg-netflix-medium-gray rounded">
               <div>
-                <p className="text-sm font-medium">New order received</p>
-                <p className="text-xs text-gray-500">2 hours ago</p>
+                <p className="text-sm font-medium text-white">New order received</p>
+                <p className="text-xs text-netflix-light-gray">2 hours ago</p>
               </div>
-              <TrendingUp className="h-5 w-5 text-green-600" />
+              <TrendingUp className="h-5 w-5 text-green-500" />
             </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+            <div className="flex items-center justify-between p-3 bg-netflix-medium-gray rounded">
               <div>
-                <p className="text-sm font-medium">Product updated</p>
-                <p className="text-xs text-gray-500">5 hours ago</p>
+                <p className="text-sm font-medium text-white">Product updated</p>
+                <p className="text-xs text-netflix-light-gray">5 hours ago</p>
               </div>
-              <Package className="h-5 w-5 text-blue-600" />
+              <Package className="h-5 w-5 text-blue-500" />
             </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+            <div className="flex items-center justify-between p-3 bg-netflix-medium-gray rounded">
               <div>
-                <p className="text-sm font-medium">Order shipped</p>
-                <p className="text-xs text-gray-500">1 day ago</p>
+                <p className="text-sm font-medium text-white">Order shipped</p>
+                <p className="text-xs text-netflix-light-gray">1 day ago</p>
               </div>
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <CheckCircle2 className="h-5 w-5 text-green-500" />
             </div>
           </div>
         </div>
       </div>
 
       {/* Performance Chart Placeholder */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold mb-4">Sales Overview</h2>
-        <div className="h-64 flex items-center justify-center bg-gray-50 rounded">
-          <div className="text-center text-gray-500">
-            <TrendingUp className="h-12 w-12 mx-auto mb-2 text-gray-400" />
+      <div className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-6">
+        <h2 className="text-xl font-semibold mb-4 text-white">Sales Overview</h2>
+        <div className="h-64 flex items-center justify-center bg-netflix-medium-gray rounded">
+          <div className="text-center text-netflix-light-gray">
+            <TrendingUp className="h-12 w-12 mx-auto mb-2 text-netflix-light-gray" />
             <p>Sales chart will be displayed here</p>
             <p className="text-sm mt-1">Last 30 days performance</p>
           </div>
