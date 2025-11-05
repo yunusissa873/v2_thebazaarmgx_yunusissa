@@ -1,0 +1,6 @@
+vendor_id,plan_id,plan_name,status,billing_cycle,current_period_start,current_period_end,next_billing_date,auto_renew,sku_limit,created_at
+vendor_001,basic,Basic Vendor,active,monthly,2025-01-01,2025-02-01,2025-02-01,true,50,2025-01-01T00:00:00Z
+vendor_002,bronze,Bronze Vendor,active,annual,2025-01-01,2026-01-01,2026-01-01,true,150,2025-01-01T00:00:00Z
+vendor_003,silver,Silver Vendor,active,monthly,2025-01-15,2025-02-15,2025-02-15,true,500,2025-01-15T00:00:00Z
+vendor_004,gold,Gold Vendor,expired,monthly,2024-12-01,2025-01-01,2025-01-01,false,1000,2024-12-01T00:00:00Z
+vendor_005,platinum,Platinum Vendor,active,annual,2025-01-01,2026-01-01,2026-01-01,true,unlimited,2025-01-01T00:00:00Z
