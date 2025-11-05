@@ -25,9 +25,10 @@ interface RawProduct {
   category_id: number;
   slug: string;
   price_usd: number;
-  brand: string;
-  seo_title: string;
-  seo_description: string;
+  seo_metadata?: {
+    seo_title?: string;
+    seo_description?: string;
+  };
 }
 
 // Helper to transform raw mock data into the Product type our components expect
@@ -37,9 +38,12 @@ const transformMockProduct = (mockProduct: RawProduct): Product => ({
   name: mockProduct.title,
   price: mockProduct.price_kes,
   image: mockProduct.image_urls?.[0] || "https://via.placeholder.com/40", // Use first image or a placeholder
+  brand: "Unknown", // Default brand
+  seo_title: mockProduct.seo_metadata?.seo_title || mockProduct.title,
+  seo_description: mockProduct.seo_metadata?.seo_description || mockProduct.description,
 });
 
-const initialProducts: Product[] = (mockProductsData as RawProduct[]).map(transformMockProduct);
+const initialProducts: Product[] = (mockProductsData as unknown as RawProduct[]).map(transformMockProduct);
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
