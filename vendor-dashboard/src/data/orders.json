@@ -1,0 +1,97 @@
+[
+  {
+    "order_id": "ORD-001",
+    "customer_name": "John Doe",
+    "customer_email": "john.doe@example.com",
+    "customer_phone": "+254 712 345 678",
+    "status": "pending",
+    "total_amount": 8500.00,
+    "date": "2025-11-01",
+    "items": [
+      {
+        "product_id": "prod_50001",
+        "product_name": "Note Ago Handmade Decor",
+        "quantity": 2,
+        "unit_price": 4250.00
+      }
+    ],
+    "shipping_address": "123 Main Street, Nairobi, Kenya"
+  },
+  {
+    "order_id": "ORD-002",
+    "customer_name": "Jane Smith",
+    "customer_email": "jane.smith@example.com",
+    "customer_phone": "+254 723 456 789",
+    "status": "processing",
+    "total_amount": 13800.00,
+    "date": "2025-11-02",
+    "items": [
+      {
+        "product_id": "prod_50002",
+        "product_name": "Theory Activity Artisan Jewelry",
+        "quantity": 1,
+        "unit_price": 13800.00
+      }
+    ],
+    "shipping_address": "456 Market Road, Mombasa, Kenya",
+    "tracking_number": "TRK-123456"
+  },
+  {
+    "order_id": "ORD-003",
+    "customer_name": "Michael Johnson",
+    "customer_email": "michael.j@example.com",
+    "customer_phone": "+254 734 567 890",
+    "status": "shipped",
+    "total_amount": 25000.00,
+    "date": "2025-11-03",
+    "items": [
+      {
+        "product_id": "prod_50003",
+        "product_name": "Modern Artisan Pottery",
+        "quantity": 3,
+        "unit_price": 8333.33
+      }
+    ],
+    "shipping_address": "789 Industrial Avenue, Kisumu, Kenya",
+    "tracking_number": "TRK-789012"
+  },
+  {
+    "order_id": "ORD-004",
+    "customer_name": "Sarah Williams",
+    "customer_email": "sarah.w@example.com",
+    "customer_phone": "+254 745 678 901",
+    "status": "delivered",
+    "total_amount": 12000.00,
+    "date": "2025-10-28",
+    "items": [
+      {
+        "product_id": "prod_50004",
+        "product_name": "Handwoven Textile Art",
+        "quantity": 1,
+        "unit_price": 12000.00
+      }
+    ],
+    "shipping_address": "321 Riverside Drive, Nakuru, Kenya",
+    "tracking_number": "TRK-345678",
+    "delivered_date": "2025-10-30"
+  },
+  {
+    "order_id": "ORD-005",
+    "customer_name": "David Brown",
+    "customer_email": "david.b@example.com",
+    "customer_phone": "+254 756 789 012",
+    "status": "cancelled",
+    "total_amount": 9500.00,
+    "date": "2025-10-25",
+    "items": [
+      {
+        "product_id": "prod_50005",
+        "product_name": "Artisan Wood Carving",
+        "quantity": 1,
+        "unit_price": 9500.00
+      }
+    ],
+    "shipping_address": "654 Mountain View, Eldoret, Kenya",
+    "cancellation_reason": "Customer request"
+  }
+]
