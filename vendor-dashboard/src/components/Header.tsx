@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Bell, MessageSquare, HelpCircle, Settings, LogOut, Sun, Moon } from "lucide-react";
+import { Menu, X, Bell, MessageSquare, HelpCircle, Settings, LogOut, Sun } from "lucide-react";
 import { useState } from "react";
 
 const Header = () => {

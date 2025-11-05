@@ -44,7 +44,7 @@ const SignupPage = () => {
         address: formData.address,
       }));
       setIsLoading(false);
-      navigate("/dashboard");
+      navigate("/vendor/profile");
     }, 500);
   };
 

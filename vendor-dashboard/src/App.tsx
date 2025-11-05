@@ -5,6 +5,7 @@ import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import ProfilePage from "./pages/vendor/Profile";
 import CommercePage from "./pages/vendor/Commerce";
+import AddProductPage from "./pages/vendor/AddProduct";
 import AnalyticsPage from "./pages/vendor/Analytics";
 import FinancePage from "./pages/vendor/Finance";
 
@@ -42,7 +43,7 @@ function App() {
           element={
             <ProtectedRoute>
               <Layout>
-                {/* AddProductPage will be integrated */}
+                <AddProductPage />
               </Layout>
             </ProtectedRoute>
           }

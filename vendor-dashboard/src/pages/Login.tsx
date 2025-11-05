@@ -83,7 +83,7 @@ const LoginPage = () => {
       localStorage.setItem("vendorAuth", "true");
       localStorage.setItem("vendorEmail", email);
       setIsLoading(false);
-      navigate("/dashboard");
+      navigate("/vendor/profile");
     }, 500);
   };
 
