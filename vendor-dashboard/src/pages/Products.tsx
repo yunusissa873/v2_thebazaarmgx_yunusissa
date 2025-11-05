@@ -112,8 +112,10 @@ export default function ProductsPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Products</h1>
-        <Button onClick={handleAddClick}>Add Product</Button>
+        <h1 className="text-2xl font-bold text-white">Products</h1>
+        <Button onClick={handleAddClick} className="bg-netflix-red hover:bg-[#c11119] text-white">
+          Add Product
+        </Button>
       </div>
       <div className="border rounded-lg">
         <Table>

@@ -4,7 +4,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
 import ProductsPage from "./pages/Products";
+import AddProductPage from "./pages/AddProduct";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 
@@ -28,11 +30,31 @@ function App() {
           }
         />
         <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Analytics />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/products"
           element={
             <ProtectedRoute>
               <Layout>
                 <ProductsPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/products/add"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <AddProductPage />
               </Layout>
             </ProtectedRoute>
           }
