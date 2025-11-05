@@ -1,17 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
 import ProductsPage from "./pages/Products";
-
-// Placeholder pages for other routes
-const Orders = () => <div>This is the Orders Page</div>;
-const Profile = () => <div>This is the Profile Page</div>;
+import Orders from "./pages/Orders";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<ProductsPage />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/profile" element={<Profile />} />
