@@ -79,68 +79,363 @@ const App = () => (
           <TooltipProvider>
             <Toaster />
             <BrowserRouter>
-            <div className="min-h-screen flex flex-col">
-              <Navbar />
-              <main className="flex-1">
-                <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/orders" element={<OrdersPage />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/wishlist" element={<WishlistPage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/help" element={<HelpPage />} />
-                    <Route path="/faqs" element={<FAQsPage />} />
-                    <Route path="/shipping" element={<ShippingPage />} />
-                    <Route path="/terms" element={<TermsPage />} />
-                    <Route path="/privacy" element={<PrivacyPage />} />
-                    <Route path="/cookies" element={<CookiePolicyPage />} />
-                    <Route path="/vendor-terms" element={<VendorTermsPage />} />
-                    <Route path="/pricing" element={<PricingPage />} />
-                    <Route path="/resources" element={<ResourcesPage />} />
-                    <Route path="/careers" element={<CareersPage />} />
-                    <Route path="/press" element={<PressPage />} />
-                    <Route path="/blog" element={<BlogPage />} />
-                    <Route path="/vendors/register" element={<VendorRegisterPage />} />
-                    {/* Vendor Portal Routes */}
-                    <Route path="/vendor/login" element={<VendorLogin />} />
-                    <Route path="/vendor/register" element={<VendorRegister />} />
-                    <Route
-                      path="/vendor"
-                      element={
-                        <VendorProtectedRoute>
-                          <VendorPortalLayout />
-                        </VendorProtectedRoute>
-                      }
-                    >
-                      <Route path="dashboard" element={<VendorDashboard />} />
-                      <Route path="products" element={<VendorProducts />} />
-                      <Route path="orders" element={<VendorOrders />} />
-                      <Route path="analytics" element={<VendorAnalytics />} />
-                      <Route path="messages" element={<VendorMessages />} />
-                      <Route path="financials" element={<VendorFinancials />} />
-                      <Route path="profile" element={<VendorProfile />} />
-                      <Route path="help" element={<VendorHelp />} />
-                    </Route>
-                    <Route path="/vendors" element={<Vendors />} />
-                    <Route path="/vendors/:slug" element={<VendorProfilePage />} />
-                    <Route path="/products" element={<ProductsPage />} />
-                    <Route path="/product/:id" element={<ProductPage />} />
-                    <Route path="/categories" element={<CategoriesPage />} />
-                    <Route path="/offline" element={<OfflinePage />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </main>
-              <Footer />
-              <PWAInstallPrompt />
-              <OfflineDetector />
-            </div>
+            <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
+              <Routes>
+                {/* Vendor Portal Routes - No Navbar/Footer */}
+                <Route path="/vendor/login" element={<VendorLogin />} />
+                <Route path="/vendor/register" element={<VendorRegister />} />
+                <Route
+                  path="/vendor/*"
+                  element={
+                    <VendorProtectedRoute>
+                      <VendorPortalLayout />
+                    </VendorProtectedRoute>
+                  }
+                >
+                  <Route index element={<VendorDashboard />} />
+                  <Route path="dashboard" element={<VendorDashboard />} />
+                  <Route path="products" element={<VendorProducts />} />
+                  <Route path="orders" element={<VendorOrders />} />
+                  <Route path="analytics" element={<VendorAnalytics />} />
+                  <Route path="messages" element={<VendorMessages />} />
+                  <Route path="financials" element={<VendorFinancials />} />
+                  <Route path="profile" element={<VendorProfile />} />
+                  <Route path="help" element={<VendorHelp />} />
+                </Route>
+                
+                {/* Main App Routes - With Navbar/Footer */}
+                <Route path="/" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <Index />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/login" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <LoginPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/register" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <RegisterPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/profile" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <ProfilePage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/orders" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <OrdersPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/cart" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <CartPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/wishlist" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <WishlistPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/checkout" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <CheckoutPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/about" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <AboutPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/contact" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <ContactPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/help" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <HelpPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/faqs" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <FAQsPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/shipping" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <ShippingPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/terms" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <TermsPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/privacy" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <PrivacyPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/cookies" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <CookiePolicyPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/vendor-terms" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <VendorTermsPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/pricing" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <PricingPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/resources" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <ResourcesPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/careers" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <CareersPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/press" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <PressPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/blog" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <BlogPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/vendors/register" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <VendorRegisterPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/vendors" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <Vendors />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/vendors/:slug" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <VendorProfilePage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/products" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <ProductsPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/product/:id" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <ProductPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/categories" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <CategoriesPage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="/offline" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <OfflinePage />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+                <Route path="*" element={
+                  <div className="min-h-screen flex flex-col">
+                    <Navbar />
+                    <main className="flex-1">
+                      <NotFound />
+                    </main>
+                    <Footer />
+                    <PWAInstallPrompt />
+                    <OfflineDetector />
+                  </div>
+                } />
+              </Routes>
+            </Suspense>
           </BrowserRouter>
           {import.meta.env.VITE_SHOW_BADGE === 'true' && <BuildBadge />}
         </TooltipProvider>

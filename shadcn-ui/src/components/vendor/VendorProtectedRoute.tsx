@@ -30,13 +30,13 @@ export default function VendorProtectedRoute({ children }: VendorProtectedRouteP
   }
 
   if (!isAuthenticated || !user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/vendor/login" replace />;
   }
 
   // Check if user has vendor role
   // Note: This will be enhanced once we have profile data
   if (!vendorProfile) {
-    return <Navigate to="/vendors/register" replace />;
+    return <Navigate to="/vendor/register" replace />;
   }
 
   return <>{children}</>;
