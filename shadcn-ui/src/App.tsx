@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import BuildBadge from '@/components/shared/BuildBadge';
 import { Navbar } from '@/components/shared/Navbar';
 import { Footer } from '@/components/shared/Footer';
@@ -82,8 +82,11 @@ const App = () => (
             <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
               <Routes>
                 {/* Vendor Portal Routes - No Navbar/Footer */}
+                {/* Public vendor routes - must come before nested routes */}
                 <Route path="/vendor/login" element={<VendorLogin />} />
                 <Route path="/vendor/register" element={<VendorRegister />} />
+                
+                {/* Protected vendor routes with layout */}
                 <Route
                   path="/vendor/*"
                   element={
@@ -92,7 +95,7 @@ const App = () => (
                     </VendorProtectedRoute>
                   }
                 >
-                  <Route index element={<VendorDashboard />} />
+                  <Route index element={<Navigate to="/vendor/dashboard" replace />} />
                   <Route path="dashboard" element={<VendorDashboard />} />
                   <Route path="products" element={<VendorProducts />} />
                   <Route path="orders" element={<VendorOrders />} />
