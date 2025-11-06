@@ -14,6 +14,9 @@ import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
 import VendorPortalLayout from '@/components/vendor/VendorPortalLayout';
 import VendorProtectedRoute from '@/components/vendor/VendorProtectedRoute';
+// Import vendor login/register directly (not lazy) to avoid routing issues
+import VendorLogin from './pages/vendor/Login';
+import VendorRegister from './pages/vendor/Register';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,8 +42,6 @@ const VendorMessages = lazy(() => import('./pages/vendor/Messages'));
 const VendorFinancials = lazy(() => import('./pages/vendor/Financials'));
 const VendorProfile = lazy(() => import('./pages/vendor/Profile'));
 const VendorHelp = lazy(() => import('./pages/vendor/Help'));
-const VendorLogin = lazy(() => import('./pages/vendor/Login'));
-const VendorRegister = lazy(() => import('./pages/vendor/Register'));
 const Vendors = lazy(() => import('./pages/Vendors'));
 const VendorProfilePage = lazy(() => import('./pages/VendorProfilePage'));
 const ProductPage = lazy(() => import('./pages/ProductPage'));
