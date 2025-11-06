@@ -12,6 +12,8 @@ import { OfflineDetector } from '@/components/shared/OfflineDetector';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
+import VendorPortalLayout from '@/components/vendor/VendorPortalLayout';
+import VendorProtectedRoute from '@/components/vendor/VendorProtectedRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +31,16 @@ const queryClient = new QueryClient({
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const VendorDashboard = lazy(() => import('./pages/VendorDashboard'));
+const VendorDashboard = lazy(() => import('./pages/vendor/Dashboard'));
+const VendorProducts = lazy(() => import('./pages/vendor/Products'));
+const VendorOrders = lazy(() => import('./pages/vendor/Orders'));
+const VendorAnalytics = lazy(() => import('./pages/vendor/Analytics'));
+const VendorMessages = lazy(() => import('./pages/vendor/Messages'));
+const VendorFinancials = lazy(() => import('./pages/vendor/Financials'));
+const VendorProfile = lazy(() => import('./pages/vendor/Profile'));
+const VendorHelp = lazy(() => import('./pages/vendor/Help'));
+const VendorLogin = lazy(() => import('./pages/vendor/Login'));
+const VendorRegister = lazy(() => import('./pages/vendor/Register'));
 const Vendors = lazy(() => import('./pages/Vendors'));
 const VendorProfilePage = lazy(() => import('./pages/VendorProfilePage'));
 const ProductPage = lazy(() => import('./pages/ProductPage'));
@@ -96,7 +107,26 @@ const App = () => (
                     <Route path="/press" element={<PressPage />} />
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/vendors/register" element={<VendorRegisterPage />} />
-                    <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+                    {/* Vendor Portal Routes */}
+                    <Route path="/vendor/login" element={<VendorLogin />} />
+                    <Route path="/vendor/register" element={<VendorRegister />} />
+                    <Route
+                      path="/vendor"
+                      element={
+                        <VendorProtectedRoute>
+                          <VendorPortalLayout />
+                        </VendorProtectedRoute>
+                      }
+                    >
+                      <Route path="dashboard" element={<VendorDashboard />} />
+                      <Route path="products" element={<VendorProducts />} />
+                      <Route path="orders" element={<VendorOrders />} />
+                      <Route path="analytics" element={<VendorAnalytics />} />
+                      <Route path="messages" element={<VendorMessages />} />
+                      <Route path="financials" element={<VendorFinancials />} />
+                      <Route path="profile" element={<VendorProfile />} />
+                      <Route path="help" element={<VendorHelp />} />
+                    </Route>
                     <Route path="/vendors" element={<Vendors />} />
                     <Route path="/vendors/:slug" element={<VendorProfilePage />} />
                     <Route path="/products" element={<ProductsPage />} />
