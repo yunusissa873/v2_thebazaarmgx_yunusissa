@@ -82,11 +82,11 @@ const App = () => (
             <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
               <Routes>
                 {/* Vendor Portal Routes - No Navbar/Footer */}
-                {/* Public vendor routes - must come before nested routes */}
+                {/* IMPORTANT: Public routes must be defined BEFORE the wildcard route */}
                 <Route path="/vendor/login" element={<VendorLogin />} />
                 <Route path="/vendor/register" element={<VendorRegister />} />
                 
-                {/* Protected vendor routes with layout */}
+                {/* Protected vendor routes - use wildcard for nested routes */}
                 <Route
                   path="/vendor/*"
                   element={
