@@ -1,4 +1,4 @@
-import { supabase } from '../../../lib/supabase/client';
+import { supabase } from './client';
 import type { Vendor, Product } from '@/types';
 
 export interface VendorFilters {

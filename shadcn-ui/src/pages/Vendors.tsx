@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, Filter, SlidersHorizontal } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Filter, SlidersHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -10,6 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Carousel } from '@/components/marketplace/Carousel';
 import { VendorCarousel } from '@/components/vendor/VendorCarousel';
 import { VendorGridCarousel } from '@/components/vendor/VendorGridCarousel';
 import { VendorCard } from '@/components/vendor/VendorCard';
@@ -17,11 +17,33 @@ import { useInfiniteVendors } from '@/hooks/useInfiniteVendors';
 import { mockVendors } from '@/data/mockVendors';
 
 export default function Vendors() {
-  const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [locationFilter, setLocationFilter] = useState<string>('');
   const [ratingFilter, setRatingFilter] = useState<string>('');
   const [tierFilter, setTierFilter] = useState<string>('');
+
+  // Get 10 trending vendors for banner hero carousel
+  const trendingVendorSlides = useMemo(() => {
+    // Prioritize featured vendors, then by rating, then by review count
+    const trending = [...mockVendors]
+      .sort((a, b) => {
+        // Featured vendors first
+        if (a.isFeatured && !b.isFeatured) return -1;
+        if (!a.isFeatured && b.isFeatured) return 1;
+        // Then by rating
+        if (b.rating !== a.rating) return b.rating - a.rating;
+        // Then by review count
+        return b.reviewCount - a.reviewCount;
+      })
+      .slice(0, 10)
+      .map((vendor) => ({
+        id: `vendor_${vendor.id}`,
+        type: 'vendor' as const,
+        image: vendor.banner || '',
+        vendorData: vendor,
+      }));
+    return trending;
+  }, []);
 
   // Get 10 vendors for hero carousel
   const heroVendors = useMemo(
@@ -40,7 +62,6 @@ export default function Vendors() {
     initialVendors: mockVendors,
     pageSize: 20,
     filters: {
-      search: searchQuery,
       category: categoryFilter,
       location: locationFilter,
       rating: ratingFilter ? parseFloat(ratingFilter) : undefined,
@@ -62,12 +83,7 @@ export default function Vendors() {
     return Array.from(locations).sort();
   }, []);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
   const clearFilters = () => {
-    setSearchQuery('');
     setCategoryFilter('');
     setLocationFilter('');
     setRatingFilter('');
@@ -88,20 +104,23 @@ export default function Vendors() {
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="mb-8 space-y-4">
-          {/* Search Bar */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <Input
-              type="search"
-              placeholder="Search vendors by name, business type, or location..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="w-full bg-netflix-dark-gray border-netflix-medium-gray pl-10 text-white placeholder:text-gray-400 focus-visible:ring-netflix-red"
+        {/* Trending Vendors Banner Hero Carousel */}
+        {trendingVendorSlides.length > 0 && (
+          <section className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-white">
+                Trending Vendors
+              </h2>
+            </div>
+            <Carousel
+              items={trendingVendorSlides}
+              autoPlayInterval={6000}
             />
-          </div>
+          </section>
+        )}
 
+        {/* Filters */}
+        <div className="mb-8 space-y-4">
           {/* Filter Bar */}
           <div className="flex flex-wrap gap-3">
             <div className="flex items-center gap-2 text-gray-400">
@@ -200,8 +219,7 @@ export default function Vendors() {
             </Select>
 
             {/* Clear Filters Button */}
-            {(searchQuery ||
-              categoryFilter ||
+            {(categoryFilter ||
               locationFilter ||
               ratingFilter ||
               tierFilter) && (

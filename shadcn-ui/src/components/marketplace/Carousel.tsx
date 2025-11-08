@@ -3,12 +3,15 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ProductBannerCard } from './ProductBannerCard';
-import type { Product } from '@/data/transformed/products';
+import { VendorBannerCard } from '@/components/vendor/VendorBannerCard';
+import type { Product as MockProduct } from '@/data/transformed/products';
+import type { Product as SupabaseProduct } from '@/lib/supabase/products';
 import type { Vendor } from '@/data/transformed/vendors';
+import type { MockVendor } from '@/data/mockVendors';
 
 interface CarouselItem {
   id: string;
-  type: 'banner' | 'product';
+  type: 'banner' | 'product' | 'vendor';
   image: string;
   title?: string;
   subtitle?: string;
@@ -16,9 +19,11 @@ interface CarouselItem {
     text: string;
     link: string;
   };
-  // Product-specific fields
-  product?: Product;
-  vendor?: Vendor | null;
+  // Product-specific fields - accept both product types
+  product?: MockProduct | SupabaseProduct;
+  vendor?: Vendor | { id: string; name: string; slug: string } | null;
+  // Vendor-specific field
+  vendorData?: MockVendor;
 }
 
 interface CarouselProps {
@@ -84,6 +89,12 @@ export function Carousel({
               <ProductBannerCard
                 product={item.product}
                 vendor={item.vendor || null}
+                className="h-full"
+              />
+            ) : item.type === 'vendor' && item.vendorData ? (
+              // Render Vendor Banner Card
+              <VendorBannerCard
+                vendor={item.vendorData}
                 className="h-full"
               />
             ) : (

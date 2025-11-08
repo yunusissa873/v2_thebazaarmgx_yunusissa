@@ -1,3 +1,3 @@
-import { HelpPage } from './HelpPage';
+import HelpPage from './HelpPage';
 export default HelpPage;
 

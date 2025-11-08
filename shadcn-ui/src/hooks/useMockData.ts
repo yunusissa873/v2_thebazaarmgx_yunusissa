@@ -4,7 +4,7 @@
  */
 
 import { useMemo } from 'react';
-import categoriesData from '@/data/transformed/categories';
+import bazaarCategories from '@/data/the_bazaar_categories';
 import vendorsData from '@/data/transformed/vendors';
 import productsData from '@/data/transformed/products';
 import attributesData from '@/data/transformed/attributes';
@@ -12,9 +12,10 @@ import usersData from '@/data/transformed/users';
 import ordersData from '@/data/transformed/orders';
 import reviewsData from '@/data/transformed/product_reviews';
 import systemSettingsData from '@/data/transformed/system_settings';
+import type { Category } from '@/data/the_bazaar_categories';
 
 export function useCategories() {
-  return categoriesData;
+  return bazaarCategories;
 }
 
 export function useVendors() {
@@ -69,16 +70,18 @@ export function useFeaturedCategories(limit: number = 8) {
   return useMemo(() => {
     const featured: any[] = [];
     
-    const collectFeatured = (items: any[]) => {
+    const collectFeatured = (items: Category[]) => {
       items.forEach(item => {
-        if (item.is_featured && item.level <= 2) {
+        // Use is_active for featured status, or default to level 1-2 categories
+        if ((item.is_active && item.level <= 2) || item.level === 1) {
           featured.push({
-            id: item.category_id,
-            category_id: item.category_id,
+            id: item.id,
+            category_id: item.id, // Keep for backward compatibility
             name: item.name,
             slug: item.slug,
             image_url: item.image_url,
             level: item.level,
+            is_featured: item.is_active, // Map is_active to is_featured for compatibility
           });
         }
         if (item.children) {
@@ -87,7 +90,7 @@ export function useFeaturedCategories(limit: number = 8) {
       });
     };
     
-    collectFeatured(categoriesData);
+    collectFeatured(bazaarCategories);
     return featured.slice(0, limit);
   }, [limit]);
 }

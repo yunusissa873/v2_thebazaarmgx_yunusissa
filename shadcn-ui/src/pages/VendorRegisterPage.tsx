@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RegisterPage } from './Auth/RegisterPage';
+import RegisterPage from './Auth/RegisterPage';
 
 export default function VendorRegisterPage() {
   // For now, redirect to register with vendor role

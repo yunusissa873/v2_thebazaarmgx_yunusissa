@@ -13,6 +13,11 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
 
+// Import error capture utility (only in development)
+if (import.meta.env.DEV) {
+  import('@/utils/consoleErrorCapture');
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -37,6 +42,7 @@ const LoginPage = lazy(() => import('./pages/Auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/Auth/RegisterPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const OrdersPage = lazy(() => import('./pages/OrdersPage'));
+const OrderDetails = lazy(() => import('./components/orders/OrderDetails'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
@@ -78,6 +84,7 @@ const App = () => (
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/orders" element={<OrdersPage />} />
+                    <Route path="/orders/:id" element={<OrderDetails />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/wishlist" element={<WishlistPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />

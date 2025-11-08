@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -62,16 +61,31 @@ export function ProductCard({
     await toggleWishlist(id);
   };
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Only navigate if clicking on the card itself, not on buttons/links
+    const target = e.target as HTMLElement;
+    if (target.closest('button, a, [role="button"]')) {
+      return;
+    }
+    window.location.href = `/product/${id}`;
+  };
+
+  const handleVendorClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = `/vendors/${vendorSlug}`;
+  };
+
   return (
-    <Link to={`/product/${id}`}>
-      <div
-        className={cn(
-          'group relative overflow-hidden rounded-lg bg-netflix-dark-gray transition-all duration-300 ease-in-out netflix-card',
-          className
-        )}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+    <div
+      onClick={handleCardClick}
+      className={cn(
+        'group relative overflow-hidden rounded-lg bg-netflix-dark-gray transition-all duration-300 ease-in-out netflix-card cursor-pointer',
+        className
+      )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
         {/* Image Container - 85% of card height */}
         <div className="relative aspect-[3/4] overflow-hidden">
           <img
@@ -140,13 +154,12 @@ export function ProductCard({
             <h3 className="text-white font-semibold text-sm line-clamp-2 mb-1">
               {name}
             </h3>
-            <Link
-              to={`/vendors/${vendorSlug}`}
-              className="text-gray-300 text-xs hover:text-white transition-colors"
-              onClick={(e) => e.stopPropagation()}
+            <button
+              onClick={handleVendorClick}
+              className="text-gray-300 text-xs hover:text-white transition-colors cursor-pointer bg-transparent border-none p-0"
             >
               {vendorName}
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -187,6 +200,5 @@ export function ProductCard({
           )}
         </div>
       </div>
-    </Link>
   );
 }

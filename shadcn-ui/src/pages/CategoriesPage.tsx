@@ -6,11 +6,12 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useCategories } from '@/hooks/useMockData';
 import { CategoryCard } from '@/components/marketplace/CategoryCard';
-import type { Department, Category, SubCategory, LeafCategory } from '@/data/transformed/categories';
+import type { Category } from '@/data/the_bazaar_categories';
 
 // Helper to flatten all categories from nested structure
-function flattenAllCategories(departments: Department[]): Array<{
+function flattenAllCategories(categories: Category[]): Array<{
   category_id: string;
+  id: string;
   name: string;
   slug: string;
   image_url: string;
@@ -19,6 +20,7 @@ function flattenAllCategories(departments: Department[]): Array<{
 }> {
   const result: Array<{
     category_id: string;
+    id: string;
     name: string;
     slug: string;
     image_url: string;
@@ -26,51 +28,25 @@ function flattenAllCategories(departments: Department[]): Array<{
     level: number;
   }> = [];
 
-  function traverseDepartment(dept: Department) {
+  function traverseCategory(category: Category) {
     result.push({
-      category_id: dept.category_id,
-      name: dept.name,
-      slug: dept.slug,
-      image_url: dept.image_url,
-      is_featured: dept.is_featured,
-      level: dept.level,
+      category_id: category.id, // Map id to category_id for backward compatibility
+      id: category.id,
+      name: category.name,
+      slug: category.slug,
+      image_url: category.image_url,
+      is_featured: category.is_active, // Map is_active to is_featured
+      level: category.level,
     });
 
-    dept.children.forEach((category: Category) => {
-      result.push({
-        category_id: category.category_id,
-        name: category.name,
-        slug: category.slug,
-        image_url: category.image_url,
-        is_featured: category.is_featured,
-        level: category.level,
+    if (category.children) {
+      category.children.forEach((child: Category) => {
+        traverseCategory(child);
       });
-
-      category.children.forEach((subCategory: SubCategory) => {
-        result.push({
-          category_id: subCategory.category_id,
-          name: subCategory.name,
-          slug: subCategory.slug,
-          image_url: subCategory.image_url,
-          is_featured: subCategory.is_featured,
-          level: subCategory.level,
-        });
-
-        subCategory.children.forEach((leafCategory: LeafCategory) => {
-          result.push({
-            category_id: leafCategory.category_id,
-            name: leafCategory.name,
-            slug: leafCategory.slug,
-            image_url: leafCategory.image_url,
-            is_featured: leafCategory.is_featured,
-            level: leafCategory.level,
-          });
-        });
-      });
-    });
+    }
   }
 
-  departments.forEach(traverseDepartment);
+  categories.forEach(traverseCategory);
   return result;
 }
 
@@ -86,8 +62,8 @@ export default function CategoriesPage() {
   const departments = useMemo(() => allCategories.filter(c => c.level === 1), [allCategories]);
   const mainCategories = useMemo(() => allCategories.filter(c => c.level === 2), [allCategories]);
   const subCategories = useMemo(() => allCategories.filter(c => c.level === 3), [allCategories]);
-  const leafCategories = useMemo(() => allCategories.filter(c => c.level === 4), [allCategories]);
-  const featuredCategories = useMemo(() => allCategories.filter(c => c.is_featured), [allCategories]);
+  const leafCategories = useMemo(() => allCategories.filter(c => c.level >= 4), [allCategories]);
+  const featuredCategories = useMemo(() => allCategories.filter(c => c.is_featured || c.level === 1), [allCategories]);
 
   return (
     <div className="min-h-screen bg-netflix-black">

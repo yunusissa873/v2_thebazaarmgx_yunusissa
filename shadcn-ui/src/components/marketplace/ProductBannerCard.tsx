@@ -11,12 +11,13 @@ import {
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { cn } from '@/lib/utils';
-import type { Product } from '@/data/transformed/products';
+import type { Product as MockProduct } from '@/data/transformed/products';
+import type { Product as SupabaseProduct } from '@/lib/supabase/products';
 import type { Vendor } from '@/data/transformed/vendors';
 
 interface ProductBannerCardProps {
-  product: Product;
-  vendor: Vendor | null;
+  product: MockProduct | SupabaseProduct;
+  vendor: Vendor | { id: string; name: string; slug: string } | null;
   className?: string;
 }
 
@@ -27,10 +28,14 @@ export function ProductBannerCard({
 }: ProductBannerCardProps) {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
-  const isProductInWishlist = isInWishlist(product.product_id);
+  
+  // Handle both product types
+  const productId = (product as any).id || (product as any).product_id;
+  const isProductInWishlist = isInWishlist(productId);
 
   const formatPrice = (amount: number) => {
-    return product.currency === 'KES'
+    const currency = (product as any).currency || 'KES';
+    return currency === 'KES'
       ? `KES ${amount.toLocaleString()}`
       : `$${amount.toFixed(2)}`;
   };
@@ -38,13 +43,13 @@ export function ProductBannerCard({
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    await addToCart(product.product_id, null, 1);
+    await addToCart(productId, null, 1);
   };
 
   const handleToggleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    await toggleWishlist(product.product_id);
+    await toggleWishlist(productId);
   };
 
   // Parse variants to extract storage and colors
@@ -52,9 +57,11 @@ export function ProductBannerCard({
     const storageOptions: string[] = [];
     const colorOptions: string[] = [];
 
-    product.variants.forEach((variant) => {
+    const variants = (product as any).variants || [];
+    variants.forEach((variant: any) => {
       // Variant name format: "512GB / Phantom Black" or "256GB / Silver" or "100ml"
-      const parts = variant.name.split(' / ');
+      const variantName = variant.name || '';
+      const parts = variantName.split(' / ');
       if (parts.length === 2) {
         const firstPart = parts[0].trim();
         const secondPart = parts[1].trim();
@@ -92,14 +99,14 @@ export function ProductBannerCard({
         }
       } else {
         // Single part variant - check if it's storage or just a variant name
-        if (/\d+\s*(GB|TB|MB|ml|ML)/i.test(variant.name)) {
-          if (!storageOptions.includes(variant.name)) {
-            storageOptions.push(variant.name);
+        if (/\d+\s*(GB|TB|MB|ml|ML)/i.test(variantName)) {
+          if (!storageOptions.includes(variantName)) {
+            storageOptions.push(variantName);
           }
         } else {
           // Could be a color or other variant type
-          if (!colorOptions.includes(variant.name)) {
-            colorOptions.push(variant.name);
+          if (variantName && !colorOptions.includes(variantName)) {
+            colorOptions.push(variantName);
           }
         }
       }
@@ -109,19 +116,38 @@ export function ProductBannerCard({
   };
 
   const { storageOptions, colorOptions } = parseVariants();
-  const discount = product.compare_at_price
-    ? Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)
+  const compareAtPrice = (product as any).compare_at_price;
+  const discount = compareAtPrice
+    ? Math.round(((compareAtPrice - product.price) / compareAtPrice) * 100)
     : 0;
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Only navigate if clicking on the card itself, not on buttons/links
+    const target = e.target as HTMLElement;
+    if (target.closest('button, a, [role="button"]')) {
+      return;
+    }
+    window.location.href = `/product/${productId}`;
+  };
+
   return (
-    <Link 
-      to={`/product/${product.product_id}`} 
-      className={cn('relative h-full w-full flex flex-col group', className)}
+    <div 
+      onClick={handleCardClick}
+      className={cn('relative h-full w-full flex flex-col group cursor-pointer', className)}
     >
       {/* Hero Image Section */}
       <div className="relative flex-1 min-h-[60%] overflow-hidden">
         <img
-          src={product.images?.[0] || '/placeholder-product.jpg'}
+          src={(() => {
+            const images = product.images;
+            if (Array.isArray(images)) {
+              return images[0] || '/placeholder-product.jpg';
+            }
+            if (typeof images === 'string') {
+              return images;
+            }
+            return '/placeholder-product.jpg';
+          })()}
           alt={product.name}
           className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
           onError={(e) => {
@@ -147,32 +173,32 @@ export function ProductBannerCard({
             {/* Vendor Link */}
             {vendor && (
               <Link
-                to={`/vendors/${vendor.slug}`}
-                className="inline-block text-netflix-red hover:text-orange-400 font-medium text-sm md:text-base transition-colors w-fit"
+                to={`/vendors/${(vendor as any).slug || 'unknown'}`}
+                className="inline-block text-netflix-red hover:text-orange-400 font-medium text-xs md:text-sm transition-colors w-fit"
                 onClick={(e) => e.stopPropagation()}
               >
-                {vendor.name}
+                {(vendor as any).name || 'Unknown Vendor'}
               </Link>
             )}
 
             {/* Product Name */}
-            <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-white leading-tight line-clamp-2">
+            <h2 className="text-2xl md:text-3xl lg:text-3xl font-bold text-white leading-tight line-clamp-2">
               {product.name}
             </h2>
 
             {/* Description */}
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed line-clamp-2">
-              {product.short_description || product.description}
+            <p className="text-gray-300 text-sm md:text-base leading-relaxed line-clamp-2">
+              {(product as any).short_description || (product as any).description || ''}
             </p>
 
             {/* Price */}
             <div className="flex items-center gap-3 md:gap-4">
-              <span className="text-2xl md:text-3xl font-bold text-netflix-red">
+              <span className="text-xl md:text-2xl font-bold text-netflix-red">
                 {formatPrice(product.price)}
               </span>
-              {product.compare_at_price && (
-                <span className="text-lg md:text-xl text-gray-400 line-through">
-                  {formatPrice(product.compare_at_price)}
+              {compareAtPrice && (
+                <span className="text-base md:text-lg text-gray-400 line-through">
+                  {formatPrice(compareAtPrice)}
                 </span>
               )}
             </div>
@@ -224,9 +250,9 @@ export function ProductBannerCard({
                     <Button
                       onClick={handleAddToCart}
                       size="icon"
-                      className="h-12 w-12 rounded-full bg-netflix-red hover:bg-netflix-red/90 text-white transition-all hover:scale-110"
+                      className="h-10 w-10 rounded-full bg-netflix-red hover:bg-netflix-red/90 text-white transition-all hover:scale-110"
                     >
-                      <ShoppingCart className="h-5 w-5" />
+                      <ShoppingCart className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -242,13 +268,13 @@ export function ProductBannerCard({
                       size="icon"
                       variant="outline"
                       className={cn(
-                        'h-12 w-12 rounded-full border-netflix-medium-gray text-white hover:bg-netflix-medium-gray transition-all hover:scale-110',
+                        'h-10 w-10 rounded-full border-netflix-medium-gray text-white hover:bg-netflix-medium-gray transition-all hover:scale-110',
                         isProductInWishlist && 'bg-netflix-red border-netflix-red'
                       )}
                     >
                       <Heart
                         className={cn(
-                          'h-5 w-5',
+                          'h-4 w-4',
                           isProductInWishlist && 'fill-current'
                         )}
                       />
@@ -262,13 +288,13 @@ export function ProductBannerCard({
                 {/* View Details */}
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Link to={`/product/${product.product_id}`} onClick={(e) => e.stopPropagation()}>
+                    <Link to={`/product/${productId}`} onClick={(e) => e.stopPropagation()}>
                       <Button
                         size="icon"
                         variant="outline"
-                        className="h-12 w-12 rounded-full border-netflix-medium-gray text-white hover:bg-netflix-medium-gray transition-all hover:scale-110"
+                        className="h-10 w-10 rounded-full border-netflix-medium-gray text-white hover:bg-netflix-medium-gray transition-all hover:scale-110"
                       >
-                        <Eye className="h-5 w-5" />
+                        <Eye className="h-4 w-4" />
                       </Button>
                     </Link>
                   </TooltipTrigger>
@@ -281,6 +307,6 @@ export function ProductBannerCard({
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

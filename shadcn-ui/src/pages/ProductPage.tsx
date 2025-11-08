@@ -1,16 +1,21 @@
 import { useParams, Link } from 'react-router-dom';
-import { Home, ShoppingCart, Heart, Star, ChevronLeft, ChevronRight, CheckCircle, Share2, Facebook, Twitter, Copy, MessageSquare } from 'lucide-react';
+import { Home, ShoppingCart, Heart, Star, ChevronLeft, ChevronRight, CheckCircle, Facebook, Twitter, Copy, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { useProduct, useVendor, useProductReviews, useProducts } from '@/hooks/useMockData';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useVendor } from '@/hooks/useMockData';
+import { useSupabaseProduct } from '@/hooks/useSupabaseProducts';
+import { useSupabaseProductReviews, useSupabaseReviewStats } from '@/hooks/useSupabaseReviews';
+import { useSupabaseProducts } from '@/hooks/useSupabaseProducts';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { ProductCard } from '@/components/marketplace/ProductCard';
 import { mapProductToCard } from '@/utils/productMapper';
 import vendorsData from '@/data/transformed/vendors';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { toast } from 'sonner';
+import { incrementProductView } from '@/lib/supabase/products';
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -20,16 +25,47 @@ export default function ProductPage() {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
-  // Get product from transformed data
-  const product = useProduct(id || '');
-  const vendor = product ? useVendor(product.vendor_id) : null;
-  const reviews = useProductReviews(product?.product_id);
+  // Get product from Supabase
+  const { product, loading: productLoading, error: productError } = useSupabaseProduct(id || '');
+  const vendor = product?.vendor || (product ? useVendor(product.vendor_id) : null);
+  const { reviews, loading: reviewsLoading } = useSupabaseProductReviews(product?.id || '');
+  const { stats: reviewStats } = useSupabaseReviewStats(product?.id || '');
   
-  // Get all products for related products
-  const allProducts = useProducts();
+  // Get related products from Supabase
+  const { products: relatedProductsData } = useSupabaseProducts({
+    filters: product ? { categoryId: product.category_id } : undefined,
+    limit: 9,
+    enabled: !!product,
+  });
+  
   const allVendors = vendorsData;
 
-  if (!product) {
+  // Increment view count when product loads
+  useEffect(() => {
+    if (product?.id) {
+      incrementProductView(product.id).catch(console.error);
+    }
+  }, [product?.id]);
+
+  if (productLoading) {
+    return (
+      <div className="min-h-screen bg-netflix-black">
+        <div className="container-custom py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Skeleton className="aspect-square w-full bg-netflix-dark-gray" />
+            <div className="space-y-4">
+              <Skeleton className="h-12 w-3/4 bg-netflix-dark-gray" />
+              <Skeleton className="h-6 w-1/2 bg-netflix-dark-gray" />
+              <Skeleton className="h-8 w-1/4 bg-netflix-dark-gray" />
+              <Skeleton className="h-32 w-full bg-netflix-dark-gray" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (productError || !product) {
     return (
       <div className="min-h-screen bg-netflix-black flex items-center justify-center">
         <div className="text-center">
@@ -37,7 +73,7 @@ export default function ProductPage() {
             Product Not Found
           </h1>
           <p className="text-gray-400 mb-6">
-            The product you're looking for doesn't exist.
+            {productError?.message || "The product you're looking for doesn't exist."}
           </p>
           <Link
             to="/"
@@ -50,7 +86,7 @@ export default function ProductPage() {
     );
   }
 
-  const images = product?.images || [];
+  const images = Array.isArray(product.images) ? product.images : (product.images ? [product.images] : []);
   const hasMultipleImages = images.length > 1;
 
   const handlePreviousImage = () => {
@@ -73,8 +109,8 @@ export default function ProductPage() {
 
   // Get selected variant price
   const selectedVariantData = useMemo(() => {
-    if (!product || !selectedVariant) return null;
-    return product.variants.find(v => v.variant_id === selectedVariant);
+    if (!product || !selectedVariant || !product.variants) return null;
+    return product.variants.find(v => v.id === selectedVariant);
   }, [product, selectedVariant]);
 
   const displayPrice = useMemo(() => {
@@ -84,24 +120,29 @@ export default function ProductPage() {
 
   const handleAddToCart = async () => {
     if (!product) return;
-    await addToCart(product.product_id, selectedVariant || null, quantity);
+    const productId = (product as any).id || (product as any).product_id;
+    await addToCart(productId, selectedVariant || null, quantity);
   };
   
   // Get related products (same category, different product)
   const relatedProducts = useMemo(() => {
-    if (!product) return [];
-    return allProducts
-      .filter(p => 
-        p.product_id !== product.product_id && 
-        p.category_id === product.category_id &&
-        p.is_active
-      )
+    if (!product || !relatedProductsData) return [];
+    const productId = (product as any).id;
+    return relatedProductsData
+      .filter(p => p.id !== productId && p.is_active)
       .slice(0, 8)
       .map(p => {
-        const v = allVendors.find(v => v.vendor_id === p.vendor_id);
-        return mapProductToCard(p, v);
+        let vendor: any = p.vendor;
+        if (!vendor) {
+          const vendorId = (p as any).vendor_id;
+          vendor = allVendors.find(v => {
+            const vId = (v as any).vendor_id || (v as any).id;
+            return vId === vendorId;
+          }) as any;
+        }
+        return mapProductToCard(p, vendor);
       });
-  }, [product, allProducts, allVendors]);
+  }, [product, relatedProductsData, allVendors]);
 
   const handleShare = async (platform?: 'facebook' | 'twitter') => {
     const url = window.location.href;
@@ -124,10 +165,12 @@ export default function ProductPage() {
 
   const handleToggleWishlist = async () => {
     if (!product) return;
-    await toggleWishlist(product.product_id);
+    const productId = (product as any).id || (product as any).product_id;
+    await toggleWishlist(productId);
   };
   
-  const isProductInWishlist = product ? isInWishlist(product.product_id) : false;
+  const productId = product ? ((product as any).id || (product as any).product_id) : '';
+  const isProductInWishlist = product ? isInWishlist(productId) : false;
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = '/placeholder-product.jpg';
@@ -248,14 +291,14 @@ export default function ProductPage() {
             </h1>
 
               {/* Rating */}
-              {product.rating > 0 && (
+              {(product.rating > 0 || reviewStats) && (
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
                         className={`h-5 w-5 ${
-                          i < Math.floor(product.rating || 0)
+                          i < Math.floor(reviewStats?.average_rating || product.rating || 0)
                             ? 'fill-yellow-400 text-yellow-400'
                             : 'text-gray-600'
                         }`}
@@ -263,7 +306,7 @@ export default function ProductPage() {
                     ))}
                   </div>
                   <span className="text-gray-400">
-                    {product.rating.toFixed(1)} ({reviews.length} reviews)
+                    {(reviewStats?.average_rating || product.rating || 0).toFixed(1)} ({reviewStats?.total_reviews || reviews.length} reviews)
                   </span>
                 </div>
               )}
@@ -290,11 +333,11 @@ export default function ProductPage() {
                   <div className="flex flex-wrap gap-2">
                     {product.variants.map((variant) => (
                       <Button
-                        key={variant.variant_id}
-                        variant={selectedVariant === variant.variant_id ? 'default' : 'outline'}
-                        onClick={() => setSelectedVariant(variant.variant_id)}
+                        key={variant.id}
+                        variant={selectedVariant === variant.id ? 'default' : 'outline'}
+                        onClick={() => setSelectedVariant(variant.id)}
                         className={`${
-                          selectedVariant === variant.variant_id
+                          selectedVariant === variant.id
                             ? 'bg-netflix-red border-netflix-red text-white'
                             : 'border-netflix-medium-gray text-white hover:bg-netflix-medium-gray'
                         } ${variant.stock_quantity === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -307,7 +350,7 @@ export default function ProductPage() {
                   </div>
                   {selectedVariantData && (
                     <p className="text-gray-400 text-sm mt-2">
-                      SKU: {selectedVariantData.sku} | Stock: {selectedVariantData.stock_quantity}
+                      SKU: {selectedVariantData.sku || 'N/A'} | Stock: {selectedVariantData.stock_quantity}
                     </p>
                   )}
                 </div>
@@ -423,7 +466,7 @@ export default function ProductPage() {
             </div>
 
             {/* Tags */}
-            {product.tags && product.tags.length > 0 && (
+            {product.tags && Array.isArray(product.tags) && product.tags.length > 0 && (
               <div className="pt-6 border-t border-netflix-medium-gray">
                 <div className="flex flex-wrap gap-2">
                   {product.tags.map((tag, index) => (
@@ -452,7 +495,16 @@ export default function ProductPage() {
         )}
 
         {/* Reviews Section */}
-        {reviews.length > 0 && (
+        {reviewsLoading ? (
+          <div className="mt-12 pt-8 border-t border-netflix-medium-gray">
+            <Skeleton className="h-8 w-48 bg-netflix-dark-gray mb-6" />
+            <div className="space-y-6">
+              {[...Array(3)].map((_, i) => (
+                <Skeleton key={i} className="h-32 w-full bg-netflix-dark-gray" />
+              ))}
+            </div>
+          </div>
+        ) : reviews.length > 0 ? (
           <div className="mt-12 pt-8 border-t border-netflix-medium-gray">
             <h2 className="text-2xl font-semibold text-white mb-6">
               Customer Reviews ({reviews.length})
@@ -460,21 +512,26 @@ export default function ProductPage() {
             <div className="space-y-6">
               {reviews.map((review) => (
                 <div
-                  key={review.review_id}
+                  key={review.id}
                   className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-6"
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <Avatar className="h-12 w-12">
-                      <AvatarImage src={review.user_image_url} alt={review.user_name} />
+                      <AvatarImage src={review.buyer?.avatar_url || undefined} alt={review.buyer?.full_name || 'User'} />
                       <AvatarFallback className="bg-netflix-medium-gray text-white">
-                        {review.user_name.charAt(0)}
+                        {(review.buyer?.full_name || 'U').charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-white font-semibold">{review.user_name}</h3>
+                        <h3 className="text-white font-semibold">{review.buyer?.full_name || 'Anonymous'}</h3>
                         {review.is_verified_purchase && (
-                          <CheckCircle className="h-4 w-4 text-green-500" title="Verified Purchase" />
+                          <div className="relative group">
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                              Verified Purchase
+                            </span>
+                          </div>
                         )}
                       </div>
                       <div className="flex items-center gap-2 mb-2">
@@ -497,10 +554,10 @@ export default function ProductPage() {
                       {review.title && (
                         <h4 className="text-white font-medium mb-2">{review.title}</h4>
                       )}
-                      <p className="text-gray-400 text-sm leading-relaxed">{review.comment}</p>
+                      <p className="text-gray-400 text-sm leading-relaxed">{review.comment || ''}</p>
                     </div>
                   </div>
-                  {review.images && review.images.length > 0 && (
+                  {review.images && Array.isArray(review.images) && review.images.length > 0 && (
                     <div className="flex gap-2 mt-4">
                       {review.images.map((img, idx) => (
                         <img
@@ -519,7 +576,7 @@ export default function ProductPage() {
               ))}
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* Product Q&A Section */}
         <div className="mt-12 pt-8 border-t border-netflix-medium-gray">
