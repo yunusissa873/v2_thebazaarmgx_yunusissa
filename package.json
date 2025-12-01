@@ -1,0 +1,21 @@
+{
+  "name": "the-bazaar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Bazaar - A Netflix-inspired marketplace with decoupled multi-portal architecture",
+  "workspaces": [
+    "shadcn-ui",
+    "admin-portal",
+    "vendor-dashboard"
+  ],
+  "scripts": {
+    "install:all": "npm install --workspaces",
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "preview": "npm run preview --workspaces"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  }
+}

@@ -1,0 +1,27 @@
+@startuml
+!theme plain
+
+actor Vendor
+participant "Vendor Portal UI" as UI
+participant "Backend (Edge Functions)" as Functions
+participant "Database (Supabase)" as DB
+
+Vendor -> UI: Enters credentials and clicks Login
+UI -> Functions: POST /auth/login\n(email, password)
+Functions -> DB: Verify user credentials and role
+DB --> Functions: Return user session (with vendor_id)
+Functions --> UI: Return JWT
+UI -> UI: Store JWT, redirect to Dashboard
+
+Vendor -> UI: Clicks "Orders"
+UI -> Functions: GET /vendor/orders\n(Authorization: Bearer JWT)
+    note right
+        Function decodes JWT to get vendor_id.
+        Admin role bypasses vendor_id check.
+    end note
+Functions -> DB: SELECT * FROM orders WHERE vendor_id = current_vendor_id
+DB --> Functions: Return list of orders
+Functions --> UI: Return orders JSON
+UI -> Vendor: Display list of orders
+
+@enduml

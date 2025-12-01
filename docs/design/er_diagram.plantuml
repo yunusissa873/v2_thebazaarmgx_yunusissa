@@ -1,0 +1,48 @@
+@startuml
+!theme plain
+
+entity "users" {
+  * id : uuid <<PK>>
+  --
+  email : varchar
+  role: "admin" | "vendor" | "customer"
+}
+
+entity "vendors" {
+  * id : uuid <<PK>>
+  --
+  user_id : uuid <<FK>>
+  shop_name : varchar
+  description: text
+  logo_url: varchar
+}
+
+entity "products" {
+  * id : uuid <<PK>>
+  --
+  vendor_id : uuid <<FK>>
+  title : varchar
+  price : decimal
+  stock_quantity: integer
+}
+
+entity "orders" {
+  * id : uuid <<PK>>
+  --
+  vendor_id : uuid <<FK>>
+  customer_id : uuid <<FK>>
+  status: varchar
+}
+
+users ||--o{ vendors : "user_id"
+vendors ||--|{ products : "vendor_id"
+vendors ||--|{ orders : "vendor_id"
+users ||--o{ orders : "customer_id"
+
+note right of users
+  We will add a 'role' column to the
+  existing 'users' table (or profiles table)
+  to differentiate between user types.
+end note
+
+@enduml

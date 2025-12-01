@@ -1,0 +1,26 @@
+@startuml
+!theme plain
+
+state "Login" as Login
+state "Dashboard" as Dashboard
+state "Products" as Products
+state "Orders" as Orders
+state "Profile" as Profile
+
+[*] --> Login
+
+Login --> Dashboard : on successful login
+
+Dashboard --> Products : "Manage Products"
+Dashboard --> Orders : "View Orders"
+Dashboard --> Profile : "Edit Profile"
+
+Products --> Dashboard : back
+Products --> Products : "Add/Edit Product"
+
+Orders --> Dashboard : back
+Orders --> Orders : "View Order Details"
+
+Profile --> Dashboard : back
+
+@enduml

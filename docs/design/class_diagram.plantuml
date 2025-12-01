@@ -1,0 +1,68 @@
+@startuml
+!theme plain
+
+interface IVendorService {
+  +getProfile(): Promise<VendorProfile>
+  +updateProfile(data: VendorProfile): Promise<void>
+  +listProducts(): Promise<Product[]>
+  +getProduct(id: string): Promise<Product>
+  +createProduct(data: NewProduct): Promise<Product>
+  +updateProduct(id: string, data: Partial<Product>): Promise<Product>
+  +listOrders(): Promise<Order[]>
+  +getOrder(id: string): Promise<Order>
+  +updateOrderStatus(id: string, status: string): Promise<Order>
+}
+
+class VendorService implements IVendorService {
+  -supabase: SupabaseClient
+  +getProfile(): Promise<VendorProfile>
+  +updateProfile(data: VendorProfile): Promise<void>
+  +listProducts(): Promise<Product[]>
+  +getProduct(id: string): Promise<Product>
+  +createProduct(data: NewProduct): Promise<Product>
+  +updateProduct(id: string, data: Partial<Product>): Promise<Product>
+  +listOrders(): Promise<Order[]>
+  +getOrder(id: string): Promise<Order>
+  +updateOrderStatus(id: string, status: string): Promise<Order>
+}
+
+class VendorProfile {
+  +id: string
+  +shop_name: string
+  +shop_logo_url: string
+  +description: string
+}
+
+class Product {
+  +id: string
+  +vendor_id: string
+  +title: string
+  +description: string
+  +price: number
+  +stock_quantity: number
+  +image_urls: string[]
+}
+
+class Order {
+  +id: string
+  +customer_id: string
+  +vendor_id: string
+  +status: "new" | "shipped" | "delivered"
+  +items: OrderItem[]
+  +total_price: number
+  +shipping_address: string
+}
+
+class OrderItem {
+  +product_id: string
+  +quantity: number
+  +price_at_purchase: number
+}
+
+VendorService ..> VendorProfile
+VendorService ..> Product
+VendorService ..> Order
+
+Order *-- "1..*" OrderItem
+
+@enduml

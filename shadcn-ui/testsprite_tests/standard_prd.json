@@ -1,0 +1,300 @@
+{
+  "meta": {
+    "project": "The Bazaar",
+    "date": "2025-11-04",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "The Bazaar is a Progressive Web App (PWA) marketplace designed to connect buyers with verified vendors, offering a comprehensive e-commerce platform with modern features such as user authentication, product management, shopping cart, order processing, and vendor management. It aims to provide a seamless, engaging, and secure shopping experience with advanced search, reviews, and payment integration.",
+  "core_goals": [
+    "Enable secure and seamless user authentication and profile management for buyers and vendors.",
+    "Provide a rich product catalog supporting browsing, filtering, searching, and detailed product views including variants.",
+    "Implement efficient shopping cart functionality with easy add, remove, and update operations.",
+    "Support order creation, tracking, and management with integrated payment processing.",
+    "Empower vendors with profile management, registration, and dashboard functionality.",
+    "Enhance user engagement through reviews, wishlist, and notifications.",
+    "Deliver a progressive web app experience with offline support and install prompts.",
+    "Ensure intuitive navigation and responsive UI with reusable components and error handling."
+  ],
+  "key_features": [
+    "User authentication including sign up, sign in, and sign out using Supabase Auth.",
+    "Product management with browsing, search, filters, detailed pages, and variant options.",
+    "Shopping cart capabilities with add, remove, and update item functionalities.",
+    "Wishlist feature allowing users to save and manage favorite products.",
+    "Order management system covering order creation, tracking, and history.",
+    "Checkout process integrated with secure payment solutions.",
+    "Vendor management including registration, profile pages, and dashboards.",
+    "Category browsing and filtering for easier product discovery.",
+    "Product reviews and rating system to foster community feedback.",
+    "User profile management with address, payment methods, and notification settings.",
+    "Robust search functionality for products and vendors.",
+    "Home page featuring dynamic carousels, featured products, and category highlights.",
+    "Full PWA support enabling offline functionality and install prompts.",
+    "Navigation components including an enhanced navbar and footer.",
+    "Error boundary components ensuring graceful error handling and protected routes for authenticated access.",
+    "Modular UI components built with Radix UI and Tailwind CSS for consistency and reusability.",
+    "Custom React hooks for data fetching, state management, and responsive behavior.",
+    "Static informational pages such as About, Contact, Terms, Privacy, and FAQs."
+  ],
+  "user_flow_summary": [
+    "User visits the landing page and browses featured products and categories.",
+    "New users sign up or existing users sign in through the authentication pages.",
+    "Authenticated users browse products, use filters and search to find items.",
+    "Users view product details including variants and add desired products to the shopping cart.",
+    "Users manage their cart, update quantities, or remove items before proceeding to checkout.",
+    "During checkout, users provide payment details and complete the purchase securely.",
+    "Users can view order history and details via the Orders page.",
+    "Vendors register and manage their profiles and product listings via the Vendor Dashboard.",
+    "Users can add products to a wishlist for future reference and write reviews after purchase.",
+    "App supports offline use with cached data and prompts users to install the PWA on their devices.",
+    "Users customize profile settings such as address, payment methods, and notifications.",
+    "Navigation facilitates smooth transitions across marketplace, profile, orders, wishlist, and vendor areas with route protection ensuring security."
+  ],
+  "validation_criteria": [
+    "Authentication workflows must securely allow users to register, login, and logout with proper error handling.",
+    "Product listing and search features must correctly filter and display products including variants.",
+    "Shopping cart must accurately reflect changes in item quantity and allow item removal.",
+    "Checkout must integrate payment processing with success and failure handling.",
+    "Vendor management tools must enable profile creation, editing, and dynamic routing for vendor profiles.",
+    "Reviews system must allow authenticated users to submit and view product reviews and ratings.",
+    "PWA features must support offline functionality and display install prompts appropriately.",
+    "UI components must be responsive, accessible, and consistent across different pages and devices.",
+    "Navigation should protect authenticated routes and provide clear user flow without dead ends or errors.",
+    "Error boundary components must capture and display errors gracefully without breaking the app.",
+    "Static pages must load correctly and display accurate information.",
+    "All forms and inputs must validate user data and provide actionable feedback."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "React",
+      "Vite",
+      "React Router DOM",
+      "TanStack Query",
+      "Supabase",
+      "Tailwind CSS",
+      "Radix UI",
+      "PWA"
+    ],
+    "features": [
+      {
+        "name": "Authentication",
+        "description": "User authentication with sign up, sign in, and sign out functionality using Supabase Auth",
+        "files": [
+          "src/lib/supabase/auth.ts",
+          "src/contexts/AuthContext.tsx",
+          "src/pages/Auth/LoginPage.tsx",
+          "src/pages/Auth/RegisterPage.tsx"
+        ]
+      },
+      {
+        "name": "Product Management",
+        "description": "Product browsing, search, filtering, and detailed product pages with variants",
+        "files": [
+          "src/lib/supabase/products.ts",
+          "src/pages/ProductPage.tsx",
+          "src/pages/ProductsPage.tsx",
+          "src/components/marketplace/ProductCard.tsx",
+          "src/components/marketplace/ProductCarousel.tsx",
+          "src/components/marketplace/ProductGridCarousel.tsx",
+          "src/components/marketplace/FilterSidebar.tsx",
+          "src/hooks/useSupabaseProducts.ts"
+        ]
+      },
+      {
+        "name": "Shopping Cart",
+        "description": "Shopping cart functionality with add, remove, and update operations",
+        "files": [
+          "src/lib/supabase/cart.ts",
+          "src/contexts/CartContext.tsx",
+          "src/pages/CartPage.tsx"
+        ]
+      },
+      {
+        "name": "Wishlist",
+        "description": "Wishlist functionality to save favorite products",
+        "files": [
+          "src/lib/supabase/wishlist.ts",
+          "src/contexts/WishlistContext.tsx",
+          "src/pages/WishlistPage.tsx"
+        ]
+      },
+      {
+        "name": "Orders Management",
+        "description": "Order creation, tracking, and management",
+        "files": [
+          "src/lib/supabase/orders.ts",
+          "src/pages/OrdersPage.tsx",
+          "src/components/orders/OrderDetails.tsx"
+        ]
+      },
+      {
+        "name": "Checkout",
+        "description": "Checkout process with payment integration",
+        "files": [
+          "src/pages/CheckoutPage.tsx",
+          "src/lib/supabase/payments.ts",
+          "src/hooks/usePayment.ts"
+        ]
+      },
+      {
+        "name": "Vendor Management",
+        "description": "Vendor profiles, registration, and dashboard",
+        "files": [
+          "src/lib/supabase/vendors.ts",
+          "src/pages/Vendors.tsx",
+          "src/pages/VendorProfilePage.tsx",
+          "src/pages/VendorDashboard.tsx",
+          "src/pages/VendorRegisterPage.tsx",
+          "src/components/vendor/VendorCard.tsx",
+          "src/components/vendor/VendorCarousel.tsx",
+          "src/components/vendor/VendorGridCarousel.tsx",
+          "src/components/vendor/VendorProfile.tsx"
+        ]
+      },
+      {
+        "name": "Categories",
+        "description": "Product categories browsing and filtering",
+        "files": [
+          "src/pages/CategoriesPage.tsx",
+          "src/components/marketplace/CategoryCard.tsx",
+          "src/components/marketplace/CategoryCarousel.tsx"
+        ]
+      },
+      {
+        "name": "Reviews",
+        "description": "Product reviews and ratings system",
+        "files": [
+          "src/lib/supabase/reviews.ts",
+          "src/components/reviews/ReviewForm.tsx",
+          "src/hooks/useSupabaseReviews.ts"
+        ]
+      },
+      {
+        "name": "User Profile",
+        "description": "User profile management with address and payment methods",
+        "files": [
+          "src/pages/ProfilePage.tsx",
+          "src/components/profile/AddressManager.tsx",
+          "src/components/profile/PaymentMethods.tsx",
+          "src/components/profile/NotificationSettings.tsx"
+        ]
+      },
+      {
+        "name": "Search",
+        "description": "Product and vendor search functionality",
+        "files": [
+          "src/components/marketplace/SearchBar.tsx",
+          "src/utils/search.ts"
+        ]
+      },
+      {
+        "name": "Home Page",
+        "description": "Main landing page with featured products, categories, and carousels",
+        "files": [
+          "src/pages/Index.tsx",
+          "src/components/marketplace/Carousel.tsx",
+          "src/components/marketplace/InfiniteScrollGrid.tsx",
+          "src/components/marketplace/ProductBannerCard.tsx"
+        ]
+      },
+      {
+        "name": "PWA Support",
+        "description": "Progressive Web App features with offline support and install prompts",
+        "files": [
+          "src/components/shared/PWAInstallPrompt.tsx",
+          "src/components/shared/OfflineDetector.tsx",
+          "src/pages/OfflinePage.tsx",
+          "src/hooks/usePWAInstall.ts",
+          "src/hooks/useOffline.ts",
+          "src/utils/backgroundSync.ts"
+        ]
+      },
+      {
+        "name": "Navigation",
+        "description": "Main navigation bar and footer components",
+        "files": [
+          "src/components/shared/Navbar.tsx",
+          "src/components/shared/Footer.tsx"
+        ]
+      },
+      {
+        "name": "Error Handling",
+        "description": "Error boundary and error handling components",
+        "files": [
+          "src/components/shared/ErrorBoundary.tsx",
+          "src/pages/NotFound.tsx"
+        ]
+      },
+      {
+        "name": "Protected Routes",
+        "description": "Route protection for authenticated pages",
+        "files": [
+          "src/components/shared/ProtectedRoute.tsx"
+        ]
+      },
+      {
+        "name": "UI Components",
+        "description": "Reusable UI components built with Radix UI and Tailwind CSS",
+        "files": [
+          "src/components/ui/button.tsx",
+          "src/components/ui/card.tsx",
+          "src/components/ui/dialog.tsx",
+          "src/components/ui/form.tsx",
+          "src/components/ui/input.tsx",
+          "src/components/ui/select.tsx",
+          "src/components/ui/toast.tsx",
+          "src/components/ui/carousel.tsx",
+          "src/components/ui/table.tsx",
+          "src/components/ui/tabs.tsx"
+        ]
+      },
+      {
+        "name": "Data Hooks",
+        "description": "Custom React hooks for data fetching and state management",
+        "files": [
+          "src/hooks/useMockData.ts",
+          "src/hooks/useInfiniteVendors.ts",
+          "src/hooks/use-mobile.tsx",
+          "src/hooks/use-theme.ts"
+        ]
+      },
+      {
+        "name": "Static Pages",
+        "description": "Informational pages like About, Contact, Terms, Privacy, etc.",
+        "files": [
+          "src/pages/AboutPage.tsx",
+          "src/pages/ContactPage.tsx",
+          "src/pages/TermsPage.tsx",
+          "src/pages/PrivacyPage.tsx",
+          "src/pages/CookiePolicyPage.tsx",
+          "src/pages/VendorTermsPage.tsx",
+          "src/pages/ShippingPage.tsx",
+          "src/pages/HelpPage.tsx",
+          "src/pages/FAQsPage.tsx",
+          "src/pages/PricingPage.tsx",
+          "src/pages/ResourcesPage.tsx",
+          "src/pages/CareersPage.tsx",
+          "src/pages/PressPage.tsx",
+          "src/pages/BlogPage.tsx"
+        ]
+      },
+      {
+        "name": "Product Variants",
+        "description": "Product variant management for different product options",
+        "files": [
+          "src/lib/supabase/variants.ts"
+        ]
+      },
+      {
+        "name": "Data Utilities",
+        "description": "Utility functions for data transformation and mapping",
+        "files": [
+          "src/utils/productMapper.ts",
+          "src/data/transformed/products.ts",
+          "src/data/transformed/vendors.ts",
+          "src/data/transformed/categories.ts"
+        ]
+      }
+    ]
+  }
+}

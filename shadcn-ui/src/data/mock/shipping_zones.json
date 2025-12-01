@@ -1,0 +1,124 @@
+{
+  "document_type": "shipping_zones",
+  "project": "The Bazaar — AI-Powered Marketplace (PWA)",
+  "version": "1.0.0",
+  "schema": "bazaar.shipping.v1",
+  "data": [
+    {
+      "zone_id": "zone_001",
+      "zone_name": "Nairobi Metro",
+      "description": "Nairobi County and immediate surrounding areas",
+      "regions": ["Nairobi County", "Kiambu (adjacent areas)"],
+      "countries": ["Kenya"],
+      "is_active": true,
+      "shipping_methods": [
+        {
+          "method_id": "method_001",
+          "method_name": "Standard Delivery",
+          "description": "3-5 business days",
+          "base_rate": 300,
+          "per_kg_rate": 50,
+          "estimated_days": 3,
+          "is_active": true
+        },
+        {
+          "method_id": "method_002",
+          "method_name": "Express Delivery",
+          "description": "1-2 business days",
+          "base_rate": 800,
+          "per_kg_rate": 100,
+          "estimated_days": 1,
+          "is_active": true
+        },
+        {
+          "method_id": "method_003",
+          "method_name": "Same Day Delivery",
+          "description": "Within Nairobi CBD only",
+          "base_rate": 1500,
+          "per_kg_rate": 200,
+          "estimated_days": 0,
+          "is_active": true
+        }
+      ],
+      "free_shipping_threshold": 5000,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-01T00:00:00Z"
+    },
+    {
+      "zone_id": "zone_002",
+      "zone_name": "Other Major Cities",
+      "description": "Mombasa, Kisumu, Nakuru, Eldoret, Thika",
+      "regions": ["Mombasa County", "Kisumu County", "Nakuru County", "Uasin Gishu County", "Kiambu County"],
+      "countries": ["Kenya"],
+      "is_active": true,
+      "shipping_methods": [
+        {
+          "method_id": "method_004",
+          "method_name": "Standard Delivery",
+          "description": "5-7 business days",
+          "base_rate": 500,
+          "per_kg_rate": 80,
+          "estimated_days": 5,
+          "is_active": true
+        },
+        {
+          "method_id": "method_005",
+          "method_name": "Express Delivery",
+          "description": "3-4 business days",
+          "base_rate": 1200,
+          "per_kg_rate": 150,
+          "estimated_days": 3,
+          "is_active": true
+        }
+      ],
+      "free_shipping_threshold": 10000,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-01T00:00:00Z"
+    },
+    {
+      "zone_id": "zone_003",
+      "zone_name": "Other Counties",
+      "description": "All other counties in Kenya",
+      "regions": ["All other counties not listed in zone_001 or zone_002"],
+      "countries": ["Kenya"],
+      "is_active": true,
+      "shipping_methods": [
+        {
+          "method_id": "method_006",
+          "method_name": "Standard Delivery",
+          "description": "7-10 business days",
+          "base_rate": 800,
+          "per_kg_rate": 100,
+          "estimated_days": 7,
+          "is_active": true
+        }
+      ],
+      "free_shipping_threshold": 15000,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-01T00:00:00Z"
+    },
+    {
+      "zone_id": "zone_004",
+      "zone_name": "International",
+      "description": "Shipping outside Kenya",
+      "regions": ["International"],
+      "countries": ["All countries except Kenya"],
+      "is_active": false,
+      "shipping_methods": [
+        {
+          "method_id": "method_007",
+          "method_name": "International Standard",
+          "description": "14-21 business days",
+          "base_rate": 5000,
+          "per_kg_rate": 500,
+          "estimated_days": 14,
+          "is_active": false
+        }
+      ],
+      "free_shipping_threshold": null,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ]
+}
+
