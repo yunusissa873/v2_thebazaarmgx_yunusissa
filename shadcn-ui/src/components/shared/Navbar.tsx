@@ -54,6 +54,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: 'Vendors', href: '/vendors' },
+    { name: 'Categories', href: '/categories' },
   ];
 
   return (

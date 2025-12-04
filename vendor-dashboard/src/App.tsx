@@ -16,7 +16,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        
+
         {/* Protected Routes - Vendor Portal v3.0 */}
         <Route
           path="/vendor/profile"
@@ -68,14 +68,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
         {/* Legacy Routes - Redirect to new structure */}
         <Route path="/dashboard" element={<Navigate to="/vendor/profile" replace />} />
         <Route path="/profile" element={<Navigate to="/vendor/profile" replace />} />
         <Route path="/products" element={<Navigate to="/vendor/commerce" replace />} />
         <Route path="/orders" element={<Navigate to="/vendor/commerce" replace />} />
         <Route path="/analytics" element={<Navigate to="/vendor/analytics" replace />} />
-        
+
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/vendor/profile" replace />} />
         <Route path="/vendor" element={<Navigate to="/vendor/profile" replace />} />

@@ -1,8 +1,9 @@
 /**
  * Utility to map product data to ProductCard format
  */
-import type { Product } from '@/data/transformed/products';
+import type { Product as MockProduct } from '@/data/transformed/products';
 import type { Vendor } from '@/data/transformed/vendors';
+import type { Product as SupabaseProduct } from '@/lib/supabase/products';
 
 export interface ProductCardData {
   id: string;
@@ -19,33 +20,47 @@ export interface ProductCardData {
   discount?: number;
 }
 
+// Map mock product format to card format
 export function mapProductToCard(
-  product: Product,
-  vendor?: Vendor
+  product: MockProduct | SupabaseProduct,
+  vendor?: Vendor | { id: string; name: string; slug: string } | null
 ): ProductCardData {
+  // Check if it's Supabase format (has 'id') or mock format (has 'product_id')
+  const isSupabaseFormat = 'id' in product;
+  const productId = isSupabaseFormat ? product.id : product.product_id;
   const vendorName = vendor?.name || 'Unknown Vendor';
   const vendorSlug = vendor?.slug || 'unknown';
-  const isInStock = product.stock_quantity > 0 && product.is_active;
+  
+  // Handle stock quantity - Supabase uses stock_quantity, mock uses stock_quantity
+  const stockQuantity = 'stock_quantity' in product ? product.stock_quantity : 0;
+  const isActive = 'is_active' in product ? product.is_active : true;
+  const isInStock = stockQuantity > 0 && isActive;
   
   // Calculate discount if compare_at_price exists
   let discount: number | undefined;
-  if (product.compare_at_price && product.compare_at_price > product.price) {
+  const compareAtPrice = 'compare_at_price' in product ? product.compare_at_price : null;
+  if (compareAtPrice && compareAtPrice > product.price) {
     discount = Math.round(
-      ((product.compare_at_price - product.price) / product.compare_at_price) * 100
+      ((compareAtPrice - product.price) / compareAtPrice) * 100
     );
   }
   
+  // Handle images - Supabase might have images as array or JSONB
+  const images = Array.isArray(product.images) 
+    ? product.images 
+    : (product.images ? [product.images] : []);
+  
   return {
-    id: product.product_id,
+    id: productId,
     name: product.name,
     price: product.price,
-    compareAtPrice: product.compare_at_price || undefined,
+    compareAtPrice: compareAtPrice || undefined,
     currency: product.currency as 'KES' | 'USD',
-    images: product.images || [],
+    images,
     vendorName,
     vendorSlug,
     rating: product.rating || 0,
-    reviewCount: 0, // TODO: Add review count from reviews data
+    reviewCount: 'review_count' in product ? product.review_count : 0,
     isInStock,
     discount,
   };

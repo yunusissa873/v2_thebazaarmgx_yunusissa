@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../../lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import { signIn, signUp, signOut as authSignOut } from '@/lib/supabase/auth';
 import type { SignInData, SignUpData } from '@/lib/supabase/auth';
 

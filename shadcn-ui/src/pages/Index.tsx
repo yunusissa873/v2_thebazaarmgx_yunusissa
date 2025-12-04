@@ -2,24 +2,37 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from '@/components/marketplace/Carousel';
 import { CategoryCarousel } from '@/components/marketplace/CategoryCarousel';
-import { ProductCarousel } from '@/components/marketplace/ProductCarousel';
 import { ProductGridCarousel } from '@/components/marketplace/ProductGridCarousel';
 import { InfiniteScrollGrid } from '@/components/marketplace/InfiniteScrollGrid';
 import { Button } from '@/components/ui/button';
-import { useFeaturedCategories, useProducts, useVendors, useVendor } from '@/hooks/useMockData';
+import { useFeaturedCategories, useVendors, useProducts as useMockProducts } from '@/hooks/useMockData';
+import { useSupabaseProducts, useSupabaseFeaturedProducts } from '@/hooks/useSupabaseProducts';
 import { mapProductToCard } from '@/utils/productMapper';
 import bannersData from '@/data/mock/banners.json';
-import { productsData } from '@/data/transformed/products';
-import type { Product } from '@/data/transformed/products';
 
 export default function Index() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   
-  // Load data from transformed mock data
+  // Load data - use Supabase with fallback to mock
   const featuredCategories = useFeaturedCategories(8);
   const allVendors = useVendors();
-  const allProducts = useProducts();
-  const featuredProductsData = useProducts({ featured: true, limit: 30 });
+  
+  // Fetch products from Supabase
+  const { products: allProductsSupabase } = useSupabaseProducts({ enabled: true });
+  const { products: featuredProductsSupabase } = useSupabaseFeaturedProducts(30);
+  
+  // Fallback to mock data if Supabase returns empty
+  const mockProducts = useMockProducts();
+  const mockFeaturedProducts = useMockProducts({ featured: true, limit: 30 });
+  
+  // Use stable references - determine which data source to use
+  const allProducts = useMemo(() => {
+    return allProductsSupabase.length > 0 ? allProductsSupabase : mockProducts;
+  }, [allProductsSupabase, mockProducts]);
+  
+  const featuredProductsData = useMemo(() => {
+    return featuredProductsSupabase.length > 0 ? featuredProductsSupabase : mockFeaturedProducts;
+  }, [featuredProductsSupabase, mockFeaturedProducts]);
   
   // Get active banners and products for hero carousel (Hot Deals)
   // Total: 10 items (1 banner + 9 products)
@@ -48,32 +61,46 @@ export default function Index() {
       },
     } : null;
 
-    // Select 9 diverse products from different categories for paid placements
-    // Priority: featured products with variants, from different vendors and categories
-    const selectedProductIds = [
-      'prd_thk_001', // iPhone 17 Pro Max - TechHub Kenya (Electronics)
-      'prd_001',     // Samsung Galaxy S25 Ultra - Nairobi Gadget Hub (Electronics)
-      'prd_002',     // MacBook Pro - Nairobi Gadget Hub (Electronics/Laptops)
-      'prd_sb_001',  // Le Falconé Hayba Royalty - Sawae Brands (Fragrances)
-      'prd_sb_006',  // Sapil Royal Oud - Sawae Brands (Fragrances)
-      'prd_003',     // Modern Linen Abaya - Ruuhi Collection (Fashion)
-      'prd_sb_013',  // Swiss Arabian Mukhallat Malaki - Sawae Brands (Fragrances)
-      'prd_sb_016',  // Cosmo Vitamin C Brightening Serum - Sawae Brands (Skincare)
-      'prd_sb_018',  // Cosmo Retinol Anti-Aging Cream - Sawae Brands (Skincare)
-    ];
-
-    const selectedProducts: Product[] = selectedProductIds
-      .map(id => productsData.find(p => p.product_id === id))
-      .filter((p): p is Product => p !== undefined);
+    // Select 9 diverse products - prioritize featured products from Supabase
+    // If Supabase has products, use those; otherwise fallback to mock data
+    const featuredProducts = allProducts
+      .filter(p => {
+        const isFeatured = 'is_featured' in p ? p.is_featured : false;
+        return isFeatured;
+      })
+      .slice(0, 9);
+    
+    // If we don't have enough featured products, fill with top-rated products
+    const selectedProducts = featuredProducts.length >= 9
+      ? featuredProducts
+      : [
+          ...featuredProducts,
+          ...allProducts
+            .filter(p => {
+              const isFeatured = 'is_featured' in p ? p.is_featured : false;
+              return !isFeatured;
+            })
+            .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+            .slice(0, 9 - featuredProducts.length)
+        ];
 
     // Create product carousel items
-    const productItems = selectedProducts.map(product => {
-      const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+    const productItems = selectedProducts.slice(0, 9).map(product => {
+      const productId = (product as any).id || (product as any).product_id;
+      const vendorId = (product as any).vendor_id;
+      let vendor: any = (product as any).vendor;
+      if (!vendor) {
+        vendor = allVendors.find(v => {
+          const vId = (v as any).vendor_id || (v as any).id;
+          return vId === vendorId;
+        });
+      }
+      const images = Array.isArray(product.images) ? product.images : (product.images ? [product.images] : []);
       return {
-        id: `product_${product.product_id}`,
+        id: `product_${productId}`,
         type: 'product' as const,
-        image: product.images?.[0] || '',
-        product: product,
+        image: images[0] || '',
+        product: product as any, // Type assertion to handle both Product types
         vendor: vendor || null,
       };
     });
@@ -82,26 +109,10 @@ export default function Index() {
     const allItems = bannerItem ? [bannerItem, ...productItems] : productItems;
     
     return allItems;
-  }, [allVendors]);
+  }, [allProducts, allVendors]);
 
   // Hot Deals - Top 10 products (can be filtered by paid placement later)
-  const hotDealsProducts = useMemo(() => {
-    return [...allProducts]
-      .sort((a, b) => {
-        // Sort by discount first, then by rating
-        const aDiscount = a.compare_at_price ? ((a.compare_at_price - a.price) / a.compare_at_price) * 100 : 0;
-        const bDiscount = b.compare_at_price ? ((b.compare_at_price - b.price) / b.compare_at_price) * 100 : 0;
-        if (bDiscount !== aDiscount) {
-          return bDiscount - aDiscount;
-        }
-        return (b.rating || 0) - (a.rating || 0);
-      })
-      .slice(0, 10)
-      .map(product => {
-        const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
-        return mapProductToCard(product, vendor);
-      });
-  }, [allProducts, allVendors]);
+  // Note: This computation is handled within heroSlides useMemo above
 
   // Map categories to CategoryCarousel format
   const categories = useMemo(() => {
@@ -121,7 +132,14 @@ export default function Index() {
   // Featured Products - 30 products for 2 rows of 15
   const featuredProducts = useMemo(() => {
     return featuredProductsData.map(product => {
-      const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+      let vendor: any = (product as any).vendor;
+      if (!vendor) {
+        const vendorId = (product as any).vendor_id;
+        vendor = allVendors.find(v => {
+          const vId = (v as any).vendor_id || (v as any).id;
+          return vId === vendorId;
+        });
+      }
       return mapProductToCard(product, vendor);
     });
   }, [featuredProductsData, allVendors]);
@@ -131,15 +149,24 @@ export default function Index() {
     return [...allProducts]
       .sort((a, b) => {
         // Sort by rating first (higher is better)
-        if (b.rating !== a.rating) {
-          return b.rating - a.rating;
+        if ((b.rating || 0) !== (a.rating || 0)) {
+          return (b.rating || 0) - (a.rating || 0);
         }
         // Then by review count
-        return (b.review_count || 0) - (a.review_count || 0);
+        const aReviewCount = (a as any).review_count || 0;
+        const bReviewCount = (b as any).review_count || 0;
+        return bReviewCount - aReviewCount;
       })
       .slice(0, 30)
       .map(product => {
-        const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+        let vendor: any = (product as any).vendor;
+        if (!vendor) {
+          const vendorId = (product as any).vendor_id;
+          vendor = allVendors.find(v => {
+            const vId = (v as any).vendor_id || (v as any).id;
+            return vId === vendorId;
+          });
+        }
         return mapProductToCard(product, vendor);
       });
   }, [allProducts, allVendors]);
@@ -147,7 +174,14 @@ export default function Index() {
   // Shop Now - All products for infinite scroll
   const shopNowProducts = useMemo(() => {
     return allProducts.map(product => {
-      const vendor = allVendors.find(v => v.vendor_id === product.vendor_id);
+      let vendor: any = (product as any).vendor;
+      if (!vendor) {
+        const vendorId = (product as any).vendor_id;
+        vendor = allVendors.find(v => {
+          const vId = (v as any).vendor_id || (v as any).id;
+          return vId === vendorId;
+        });
+      }
       return mapProductToCard(product, vendor);
     });
   }, [allProducts, allVendors]);

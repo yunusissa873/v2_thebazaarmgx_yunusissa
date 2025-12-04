@@ -30,7 +30,9 @@ function flattenCategories(categories: any[]): Array<{ id: string; name: string 
   
   function traverse(items: any[]) {
     items.forEach((item) => {
-      result.push({ id: item.category_id, name: item.name });
+      // Support both old (category_id) and new (id) structure
+      const categoryId = item.id || item.category_id;
+      result.push({ id: categoryId, name: item.name });
       if (item.children) {
         traverse(item.children);
       }

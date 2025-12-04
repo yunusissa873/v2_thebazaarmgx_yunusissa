@@ -10,11 +10,13 @@ import { FilterSidebar } from '@/components/marketplace/FilterSidebar';
 import { ProductCard } from '@/components/marketplace/ProductCard';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { searchProducts, type SearchFilters, type SortOption } from '@/utils/search';
+import { type SearchFilters, type SortOption } from '@/utils/search';
 import { mapProductToCard } from '@/utils/productMapper';
+import { useSupabaseProducts } from '@/hooks/useSupabaseProducts';
 import { useVendors } from '@/hooks/useMockData';
-import type { Product } from '@/data/transformed/products';
+import type { ProductFilters } from '@/lib/supabase/products';
 
 export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -106,18 +108,68 @@ export default function ProductsPage() {
     }
   }, [filters, setSearchParams, searchParams]);
 
-  // Get search results
-  const results = useMemo(() => {
-    return searchProducts(filters, sortBy);
-  }, [filters, sortBy]);
+  // Convert SearchFilters to ProductFilters for Supabase
+  const supabaseFilters: ProductFilters = useMemo(() => {
+    return {
+      categoryId: filters.categoryId,
+      vendorId: filters.vendorId,
+      minPrice: filters.minPrice,
+      maxPrice: filters.maxPrice,
+      minRating: filters.minRating,
+      inStock: filters.inStock,
+      search: filters.query,
+    };
+  }, [filters]);
+
+  // Fetch products from Supabase
+  const { products, loading, error } = useSupabaseProducts({
+    filters: supabaseFilters,
+    enabled: true,
+  });
+
+  // Sort products based on sortBy option
+  const sortedProducts = useMemo(() => {
+    if (!products) return [];
+    
+    const sorted = [...products];
+    switch (sortBy) {
+      case 'price-asc':
+        return sorted.sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return sorted.sort((a, b) => b.price - a.price);
+      case 'rating':
+        return sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case 'newest':
+        return sorted.sort((a, b) => 
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+      case 'relevance':
+      default:
+        // For relevance, prioritize featured products and higher ratings
+        return sorted.sort((a, b) => {
+          if (a.is_featured !== b.is_featured) {
+            return a.is_featured ? -1 : 1;
+          }
+          return (b.rating || 0) - (a.rating || 0);
+        });
+    }
+  }, [products, sortBy]);
 
   // Map products to card format
   const productCards = useMemo(() => {
-    return results.map((product: Product) => {
-      const vendor = vendors.find((v) => v.vendor_id === product.vendor_id);
+    return sortedProducts.map((product) => {
+      // Use vendor from product if available, otherwise find in vendors list
+      let vendor: any = product.vendor;
+      if (!vendor) {
+        const vendorId = (product as any).vendor_id;
+        vendor = vendors.find((v) => {
+          const vId = (v as any).vendor_id || (v as any).id;
+          return vId === vendorId;
+        }) as any;
+      }
       return mapProductToCard(product, vendor);
     });
-  }, [results, vendors]);
+  }, [sortedProducts, vendors]);
 
   const handleFiltersChange = (newFilters: SearchFilters) => {
     setFilters(newFilters);
@@ -152,14 +204,18 @@ export default function ProductsPage() {
             {/* Header with Results Count, Sort, and View Toggle */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div className="flex items-center gap-4">
-                <p className="text-gray-300">
-                  {results.length} {results.length === 1 ? 'product' : 'products'} found
-                  {filters.query && (
-                    <span className="ml-2">
-                      for "<span className="text-white font-medium">{filters.query}</span>"
-                    </span>
-                  )}
-                </p>
+                {loading ? (
+                  <Skeleton className="h-6 w-48 bg-netflix-dark-gray" />
+                ) : (
+                  <p className="text-gray-300">
+                    {productCards.length} {productCards.length === 1 ? 'product' : 'products'} found
+                    {filters.query && (
+                      <span className="ml-2">
+                        for "<span className="text-white font-medium">{filters.query}</span>"
+                      </span>
+                    )}
+                  </p>
+                )}
               </div>
 
               <div className="flex items-center gap-4">
@@ -215,7 +271,34 @@ export default function ProductsPage() {
             </div>
 
             {/* Products Grid/List */}
-            {productCards.length > 0 ? (
+            {loading ? (
+              <div
+                className={cn(
+                  viewMode === 'grid'
+                    ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'
+                    : 'grid grid-cols-1 gap-4'
+                )}
+              >
+                {[...Array(10)].map((_, i) => (
+                  <Skeleton key={i} className="h-80 w-full bg-netflix-dark-gray" />
+                ))}
+              </div>
+            ) : error ? (
+              <div className="flex flex-col items-center justify-center py-16 px-4">
+                <SlidersHorizontal className="h-16 w-16 text-gray-600 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Error loading products</h3>
+                <p className="text-gray-400 text-center max-w-md mb-4">
+                  {error.message || 'Failed to load products. Please try again later.'}
+                </p>
+                <Button
+                  variant="outline"
+                  className="border-netflix-medium-gray text-white hover:bg-netflix-medium-gray"
+                  onClick={() => window.location.reload()}
+                >
+                  Retry
+                </Button>
+              </div>
+            ) : productCards.length > 0 ? (
               <div
                 className={cn(
                   viewMode === 'grid'

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Calendar, DollarSign, Eye, Truck, RefreshCw, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProtectedRoute } from '@/components/shared/ProtectedRoute';
 import { useAuth } from '@/contexts/AuthContext';
-import { useOrders } from '@/hooks/useMockData';
+import { getUserOrders, type Order } from '@/lib/supabase/orders';
 import { format } from 'date-fns';
 
 const statusColors: Record<string, string> = {
@@ -21,27 +21,60 @@ const statusColors: Record<string, string> = {
 export default function OrdersPage() {
   const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('all');
-  // Get orders for the current user (using first user as mock for now)
-  const allOrders = useOrders(user?.id || 'usr_001');
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(true);
+  const [ordersError, setOrdersError] = useState<any>(null);
+
+  // Fetch orders from Supabase
+  useEffect(() => {
+    const fetchOrders = async () => {
+      if (!user) {
+        setOrdersLoading(false);
+        return;
+      }
+
+      setOrdersLoading(true);
+      setOrdersError(null);
+
+      try {
+        const { data, error } = await getUserOrders();
+        if (error) {
+          console.warn('Supabase fetch error:', error);
+          setOrdersError(error);
+          setOrders([]);
+        } else {
+          setOrders(data || []);
+        }
+      } catch (err) {
+        console.error('Error fetching orders:', err);
+        setOrdersError(err);
+        setOrders([]);
+      } finally {
+        setOrdersLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, [user]);
 
   // Filter orders by status
   const filteredOrders = useMemo(() => {
-    if (activeTab === 'all') return allOrders;
-    return allOrders.filter(order => order.status === activeTab);
-  }, [allOrders, activeTab]);
+    if (activeTab === 'all') return orders;
+    return orders.filter(order => order.status === activeTab);
+  }, [orders, activeTab]);
 
   // Get order counts by status
   const orderCounts = useMemo(() => {
     return {
-      all: allOrders.length,
-      pending: allOrders.filter(o => o.status === 'pending').length,
-      shipped: allOrders.filter(o => o.status === 'shipped').length,
-      delivered: allOrders.filter(o => o.status === 'delivered').length,
-      cancelled: allOrders.filter(o => o.status === 'cancelled').length,
+      all: orders.length,
+      pending: orders.filter(o => o.status === 'pending').length,
+      shipped: orders.filter(o => o.status === 'shipped').length,
+      delivered: orders.filter(o => o.status === 'delivered').length,
+      cancelled: orders.filter(o => o.status === 'cancelled').length,
     };
-  }, [allOrders]);
+  }, [orders]);
 
-  if (loading) {
+  if (loading || ordersLoading) {
     return (
       <div className="min-h-screen bg-netflix-black">
         <div className="container-custom py-8">
@@ -108,7 +141,19 @@ export default function OrdersPage() {
             </TabsList>
 
             <TabsContent value={activeTab} className="mt-0">
-          {filteredOrders.length === 0 ? (
+          {ordersError ? (
+            <div className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-12 text-center">
+              <Package className="h-16 w-16 mx-auto text-gray-600 mb-4" />
+              <h2 className="text-2xl font-semibold text-white mb-2">Error loading orders</h2>
+              <p className="text-gray-400 mb-6">{ordersError.message || 'Failed to load orders. Please try again later.'}</p>
+              <Button 
+                className="bg-netflix-red hover:bg-netflix-red/90 text-white"
+                onClick={() => window.location.reload()}
+              >
+                Retry
+              </Button>
+            </div>
+          ) : filteredOrders.length === 0 ? (
             <div className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-12 text-center">
               <Package className="h-16 w-16 mx-auto text-gray-600 mb-4" />
               <h2 className="text-2xl font-semibold text-white mb-2">No orders yet</h2>
@@ -121,9 +166,9 @@ export default function OrdersPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {orders.map((order) => (
+              {filteredOrders.map((order) => (
                 <div
-                  key={order.order_id}
+                  key={order.id}
                   className="bg-netflix-dark-gray rounded-lg border border-netflix-medium-gray p-6"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
@@ -139,11 +184,11 @@ export default function OrdersPage() {
                       <div className="flex items-center gap-4 text-sm text-gray-400">
                         <div className="flex items-center gap-1">
                           <Calendar className="h-4 w-4" />
-                          <span>{format(new Date(order.order_date), 'MMM dd, yyyy')}</span>
+                          <span>{format(new Date(order.created_at), 'MMM dd, yyyy')}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <DollarSign className="h-4 w-4" />
-                          <span>{order.currency} {order.total_amount.toLocaleString()}</span>
+                          <span>{order.currency} {order.total.toLocaleString()}</span>
                         </div>
                         {order.tracking_number && (
                           <div className="flex items-center gap-1">
@@ -159,9 +204,9 @@ export default function OrdersPage() {
                         className="border-netflix-medium-gray text-white hover:bg-netflix-medium-gray"
                         asChild
                       >
-                        <Link to={`/orders/${order.order_id}`}>
+                        <Link to={`/orders/${order.id}`}>
                           <Eye className="h-4 w-4 mr-2" />
-                          Track Order
+                          View Details
                         </Link>
                       </Button>
                       {(order.status === 'shipped' || order.status === 'delivered') && (
@@ -176,32 +221,29 @@ export default function OrdersPage() {
                     </div>
                   </div>
 
-                  <div className="border-t border-netflix-medium-gray pt-4">
-                    <div className="space-y-3">
-                      {order.items.map((item) => (
-                        <div key={item.item_id} className="flex items-center gap-4">
-                          <img
-                            src={item.image_url}
-                            alt={item.product_name}
-                            className="w-16 h-16 object-cover rounded"
-                            onError={(e) => {
-                              e.currentTarget.src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop&q=80';
-                            }}
-                          />
-                          <div className="flex-1">
-                            <h3 className="text-white font-medium">{item.product_name}</h3>
-                            <p className="text-gray-400 text-sm">
-                              {item.variant_name && <span>{item.variant_name} • </span>}
-                              Quantity: {item.quantity} × {order.currency} {item.unit_price.toLocaleString()}
-                            </p>
+                  {order.items && order.items.length > 0 && (
+                    <div className="border-t border-netflix-medium-gray pt-4">
+                      <div className="space-y-3">
+                        {order.items.map((item) => (
+                          <div key={item.id} className="flex items-center gap-4">
+                            <div className="w-16 h-16 bg-netflix-medium-gray rounded flex items-center justify-center">
+                              <Package className="h-8 w-8 text-gray-600" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-white font-medium">{item.product_name}</h3>
+                              <p className="text-gray-400 text-sm">
+                                {item.variant_name && <span>{item.variant_name} • </span>}
+                                Quantity: {item.quantity} × {order.currency} {item.unit_price.toLocaleString()}
+                              </p>
+                            </div>
+                            <div className="text-white font-semibold">
+                              {order.currency} {item.total.toLocaleString()}
+                            </div>
                           </div>
-                          <div className="text-white font-semibold">
-                            {order.currency} {item.total_price.toLocaleString()}
-                          </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {order.status === 'shipped' && order.tracking_number && (
                     <div className="mt-4 pt-4 border-t border-netflix-medium-gray flex items-center gap-2 text-netflix-red">

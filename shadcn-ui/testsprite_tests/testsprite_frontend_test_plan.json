@@ -1,0 +1,688 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Registration Success",
+    "description": "Verify that a new user can successfully register with valid details.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the registration page."
+      },
+      {
+        "type": "action",
+        "description": "Fill in all mandatory fields with valid information."
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user account is created and user is redirected to the authenticated landing page."
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "User Registration with Invalid Data",
+    "description": "Verify registration fails with invalid or incomplete data and appropriate error messages are shown.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the registration page."
+      },
+      {
+        "type": "action",
+        "description": "Submit registration with empty required fields."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation errors are displayed for missing fields."
+      },
+      {
+        "type": "action",
+        "description": "Submit registration with invalid email format."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an error message indicates invalid email format."
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "User Login Success",
+    "description": "Check that users can log in successfully with correct credentials.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login page."
+      },
+      {
+        "type": "action",
+        "description": "Enter valid username/email and password."
+      },
+      {
+        "type": "action",
+        "description": "Click login button."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm login succeeds and user is taken to authenticated area."
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "User Login Failure",
+    "description": "Check login fails with invalid credentials and appropriate error messages are shown.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to login page."
+      },
+      {
+        "type": "action",
+        "description": "Enter invalid username/email or password."
+      },
+      {
+        "type": "action",
+        "description": "Click login button."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm login fails and error message about invalid credentials appears."
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "User Logout",
+    "description": "Ensure users can securely logout and end their session.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a valid user."
+      },
+      {
+        "type": "action",
+        "description": "Click the logout button/link."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user is logged out and redirected to the public landing page."
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Browse Product Catalog",
+    "description": "Verify users can browse product listings with pagination and category filters.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the products listing page."
+      },
+      {
+        "type": "action",
+        "description": "Browse product pages and navigate between pages."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify products display correctly with images and titles."
+      },
+      {
+        "type": "action",
+        "description": "Apply a category filter from the sidebar."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list updates to show only filtered category items."
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Search Products by Keyword",
+    "description": "Verify the search bar returns appropriate products based on user queries.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the products page."
+      },
+      {
+        "type": "action",
+        "description": "Enter a product name or keyword in the search bar."
+      },
+      {
+        "type": "action",
+        "description": "Submit the search query."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the results list contains relevant products matching the keyword."
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "View Product Detail with Variants",
+    "description": "Ensure users can view detailed product information including variant options.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Select a product from listing."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm product detail page loads with description, images, and variant selectors."
+      },
+      {
+        "type": "action",
+        "description": "Change product variant selection."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify price and availability update accordingly."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Add Product to Shopping Cart",
+    "description": "Verify users can add a product with selected variant to the shopping cart.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "On the product detail page, select desired variant and quantity."
+      },
+      {
+        "type": "action",
+        "description": "Click 'Add to Cart' button."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the product is added to the cart and cart count updates."
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Update Shopping Cart Item Quantity",
+    "description": "Verify users can update quantity of a product in their shopping cart.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the shopping cart page."
+      },
+      {
+        "type": "action",
+        "description": "Change the quantity of a cart item to a valid number."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify cart totals update correctly and quantity persists."
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Remove Item from Shopping Cart",
+    "description": "Ensure users can remove items from their shopping cart.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the shopping cart page."
+      },
+      {
+        "type": "action",
+        "description": "Remove an item from the cart."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the item is removed and cart updates accordingly."
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Complete Checkout with Valid Payment",
+    "description": "Verify checkout process completes with valid payment details and order is created.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Ensure shopping cart has items."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the checkout page."
+      },
+      {
+        "type": "action",
+        "description": "Fill in valid payment and shipping information."
+      },
+      {
+        "type": "action",
+        "description": "Submit the order."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm order creation success and user is shown order confirmation."
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Checkout with Payment Failure",
+    "description": "Verify the checkout process handles payment failures gracefully with error messages.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Add items to the shopping cart."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to checkout page."
+      },
+      {
+        "type": "action",
+        "description": "Enter invalid or declined payment information."
+      },
+      {
+        "type": "action",
+        "description": "Submit the payment."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify payment failure is handled and user is notified with appropriate message."
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "View Order History",
+    "description": "Verify authenticated users can view their past orders and order details.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a registered user with existing orders."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the Orders page."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm list of past orders is displayed with correct order info."
+      },
+      {
+        "type": "action",
+        "description": "Select an order to view details."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order details page displays items, status, and payment info accurately."
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Vendor Registration and Profile Creation",
+    "description": "Ensure vendors can successfully register and create their profiles.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to vendor registration page."
+      },
+      {
+        "type": "action",
+        "description": "Complete the vendor registration form with required information."
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify vendor profile is created and vendor is redirected to dashboard."
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Vendor Dashboard Profile Editing",
+    "description": "Check vendors can edit and update their profile information from the dashboard.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a vendor user."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the vendor dashboard profile edit section."
+      },
+      {
+        "type": "action",
+        "description": "Modify profile details such as business description or contact info."
+      },
+      {
+        "type": "action",
+        "description": "Save changes."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify changes persist and updated profile is displayed correctly."
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Add and Manage Vendor Products",
+    "description": "Ensure vendors can add new products with variants and manage existing listings correctly.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a vendor."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to vendor dashboard product management."
+      },
+      {
+        "type": "action",
+        "description": "Add a new product including variants and descriptions."
+      },
+      {
+        "type": "action",
+        "description": "Save the product."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product appears in vendor listings and marketplace catalog."
+      },
+      {
+        "type": "action",
+        "description": "Edit an existing product's information."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm changes are reflected in product detail views."
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Add Product Review and Rating",
+    "description": "Verify authenticated users can submit product reviews and ratings after purchase.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a user who purchased a product."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to that product's page."
+      },
+      {
+        "type": "action",
+        "description": "Submit a review with rating and comment."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the review is saved and displayed on the product page."
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Wishlist Add and Remove Products",
+    "description": "Verify users can add products to wishlist and remove them as needed.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a user."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to a product detail page."
+      },
+      {
+        "type": "action",
+        "description": "Add the product to the wishlist."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product appears in the user's wishlist."
+      },
+      {
+        "type": "action",
+        "description": "Remove the product from the wishlist."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the wishlist no longer lists the product."
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "User Profile Update",
+    "description": "Verify users can update profile details including address, payment methods, and notification settings.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login and navigate to profile management page."
+      },
+      {
+        "type": "action",
+        "description": "Update address details."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify address updates persist."
+      },
+      {
+        "type": "action",
+        "description": "Add/edit payment methods."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify payment method updates save correctly."
+      },
+      {
+        "type": "action",
+        "description": "Change notification preferences."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm notification settings are saved and applied."
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Offline Support and PWA Installation Prompt",
+    "description": "Verify the app functions offline with cached data and shows the PWA install prompt when appropriate.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load the app online and navigate several pages to cache data."
+      },
+      {
+        "type": "action",
+        "description": "Go offline (simulate network disconnection)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify previously visited pages load correctly offline."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the PWA install prompt appears based on supported device triggers."
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Protected Routes Access Control",
+    "description": "Verify protected routes redirect unauthorized users to login and allow access for authenticated users.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Attempt to directly access a protected page while logged out."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm redirection to login page."
+      },
+      {
+        "type": "action",
+        "description": "Login with valid credentials."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the protected page."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is granted and page content is displayed."
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "Navigation Bar and Footer Responsiveness",
+    "description": "Verify navigation bar and footer components are responsive and function correctly on various screen sizes.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Resize browser window or simulate devices of different widths."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify navigation bar elements adjust layout without overflow or clipping."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify footer displays all elements properly and remains accessible."
+      },
+      {
+        "type": "action",
+        "description": "Click navigation links and verify correct page loads without errors."
+      }
+    ]
+  },
+  {
+    "id": "TC024",
+    "title": "Error Boundary Handling",
+    "description": "Ensure the error boundary component captures runtime errors and displays a user-friendly message without breaking the app.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate a runtime error inside a child component."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the error boundary displays fallback UI with error details or friendly message."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the app does not crash and navigation is still functional."
+      }
+    ]
+  },
+  {
+    "id": "TC025",
+    "title": "Static Informational Pages Load",
+    "description": "Verify static pages like About, Terms, Privacy, and FAQs load successfully and display correct content.",
+    "category": "functional",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to each static informational page."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm pages load without errors and content is accurate and readable."
+      }
+    ]
+  },
+  {
+    "id": "TC026",
+    "title": "Form Input Validation and Feedback",
+    "description": "Verify all forms validate user input and provide actionable feedback for invalid data.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open various forms such as registration, login, checkout, and profile edit."
+      },
+      {
+        "type": "action",
+        "description": "Enter invalid inputs such as empty fields, wrong formats, and invalid characters."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation messages appear guiding the user to correct issues."
+      },
+      {
+        "type": "action",
+        "description": "Correct the inputs and resubmit the forms."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm forms submit successfully after valid inputs."
+      }
+    ]
+  }
+]
