@@ -1,29 +1,38 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated, loading } = useAuth();
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-  if (loading) {
+  useEffect(() => {
+    const checkAuth = () => {
+      const auth = localStorage.getItem("vendorAuth");
+      if (auth === "true") {
+        setIsAuthenticated(true);
+      } else {
+        navigate("/login");
+      }
+      setIsLoading(false);
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+  if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
       </div>
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  return isAuthenticated ? <>{children}</> : null;
+};
 
-  return <>{children}</>;
-}
-
-
+export default ProtectedRoute;

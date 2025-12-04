@@ -15,7 +15,7 @@ import { Product } from "@/types";
 interface ProductDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (product: Omit<Product, "image">, id?: string) => void;
+  onSave: (product: Omit<Product, "id" | "image" | "product_id" | "vendor_id" | "category_id" | "slug" | "price_usd" | "brand" | "seo_title" | "seo_description" | "image_urls">, id?: string) => void;
   productToEdit?: Product | null;
 }
 

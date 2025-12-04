@@ -14,7 +14,7 @@ import { Product } from "@/types";
 interface AddProductDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddProduct: (product: Omit<Product, 'id'>) => void;
+  onAddProduct: (product: Omit<Product, 'id' | 'product_id' | 'vendor_id' | 'category_id' | 'slug' | 'price_usd' | 'brand' | 'seo_title' | 'seo_description' | 'image_urls'>) => void;
 }
 
 export const AddProductDialog = ({ isOpen, onClose, onAddProduct }: AddProductDialogProps) => {
@@ -24,7 +24,13 @@ export const AddProductDialog = ({ isOpen, onClose, onAddProduct }: AddProductDi
   const [stock, setStock] = useState(0);
 
   const handleSubmit = () => {
-    onAddProduct({ name, description, price, stock, image: "https://via.placeholder.com/150" });
+    onAddProduct({ 
+      name, 
+      description, 
+      price, 
+      stock, 
+      image: "https://via.placeholder.com/150" 
+    });
     onClose();
   };
 

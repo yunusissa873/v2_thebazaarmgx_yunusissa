@@ -25,9 +25,10 @@ interface RawProduct {
   category_id: number;
   slug: string;
   price_usd: number;
-  brand: string;
-  seo_title: string;
-  seo_description: string;
+  seo_metadata?: {
+    seo_title?: string;
+    seo_description?: string;
+  };
 }
 
 // Helper to transform raw mock data into the Product type our components expect
@@ -37,9 +38,12 @@ const transformMockProduct = (mockProduct: RawProduct): Product => ({
   name: mockProduct.title,
   price: mockProduct.price_kes,
   image: mockProduct.image_urls?.[0] || "https://via.placeholder.com/40", // Use first image or a placeholder
+  brand: "Unknown", // Default brand
+  seo_title: mockProduct.seo_metadata?.seo_title || mockProduct.title,
+  seo_description: mockProduct.seo_metadata?.seo_description || mockProduct.description,
 });
 
-const initialProducts: Product[] = (mockProductsData as RawProduct[]).map(transformMockProduct);
+const initialProducts: Product[] = (mockProductsData as unknown as RawProduct[]).map(transformMockProduct);
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
@@ -108,8 +112,10 @@ export default function ProductsPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Products</h1>
-        <Button onClick={handleAddClick}>Add Product</Button>
+        <h1 className="text-2xl font-bold text-white">Products</h1>
+        <Button onClick={handleAddClick} className="bg-netflix-red hover:bg-[#c11119] text-white">
+          Add Product
+        </Button>
       </div>
       <div className="border rounded-lg">
         <Table>

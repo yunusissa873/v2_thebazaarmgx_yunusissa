@@ -173,6 +173,13 @@ export default defineConfig(({ command, mode }) => {
     server: {
       port: 3000,
       host: true, // Listen on all network interfaces
+      strictPort: false, // Allow port fallback
+      allowedHosts: [
+        '.trycloudflare.com',
+        '.ngrok.io',
+        'localhost',
+        '127.0.0.1',
+      ],
     },
   };
 });

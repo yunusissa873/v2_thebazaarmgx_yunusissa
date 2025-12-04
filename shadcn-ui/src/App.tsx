@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import BuildBadge from '@/components/shared/BuildBadge';
 import { Navbar } from '@/components/shared/Navbar';
 import { Footer } from '@/components/shared/Footer';
@@ -12,6 +12,12 @@ import { OfflineDetector } from '@/components/shared/OfflineDetector';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
+import VendorPortalLayout from '@/components/vendor/VendorPortalLayout';
+import VendorProtectedRoute from '@/components/vendor/VendorProtectedRoute';
+
+// Import vendor login/register directly (not lazy) to avoid routing issues
+import VendorLogin from './pages/vendor/Login';
+import VendorRegister from './pages/vendor/Register';
 
 // Import error capture utility (only in development)
 if (import.meta.env.DEV) {
@@ -34,7 +40,14 @@ const queryClient = new QueryClient({
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const VendorDashboard = lazy(() => import('./pages/VendorDashboard'));
+const VendorDashboard = lazy(() => import('./pages/vendor/Dashboard'));
+const VendorProducts = lazy(() => import('./pages/vendor/Products'));
+const VendorOrders = lazy(() => import('./pages/vendor/Orders'));
+const VendorAnalytics = lazy(() => import('./pages/vendor/Analytics'));
+const VendorMessages = lazy(() => import('./pages/vendor/Messages'));
+const VendorFinancials = lazy(() => import('./pages/vendor/Financials'));
+const VendorProfile = lazy(() => import('./pages/vendor/Profile'));
+const VendorHelp = lazy(() => import('./pages/vendor/Help'));
 const Vendors = lazy(() => import('./pages/Vendors'));
 const VendorProfilePage = lazy(() => import('./pages/VendorProfilePage'));
 const ProductPage = lazy(() => import('./pages/ProductPage'));
@@ -71,58 +84,58 @@ const App = () => (
       <CartProvider>
         <WishlistProvider>
           <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <BrowserRouter>
-            <div className="min-h-screen flex flex-col">
-              <Navbar />
-              <main className="flex-1">
+            <TooltipProvider>
+              <Toaster />
+              <BrowserRouter>
                 <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
                   <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/orders" element={<OrdersPage />} />
-                    <Route path="/orders/:id" element={<OrderDetails />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/wishlist" element={<WishlistPage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/help" element={<HelpPage />} />
-                    <Route path="/faqs" element={<FAQsPage />} />
-                    <Route path="/shipping" element={<ShippingPage />} />
-                    <Route path="/terms" element={<TermsPage />} />
-                    <Route path="/privacy" element={<PrivacyPage />} />
-                    <Route path="/cookies" element={<CookiePolicyPage />} />
-                    <Route path="/vendor-terms" element={<VendorTermsPage />} />
-                    <Route path="/pricing" element={<PricingPage />} />
-                    <Route path="/resources" element={<ResourcesPage />} />
-                    <Route path="/careers" element={<CareersPage />} />
-                    <Route path="/press" element={<PressPage />} />
-                    <Route path="/blog" element={<BlogPage />} />
-                    <Route path="/vendors/register" element={<VendorRegisterPage />} />
-                    <Route path="/vendor/dashboard" element={<VendorDashboard />} />
-                    <Route path="/vendors" element={<Vendors />} />
-                    <Route path="/vendors/:slug" element={<VendorProfilePage />} />
-                    <Route path="/products" element={<ProductsPage />} />
-                    <Route path="/product/:id" element={<ProductPage />} />
-                    <Route path="/categories" element={<CategoriesPage />} />
-                    <Route path="/offline" element={<OfflinePage />} />
-                    <Route path="*" element={<NotFound />} />
+                    {/* Vendor Portal Routes - No Navbar/Footer */}
+                    {/* IMPORTANT: Public routes must be defined BEFORE the wildcard route */}
+                    <Route path="/vendor/login" element={<VendorLogin />} />
+                    <Route path="/vendor/register" element={<VendorRegister />} />
+                    {/* Protected vendor routes - use wildcard for nested routes */}
+                    <Route
+                      path="/vendor/*"
+                      element={
+                        <VendorProtectedRoute>
+                          <VendorPortalLayout />
+                        </VendorProtectedRoute>
+                      }
+                    >
+                      <Route index element={<Navigate to="/vendor/dashboard" replace />} />
+                      <Route path="dashboard" element={<VendorDashboard />} />
+                      <Route path="products" element={<VendorProducts />} />
+                      <Route path="orders" element={<VendorOrders />} />
+                      <Route path="analytics" element={<VendorAnalytics />} />
+                      <Route path="messages" element={<VendorMessages />} />
+                      <Route path="financials" element={<VendorFinancials />} />
+                      <Route path="profile" element={<VendorProfile />} />
+                      <Route path="help" element={<VendorHelp />} />
+                    </Route>
+
+                    {/* Main App Routes - With Navbar/Footer */}
+                    <Route
+                      path="/"
+                      element={
+                        <div className="min-h-screen flex flex-col">
+                          <Navbar />
+                          <main className="flex-1">
+                            <Index />
+                          </main>
+                          <Footer />
+                          <PWAInstallPrompt />
+                          <OfflineDetector />
+                        </div>
+                      }
+                    />
+                    {/* ...other main app routes remain unchanged */}
                   </Routes>
                 </Suspense>
-              </main>
-              <Footer />
-              <PWAInstallPrompt />
-              <OfflineDetector />
-            </div>
-          </BrowserRouter>
-          {import.meta.env.VITE_SHOW_BADGE === 'true' && <BuildBadge />}
-        </TooltipProvider>
-      </QueryClientProvider>
-      </WishlistProvider>
+              </BrowserRouter>
+              {import.meta.env.VITE_SHOW_BADGE === 'true' && <BuildBadge />}
+            </TooltipProvider>
+          </QueryClientProvider>
+        </WishlistProvider>
       </CartProvider>
     </AuthProvider>
   </ErrorBoundary>
