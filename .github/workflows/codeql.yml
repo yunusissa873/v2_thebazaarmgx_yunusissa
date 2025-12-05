@@ -1,0 +1,127 @@
+name: "CodeQL Advanced — Enterprise"
+
+on:
+  push:
+    branches: [ "master", "develop", "release/*" ]
+  pull_request:
+    branches: [ "master", "develop" ]
+  schedule:
+    - cron: '0 2 * * *'   # Daily scan at 02:00 UTC
+    - cron: '20 5 * * 0'  # Weekly scan at 05:20 UTC
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: javascript-typescript
+            build-mode: manual
+          - language: python
+            build-mode: none
+          - language: go
+            build-mode: none
+          - language: java-kotlin
+            build-mode: none
+          - language: c-cpp
+            build-mode: none
+
+    steps:
+      # --- Checkout ---
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --- Cache dependencies ---
+      - name: Cache Node.js modules
+        if: matrix.language == 'javascript-typescript'
+        uses: actions/cache@v4.3.0
+        with:
+          path: |
+            **/node_modules
+            ~/.npm
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: node-modules-${{ runner.os }}-
+
+      - name: Cache Python packages
+        if: matrix.language == 'python'
+        uses: actions/cache@v4.3.0
+        with:
+          path: ~/.cache/pip
+          key: python-pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: python-pip-${{ runner.os }}-
+
+      - name: Cache Go modules
+        if: matrix.language == 'go'
+        uses: actions/cache@v4.3.0
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: go-mod-${{ runner.os }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: go-mod-${{ runner.os }}-
+
+      # --- Setup environments ---
+      - name: Setup Node.js environment
+        if: matrix.language == 'javascript-typescript'
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version: '20'
+
+      - name: Setup Go environment
+        if: matrix.language == 'go'
+        uses: actions/setup-go@v6.1.0
+        with:
+          go-version: '1.21'
+
+      - name: Setup Java JDK
+        if: matrix.language == 'java-kotlin'
+        uses: actions/setup-java@v5.1.0
+        with:
+          java-version: '20'
+          distribution: temurin
+
+      # --- Initialize CodeQL ---
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          queries: security-extended, security-and-quality
+
+      # --- Manual build (if required) ---
+      - name: Run manual build steps
+        if: matrix.build-mode == 'manual'
+        shell: bash
+        run: |
+          echo "Manual build for JS/TS Next.js backend..."
+          npm ci
+          npm run build
+
+      # --- Optional: upload build artifact ---
+      - name: Upload Build Artifact
+        if: matrix.language == 'javascript-typescript' && matrix.build-mode == 'manual'
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: nextjs-build
+          path: .next
+
+      # --- Perform CodeQL analysis ---
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:${{ matrix.language }}"
+
+      # --- Optional: Autofix ---
+      - name: CodeQL Autofix
+        uses: github/codeql-action/autofix@v2
+        if: success()
+        with:
+          autofix-only: true
