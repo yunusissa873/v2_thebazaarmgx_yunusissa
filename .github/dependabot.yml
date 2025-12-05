@@ -1,0 +1,54 @@
+# .github/dependabot.yml
+# Dependabot version updates configuration for The Bazaar
+# Updates dependencies automatically to reduce vulnerabilities
+# Documentation: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml
+
+version: 2
+updates:
+  - package-ecosystem: "npm"          # Use npm for frontend/backend Node.js projects
+    directory: "/"                    # Root manifest location for main app
+    schedule:
+      interval: "weekly"              # Check weekly for new versions
+    commit-message:
+      prefix: "chore(deps)"           # Prefix for automatic commits
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "legacy-package"  # Example: ignore outdated legacy dependencies
+        versions: ["<1.0.0"]
+    allow:
+      - dependency-type: "all"        # Updates dev, production, and optional dependencies
+    versioning-strategy: "increase"   # Auto-update minor/patch versions
+    # Major versions will require manual review via Dependabot PRs
+
+  - package-ecosystem: "npm"
+    directory: "/apps/vendor-portal"  # Vendor portal package manifests
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps)"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    versioning-strategy: "increase"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/admin-portal"   # Admin portal package manifests
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps)"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
+    versioning-strategy: "increase"
+
+  - package-ecosystem: "npm"
+    directory: "/packages"            # Shared libraries and packages
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps)"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-type: "all"
+    versioning-strategy: "increase"
