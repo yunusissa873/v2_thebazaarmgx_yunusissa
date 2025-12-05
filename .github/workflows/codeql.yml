@@ -119,9 +119,4 @@ jobs:
         with:
           category: "/language:${{ matrix.language }}"
 
-      # --- Optional: Autofix ---
-      - name: CodeQL Autofix
-        uses: github/codeql-action/autofix@v2
-        if: success()
-        with:
-          autofix-only: true
+    
